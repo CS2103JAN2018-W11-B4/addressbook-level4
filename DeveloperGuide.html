@@ -1954,6 +1954,24 @@ for <code>RemarkCommandParser</code>.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">student with friends</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">search friends who have taken or are taking similar modules</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">know who I can group with or approach for help</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">student with friends</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">find my friend’s timetables</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">can find common studying time with them</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add tasks</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">keep track of what I need to do</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">add a new person</p></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -1977,10 +1995,22 @@ for <code>RemarkCommandParser</code>.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">minimize chance of someone else seeing them by accident</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">student with friends</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">tag my friends in my tasks, so that we can share important information</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user with many persons in the address book</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">sort persons by name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">locate a person easily</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">student</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">find venues in NUS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">locate my tutorial rooms</p></td>
 </tr>
 </tbody>
 </table>
@@ -2037,6 +2067,81 @@ for <code>RemarkCommandParser</code>.</p>
 <p>3a1. AddressBook shows an error message.</p>
 <div class="paragraph">
 <p>Use case resumes at step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-find-venue" class="discrete">Use case: Find venue</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to find an available venue</p>
+</li>
+<li>
+<p>AddressBook prompts user to input a faculty</p>
+</li>
+<li>
+<p>User requests venues near this faculty</p>
+</li>
+<li>
+<p>AddressBook prints out a list of available venues near the specified faculty</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. No location is available</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a1. AddressBook displays the empty result</p>
+<div class="paragraph">
+<p>Use case resumes at step 2</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3a. The given location is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1. AddressBook shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>4a. AddressBook cannot retrieve the information online</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>4a1. AddressBook shows an error message</p>
+</li>
+<li>
+<p>4a2. AddressBook attempts to reconnect</p>
+</li>
+<li>
+<p>4a3. If problem persists, AddressBook directs User to troubleshooting</p>
+<div class="paragraph">
+<p>Use case ends</p>
 </div>
 </li>
 </ul>
@@ -2237,7 +2342,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-02-21 14:13:38 UTC
+Last updated 2018-03-06 17:52:00 UTC
 </div>
 </div>
 </body>
