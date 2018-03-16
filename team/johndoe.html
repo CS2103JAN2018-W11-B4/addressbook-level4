@@ -544,9 +544,41 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">[Proposed] Data Encryption</a></h3>
+<h3 id="data-encryption"><a class="link" href="#data-encryption">Data Encryption</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">Current Implementation</a></h4>
 <div class="paragraph">
-<p><em>{Explain here how the data encryption feature will be implemented}</em></p>
+<p>We are using <code>java.crypto.cipher</code> and <code>java.security.key</code> package for the encryption of the data. The <code>SecurityUtil</code> class is used to provide the <code>SHA-1</code> hashing and <code>AES</code> encryption/decryption required.</p>
+</div>
+<div class="paragraph">
+<p>Using a given password, it is first hashed using <code>SHA-1</code> to be used as the <code>AES</code> key.
+The first 16 bits of the digest created by the <code>SHA-1</code> hash is extracted.
+This is required as <code>AES</code> requires its key to be 16 bits long.</p>
+</div>
+<div class="paragraph">
+<p>Although this would subject the data to be vulnerable to brute force attack, this data encryption is not used for the purpose of preventing attacks.
+It is used to prevent data from being stored in plain text and hence a simple cipher would suffice.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The encryption can be done simply by using <code>SecurityUtil.encrypt()</code> which will encrypt the addressbook.xml.</p>
+</li>
+<li>
+<p>The decryption can be done simply by using <code>SecurityUtil.decrypt()</code> which will decrypt the addressbook.xml.</p>
+</li>
+<li>
+<p>Currently, decryption/encryption is done in <code>XmlAddressBookStorage</code> class before/after <code>readAddressBook</code> and <code>saveAddressBook</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-todo"><a class="link" href="#aspect-todo">Aspect: &lt;TODO&gt;</a></h5>
+
+</div>
 </div>
 </div>
 </div>
@@ -563,7 +595,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-16 17:08:38 UTC
+Last updated 2018-03-16 17:45:39 UTC
 </div>
 </div>
 </body>
