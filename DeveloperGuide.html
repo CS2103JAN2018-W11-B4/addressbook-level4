@@ -92,7 +92,6 @@
 <li><a href="#launch-and-shutdown">H.1. Launch and Shutdown</a></li>
 <li><a href="#deleting-a-person">H.2. Deleting a person</a></li>
 <li><a href="#saving-data">H.3. Saving data</a></li>
-<li><a href="#encrypting-data">H.4. Encrypting data</a></li>
 </ul>
 </li>
 </ul>
@@ -2136,8 +2135,8 @@ for <code>RemarkCommandParser</code>.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Lee Yong Ler</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">x</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">x</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adding of <code>TimeTable</code> class and into the <code>Person</code> class. This allows user to enter their time table into the address book, making it easy for them to know their time table.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Data encryption system to allow the <code>addressbook.xml</code> to be encrypted when not in use. A <code>password</code> command will also be added for user to key in their own password. This ensure that the privacy of users are respected and information in the address book is confidential. NUS students would be able to store sensitive information like time table without fear of them leaking.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Loh Cai Jun</p></td>
@@ -2581,24 +2580,12 @@ Expected: Similar to previous.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p><em>{explain how to simulate a missing/corrupted file and the expected behavior}</em></p>
+<p>Test case: Delete <code>addressbook.xml</code><br>
+Expected: Application opens with an address book with dummy data.</p>
 </li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="encrypting-data"><a class="link" href="#encrypting-data">H.4. Encrypting data</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
 <li>
-<p>Dealing with wrong password</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Change password</p>
+<p>Test case: Corrupt <code>addressbook.xml</code> by editing it<br>
+Expected: Application opens with an address book with dummy data.</p>
 </li>
 </ol>
 </div>
@@ -2614,7 +2601,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-19 08:44:20 UTC
+Last updated 2018-03-19 10:20:10 UTC
 </div>
 </div>
 </body>
