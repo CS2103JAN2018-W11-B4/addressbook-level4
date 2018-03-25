@@ -48,7 +48,7 @@
 <li><a href="#clearing-all-entries-code-clear-code">3.18. Clearing all entries : <code>clear</code></a></li>
 <li><a href="#exiting-the-program-code-exit-code">3.19. Exiting the program : <code>exit</code></a></li>
 <li><a href="#saving-the-data">3.20. Saving the data</a></li>
-<li><a href="#encrypting-data-files-code-password-code-coming-in-v1-3">3.21. Encrypting data files : <code>password</code> (coming in v1.3)</a></li>
+<li><a href="#encrypting-data-files-code-password-code-since-v1-2">3.21. Encrypting data files : <code>password</code> (since v1.2)</a></li>
 <li><a href="#sorting-all-persons-by-module-code-code-sortcode-code-coming-in-v2-0">3.22. Sorting all persons by module code: <code>sortCode</code> (coming in v2.0)</a></li>
 </ul>
 </li>
@@ -496,8 +496,8 @@ Selects the 1st person in the results of the <code>find</code> command.</p>
 <div class="sect2">
 <h3 id="importing-address-book-code-import-code-since-v1-1"><a class="link" href="#importing-address-book-code-import-code-since-v1-1">3.13. Importing address book : <code>import</code> (since v1.1)</a></h3>
 <div class="paragraph">
-<p>Imports an address book from filepath to the existing address book. Persons, Tags, and Aliases that are not in your address book will be added.<br>
-Format: <code>import FILEPATH</code></p>
+<p>Imports an encrypted address book from filepath to the existing address book. Persons, Tags, and Aliases that are not in your address book will be added.<br>
+Format: <code>import FILEPATH PASSWORD</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -505,6 +505,9 @@ Format: <code>import FILEPATH</code></p>
 <ul>
 <li>
 <p>Imports an address book from the specified <code>FILEPATH</code>.</p>
+</li>
+<li>
+<p>Decrypt that address book using the <code>PASSWORD</code> provided.</p>
 </li>
 <li>
 <p>The filepath refers to the filepath where the address book file is stored.</p>
@@ -517,13 +520,13 @@ Format: <code>import FILEPATH</code></p>
 </div>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p>Example:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>import data/addressBook.xml</code><br>
-Imports address book XML file at data folder.</p>
+<p><code>import data/addressBook.xml testpassword</code><br>
+Imports address book XML file at data folder using testpassword as the password.</p>
 </li>
 </ul>
 </div>
@@ -680,7 +683,7 @@ There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="encrypting-data-files-code-password-code-coming-in-v1-3"><a class="link" href="#encrypting-data-files-code-password-code-coming-in-v1-3">3.21. Encrypting data files : <code>password</code> (coming in v1.3)</a></h3>
+<h3 id="encrypting-data-files-code-password-code-since-v1-2"><a class="link" href="#encrypting-data-files-code-password-code-since-v1-2">3.21. Encrypting data files : <code>password</code> (since v1.2)</a></h3>
 <div class="paragraph">
 <p>Changes the password used to encrypt the address book.<br>
 Format: <code>password PASSWORD</code></p>
@@ -816,7 +819,7 @@ e.g. <code>password test</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-23 17:54:15 UTC
+Last updated 2018-03-25 14:36:56 UTC
 </div>
 </div>
 </body>
