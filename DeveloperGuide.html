@@ -895,13 +895,6 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.2.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-alias-list-is-maintained"><a class="link" href="#aspect-how-alias-list-is-maintained">Aspect: How alias list is maintained</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Create an <code>UniqueAliasList</code> in the <code>alias</code> model</p>
-</li>
-</ul>
-</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/ModelClassDiagram.png" alt="ModelClassDiagram" width="800">
@@ -910,23 +903,30 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="ulist">
 <ul>
 <li>
+<p><strong>Alternative 1 (current choice):</strong> Create an <code>UniqueAliasList</code> in the <code>alias</code> model</p>
+<div class="ulist">
+<ul>
+<li>
 <p>Pros: Reduce coupling between <code>Alias</code> and other commands. This design follows the Open Closed Principle where a command is open to extension and closed to modification.</p>
 </li>
 <li>
 <p>Cons: More difficult to implement as need to design an instance of a <code>UniqueAliasList</code>.</p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 2:</strong> Create a HashMap of <code>Alias</code> in each command class</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
+<p><strong>Alternative 2:</strong> Create a HashMap of <code>Alias</code> in each command class</p>
+<div class="ulist">
+<ul>
+<li>
 <p>Pros: Faster to implement as each command class only needs to include a HashMap that stores all the aliases tagged to the command.</p>
 </li>
 <li>
 <p>Cons: High coupling between <code>Alias</code> and other commands and the HashMaps of every command needs to be iterated through to find to find the aliased command.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -940,10 +940,10 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="ulist">
 <ul>
 <li>
-<p>Pros:</p>
+<p>Pros: Reduces files where data need to be stored, as all the user saved data is in one file.</p>
 </li>
 <li>
-<p>Cons:</p>
+<p>Cons: Need to design a section in <code>addressbook.xml</code> for saving alias data with the other data like person data.</p>
 </li>
 </ul>
 </div>
@@ -953,10 +953,10 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="ulist">
 <ul>
 <li>
-<p>Pros:</p>
+<p>Pros: Easier to implement.</p>
 </li>
 <li>
-<p>Cons:</p>
+<p>Cons: Affects Import command, to import <code>UserPrefsStorage</code> as well, than just importing <code>addressbook.xml</code></p>
 </li>
 </ul>
 </div>
@@ -2158,7 +2158,7 @@ Expected: Application opens with an address book with dummy data.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-25 15:26:22 UTC
+Last updated 2018-03-25 15:40:49 UTC
 </div>
 </div>
 </body>
