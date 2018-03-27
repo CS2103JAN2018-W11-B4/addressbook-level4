@@ -168,9 +168,6 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <li>
 <p>Parameters can be in any order e.g. if the command specifies <code>n/NAME p/PHONE_NUMBER</code>, <code>p/PHONE_NUMBER n/NAME</code> is also acceptable.</p>
 </li>
-<li>
-<p>Birthday must be in DDMMYY format</p>
-</li>
 </ul>
 </div>
 </div>
@@ -410,7 +407,37 @@ Format: <code>nopassword</code></p>
 <h3 id="viewing-a-collated-birthday-list-code-birthdays-code-since-v1-3"><a class="link" href="#viewing-a-collated-birthday-list-code-birthdays-code-since-v1-3">3.10. Viewing a collated birthday list: <code>birthdays</code> (since v1.3)</a></h3>
 <div class="paragraph">
 <p>Displays a list that contains all the birthdays of all contacts ordered by date<br>
-Format: <code>birthdays</code></p>
+Or display a notification of the birthdays today<br>
+Format: <code>birthdays [ADDITIONAL_PARAMETER]</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>There is an optional field of [ADDITIONAL_PARAMETER]</p>
+</li>
+<li>
+<p>You can input <code>todays</code> in that field to show a notification of the birthdays today instead</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>birthdays</code><br>
+Displays a list of all birthdays</p>
+</li>
+<li>
+<p><code>birthdays today</code><br>
+Displays a window with the birthdays today</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect2">
@@ -893,7 +920,7 @@ e.g. <code>vacant COM1</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-27 18:06:43 UTC
+Last updated 2018-03-27 18:40:10 UTC
 </div>
 </div>
 </body>
