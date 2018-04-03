@@ -44,13 +44,14 @@
 <li><a href="#importing-data-code-import-code-since-v1-1">3.14. Importing data : <code>import</code> (since v1.1)</a></li>
 <li><a href="#exporting-data-code-export-code-coming-in-v1-4">3.15. Exporting data : <code>export</code> (coming in v1.4)</a></li>
 <li><a href="#vacant-study-rooms-finder-code-vacant-code-since-in-v1-3">3.16. Vacant study rooms finder : <code>vacant</code> (since in v1.3)</a></li>
-<li><a href="#listing-entered-commands-code-history-code">3.17. Listing entered commands : <code>history</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">3.18. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.19. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">3.20. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">3.21. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">3.22. Saving the data</a></li>
-<li><a href="#encrypting-data-files-code-password-code-since-v1-2">3.23. Encrypting data files : <code>password</code> (since v1.2)</a></li>
+<li><a href="#google-maps-display-code-map-code-coming-in-v1-4">3.17. Google maps display : <code>map</code> (coming in v1.4)</a></li>
+<li><a href="#listing-entered-commands-code-history-code">3.18. Listing entered commands : <code>history</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-code">3.19. Undoing previous command : <code>undo</code></a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.20. Redoing the previously undone command : <code>redo</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-code">3.21. Clearing all entries : <code>clear</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">3.22. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">3.23. Saving the data</a></li>
+<li><a href="#encrypting-data-files-code-password-code-since-v1-2">3.24. Encrypting data files : <code>password</code> (since v1.2)</a></li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
@@ -661,7 +662,50 @@ Finds the vacancy status of study rooms in COM1 building.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.17. Listing entered commands : <code>history</code></a></h3>
+<h3 id="google-maps-display-code-map-code-coming-in-v1-4"><a class="link" href="#google-maps-display-code-map-code-coming-in-v1-4">3.17. Google maps display : <code>map</code> (coming in v1.4)</a></h3>
+<div class="paragraph">
+<p>Launches Google Maps with the specified location(s).
+Format: <code>map LOCATION</code> or <code>map LOCATION/LOCATION&#8230;&#8203;</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>If only one location is provided, the location will be displayed on the map.</p>
+</li>
+<li>
+<p>If more than one location is provided, directions to each location, starting from the first one, will be displayed.</p>
+</li>
+<li>
+<p>Typing "map LOCATION_START to LOCATION_DESTINATION" can work as well only if neither locations specified are NUS buildings.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>map BIZ1</code><br>
+Displays the location of BIZ1 (which is an NUS building name).</p>
+</li>
+<li>
+<p><code>map Tampines Mall/COM1</code><br>
+Displays the directions from <code>Tampines Mall</code> to <code>COM1</code>.</p>
+</li>
+<li>
+<p><code>map Tampines Mall/COM1/Airport Blvd</code><br>
+Displays the directions from <code>Tampines Mall</code> to <code>COM1</code> to <code>Airport Blvd</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.18. Listing entered commands : <code>history</code></a></h3>
 <div class="paragraph">
 <p>Lists all the commands that you have entered in reverse chronological order.<br>
 Format: <code>history</code></p>
@@ -682,7 +726,7 @@ Format: <code>history</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.18. Undoing previous command : <code>undo</code></a></h3>
+<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.19. Undoing previous command : <code>undo</code></a></h3>
 <div class="paragraph">
 <p>Restores the StardyTogether instance to the state before the previous <em>undoable</em> command was executed.<br>
 Format: <code>undo</code></p>
@@ -727,7 +771,7 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.19. Redoing the previously undone command : <code>redo</code></a></h3>
+<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.20. Redoing the previously undone command : <code>redo</code></a></h3>
 <div class="paragraph">
 <p>Reverses the most recent <code>undo</code> command.<br>
 Format: <code>redo</code></p>
@@ -759,28 +803,28 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.20. Clearing all entries : <code>clear</code></a></h3>
+<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.21. Clearing all entries : <code>clear</code></a></h3>
 <div class="paragraph">
 <p>Clears all entries from StardyTogether.<br>
 Format: <code>clear</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.21. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.22. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.22. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.23. Saving the data</a></h3>
 <div class="paragraph">
 <p>StardyTogether data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="encrypting-data-files-code-password-code-since-v1-2"><a class="link" href="#encrypting-data-files-code-password-code-since-v1-2">3.23. Encrypting data files : <code>password</code> (since v1.2)</a></h3>
+<h3 id="encrypting-data-files-code-password-code-since-v1-2"><a class="link" href="#encrypting-data-files-code-password-code-since-v1-2">3.24. Encrypting data files : <code>password</code> (since v1.2)</a></h3>
 <div class="paragraph">
 <p>Changes the password used to encrypt the StardyTogether.<br>
 Format: <code>password PASSWORD</code></p>
@@ -960,7 +1004,7 @@ e.g. <code>vacant COM1</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-03 10:43:33 UTC
+Last updated 2018-04-03 14:00:06 UTC
 </div>
 </div>
 </body>
