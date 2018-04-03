@@ -1342,6 +1342,10 @@ The information is then sorted and added as a list of lessons taken by the user 
 TimetableData consists of 2 TimetableWeek, which each consist of 5 TimetableDay, which each consist of 24
 TimetableSlot (following the 24h clock)</p>
 </div>
+<div class="paragraph">
+<p>When the user uses the <code>TimeTableCommand</code>, it will raise the <code>TimeTableEvent</code> which will be caught and handled by the <code>InfoPanel</code>.
+The <code>InfoPanel</code> will swap between <code>BrowsePanel</code>, <code>BirthdayList</code>, <code>VenueTable</code> and <code>TimeTablePanel</code> so that the UI would not be too cluttered.</p>
+</div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">4.6.2. Design Considerations</a></h4>
@@ -1438,6 +1442,119 @@ Timetable will parse those differently</p>
 </li>
 <li>
 <p>Cons: Allows possible unauthorized access to Timetable</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-displaying-of-timetable-in-ui"><a class="link" href="#aspect-displaying-of-timetable-in-ui">Aspect: Displaying of Timetable in UI</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (Current choice):</strong> Change between the different panels</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: UI would not be too cluttered.</p>
+</li>
+<li>
+<p>Cons: User cannot simultaneously use the different panels.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Have a dedicated spot in the UI for <code>TimeTablePanel</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to refer for users.</p>
+</li>
+<li>
+<p>Cons: UI would be confusing and cluttered.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-size-of-timetable-size"><a class="link" href="#aspect-size-of-timetable-size">Aspect: Size of Timetable size</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (Current choice):</strong> Automatically resize according to the size of the Application</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Size is adaptable to the size of the Application.</p>
+</li>
+<li>
+<p>Cons: Variable size may make it confusing for users.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Fixed Size</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy and predictable size and location of timings.</p>
+</li>
+<li>
+<p>Cons: Since display may different from computer to computer, it would be inflexible to use a one size fit all approach.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-color-of-modules-in-timetable"><a class="link" href="#aspect-color-of-modules-in-timetable">Aspect: Color of Modules in Timetable</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (Current choice):</strong> Automatically randomized based on the <code>hashcode()</code> of the module name</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Colors are fixed and more or less randomized.</p>
+</li>
+<li>
+<p>Cons: Colors may be same for different modules in the same timetable and Colors are not customizable.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Pre-defined colors for the different modules</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: No overlap in color and different color for each module</p>
+</li>
+<li>
+<p>Cons: Since there are many different modules in NUS, it would be very time-consuming and almost impossible to be implemented.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 3:</strong> User customize colors</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Customized Application for users.</p>
+</li>
+<li>
+<p>Cons: Implementation of this system would be complex and time-consuming, it would be implemented in later versions.
+Current implementation is the best in terms of variability and ease of implementation.</p>
 </li>
 </ul>
 </div>
@@ -2338,7 +2455,7 @@ Expected: Application opens with an address book with dummy data.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-03 16:43:52 UTC
+Last updated 2018-04-03 18:02:06 UTC
 </div>
 </div>
 </body>
