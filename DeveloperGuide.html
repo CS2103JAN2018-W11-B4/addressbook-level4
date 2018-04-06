@@ -1413,7 +1413,7 @@ However, this is still secure as even if a malicious user were to somehow get a 
 <div class="sect3">
 <h4 id="current-implementation-7"><a class="link" href="#current-implementation-7">4.7.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>When adding a Person using the Add Command, users can enter their NUSMods shortened link into the "tt/" field
+<p>When adding a Person using the Add Command, users can enter their NUSMods shortened link into the "tt/" field.
 The link goes into the TimetableParserUtil class to parse and retrieve the info of the user&#8217;s modules.
 The information is then sorted and added as a list of lessons taken by the user to the Timetable</p>
 </div>
@@ -1421,6 +1421,16 @@ The information is then sorted and added as a list of lessons taken by the user 
 <p>The main contents of the timetable is stored as TimetableData and is accessed through Timetable.
 TimetableData consists of 2 TimetableWeek, which each consist of 5 TimetableDay, which each consist of 24
 TimetableSlot (following the 24h clock)</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/TimetableComponentGraph.png" alt="TimetableComponentGraph" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>In the event the url provided is invalid or empty, a empty Timetable will be created.
+Do take note that there are dummy urls for the purpose of testing. While normal users should not be able to know of their existence,
+entering a dummy link will result in a preset timetable being built.</p>
 </div>
 <div class="paragraph">
 <p>When the user uses the <code>TimeTableCommand</code>, it will raise the <code>TimeTableEvent</code> which will be caught and handled by the <code>InfoPanel</code>.
@@ -1454,7 +1464,7 @@ The <code>InfoPanel</code> will swap between <code>BrowsePanel</code>, <code>Bir
 <p>Pros: More flexibility for the user</p>
 </li>
 <li>
-<p>Cons: Hard to implement and control the input</p>
+<p>Cons: Hard to implement and parse the input</p>
 </li>
 </ul>
 </div>
@@ -2535,7 +2545,7 @@ Expected: Application opens with an address book with dummy data.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-05 16:32:10 UTC
+Last updated 2018-04-06 02:58:10 UTC
 </div>
 </div>
 </body>

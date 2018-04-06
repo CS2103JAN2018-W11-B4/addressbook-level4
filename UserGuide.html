@@ -212,13 +212,16 @@ A person can have any number of tags (including 0)
 <p>Birthday must be in DDMMYYYY format</p>
 </li>
 <li>
-<p>Timetable must be a valid NUSMods shortened link</p>
+<p>Timetable must either be a valid NUSMods shortened link or left empty (in which a empty timetable will be created)</p>
 </li>
 </ul>
 </div>
 </td>
 </tr>
 </table>
+</div>
+<div class="paragraph">
+<p>For more information on how to get a valid link, refer to <a href="#faq">Section 4, &#8220;FAQ&#8221;</a>.</p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -422,15 +425,9 @@ Format: <code>birthdays [ADDITIONAL_PARAMETER]</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>There is an optional field of [ADDITIONAL_PARAMETER]</p>
-</li>
-<li>
-<p>You can input <code>todays</code> in that field to show a notification of the birthdays today instead</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>The following parameters can be inputted into the [ADDITIONAL_PARAMETER] field
+* <code>todays</code>: Shows a notification of the birthdays occurring today</p>
 </div>
 </div>
 </div>
@@ -884,8 +881,7 @@ There is no need to save manually.</p>
 <div class="paragraph">
 <p><strong>Q</strong>: How do I transfer my data to another Computer?<br>
 <strong>A</strong>:
-<strong>Method 1</strong>
-Replaces the other computer&#8217;s data completely</p>
+<strong>Method 1</strong>: Replaces the other computer&#8217;s data completely</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -908,8 +904,7 @@ Replaces the other computer&#8217;s data completely</p>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>Method 2</strong>
-Merges the contacts of both computers</p>
+<p><strong>Method 2</strong>: Merges the contacts of both computers</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -940,6 +935,23 @@ Merges the contacts of both computers</p>
 </div>
 </div>
 </div>
+<div class="paragraph">
+<p><strong>Q</strong>: How do I import my timetable from NUSMods?<br>
+<strong>A</strong>:</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>When adding or editing a person, you can input his/her NUSMods shortened link in the tt/TIMETABLE field
+.   Go to NUSMods
+.   Click <code>Share/Sync</code> at the bottom right hand corner
+image::NUSMods_SS1.png[width="800"]
+.   Copy the link in the window that appeared
+image::NUSMods_SS2.png[width="800"]
+.   Paste it in StardyTogether at the tt/TIMETABLE field</p>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -959,7 +971,7 @@ e.g. <code>alias history hist</code></p>
 <p><strong>Alias List</strong> <code>alias list</code><br></p>
 </li>
 <li>
-<p><strong>Birthday List</strong>: <code>birthdays</code></p>
+<p><strong>Birthday List</strong>: <code>birthdays [todays]</code></p>
 </li>
 <li>
 <p><strong>Clear</strong> : <code>clear</code></p>
@@ -1029,7 +1041,7 @@ e.g. <code>vacant COM1</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-05 16:32:10 UTC
+Last updated 2018-04-06 02:58:10 UTC
 </div>
 </div>
 </body>
