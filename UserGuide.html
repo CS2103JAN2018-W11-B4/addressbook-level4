@@ -421,10 +421,13 @@ Selects the 1st person in the results of the <code>find</code> command.</p>
 <div class="paragraph">
 <p>Displays a list that contains all the birthdays of all contacts ordered by date<br>
 Or display a notification of the birthdays today<br>
-Format: <code>birthdays [ADDITIONAL_PARAMETER]</code></p>
+Format: <code>birthdays [ADDITIONAL_PARAMETER]</code>
+The following parameters can be inputted into the [ADDITIONAL_PARAMETER] field<br></p>
 </div>
-<div class="paragraph">
-<p>The following parameters can be inputted into the [ADDITIONAL_PARAMETER] field<br></p>
+<div class="imageblock">
+<div class="content">
+<img src="images/birthdaysToday.png" alt="birthdaysToday" width="790">
+</div>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -458,6 +461,11 @@ Displays a window with the birthdays today</p>
 <div class="paragraph">
 <p>Displays the timetable of a person for Odd or Even Week.<br>
 Format: <code>timetable INDEX ODD/EVEN</code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/timetable.png" alt="timetable" width="790">
+</div>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -567,6 +575,11 @@ Format: <code>unalias [CURRENT_ALIAS]</code></p>
 <p>Displays a list of rooms in the specified building and whether each room is vacant or not, in blocks of 1 hours.<br>
 Format: <code>vacant BUILDING</code></p>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="images/vacant.png" alt="vacant" width="790">
+</div>
+</div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
@@ -597,12 +610,20 @@ Finds the vacancy status of study rooms in COM1 building.</p>
 <h3 id="google-maps-display-code-map-code-since-v1-4"><a class="link" href="#google-maps-display-code-map-code-since-v1-4">3.15. Google maps display : <code>map</code> (since v1.4)</a></h3>
 <div class="paragraph">
 <p>Launches Google Maps with the specified location(s).
-Format: <code>map LOCATION</code> or <code>map LOCATION/LOCATION&#8230;&#8203;</code></p>
+Format: <code>map LOCATION</code> or <code>map LOCATION/LOCATION/&#8230;&#8203;</code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/map.png" alt="map" width="790">
+</div>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
+<li>
+<p>All locations specified cannot contains <code>/</code>. e.g. Changi/Airport is not a valid location.</p>
+</li>
 <li>
 <p>NUS building name is case insensitive e.g. <code>COM1</code> or <code>com1</code> gets the same output</p>
 </li>
@@ -613,7 +634,7 @@ Format: <code>map LOCATION</code> or <code>map LOCATION/LOCATION&#8230;&#8203;</
 <p>If more than one location is provided, directions to each location, starting from the first one, will be displayed.</p>
 </li>
 <li>
-<p>Typing "map LOCATION_START to LOCATION_DESTINATION" can work as well only if neither locations specified are NUS buildings.</p>
+<p>Typing <code>map LOCATION_START to LOCATION_DESTINATION</code> can work as well for two locations input, only if neither locations specified are NUS buildings.</p>
 </li>
 </ul>
 </div>
@@ -1064,7 +1085,7 @@ e.g. <code>vacant COM1</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-08 14:18:33 UTC
+Last updated 2018-04-08 17:57:41 UTC
 </div>
 </div>
 </body>
