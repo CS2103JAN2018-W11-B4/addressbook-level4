@@ -5,433 +5,123 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.6.1">
-<title>StardyTogether - User Guide</title>
-<link rel="stylesheet" href="stylesheets/gh-pages.css">
+<title>Wayne Neo - Project Portfolio</title>
+<link rel="stylesheet" href="../stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
-<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css">
 </head>
 <body class="article">
 <div id="header">
-<h1>StardyTogether - User Guide</h1>
+<h1>Wayne Neo - Project Portfolio</h1>
 </div>
 <div id="content">
-<div id="preamble">
+<div class="sect1">
+<h2 id="project-stardytogether"><a class="link" href="#project-stardytogether">PROJECT: StardyTogether</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>By: <code>Team W11-B4</code>      Since: <code>Feb 2018</code>      Licence: <code>MIT</code></p>
+<p>StardyTogether is a desktop contacts and venues manager application specially for NUS students to help them find free time and rooms to study together with their friends.</p>
 </div>
+<div class="paragraph">
+<p>Most of the user interactions are via CLI, while there exists a GUI created with JavaFX. It is written in Java and has
+about 10kLoC.</p>
 </div>
-<div id="toc" class="toc">
-<div id="toctitle"></div>
-<ul class="sectlevel1">
-<li><a href="#introduction">1. Introduction</a></li>
-<li><a href="#quick-start">2. Quick Start</a></li>
-<li><a href="#Features">3. Features</a>
-<ul class="sectlevel2">
-<li><a href="#contact-commands">3.1. Contact Commands</a>
-<ul class="sectlevel3">
-<li><a href="#adding-a-person-code-add-code">3.1.1. Adding a person: <code>add</code></a></li>
-<li><a href="#listing-all-persons-code-list-code">3.1.2. Listing all persons : <code>list</code></a></li>
-<li><a href="#editing-a-person-code-edit-code">3.1.3. Editing a person : <code>edit</code></a></li>
-<li><a href="#locating-persons-by-name-code-find-code">3.1.4. Locating persons by name: <code>find</code></a></li>
-<li><a href="#deleting-a-person-code-delete-code">3.1.5. Deleting a person : <code>delete</code></a></li>
-<li><a href="#selecting-a-person-code-select-code">3.1.6. Selecting a person : <code>select</code></a></li>
-<li><a href="#viewing-a-collated-birthday-list-code-birthdays-code-since-v1-3">3.1.7. Viewing a collated birthday list: <code>birthdays</code> (since v1.3)</a></li>
-</ul>
-</li>
-<li><a href="#nus-commands">3.2. NUS Commands</a>
-<ul class="sectlevel3">
-<li><a href="#viewing-common-time-slots-in-timetable-code-union-code-coming-in-v2-0">3.2.1. Viewing common time slots in timetable: <code>union</code> (coming in v2.0)</a></li>
-<li><a href="#vacant-study-rooms-finder-code-vacant-code-since-v1-3">3.2.2. Vacant study rooms finder : <code>vacant</code> (since v1.3)</a></li>
-<li><a href="#google-maps-display-code-map-code-since-v1-4">3.2.3. Google maps display : <code>map</code> (since v1.4)</a></li>
-</ul>
-</li>
-<li><a href="#utility-commands">3.3. Utility Commands</a>
-<ul class="sectlevel3">
-<li><a href="#viewing-help-code-help-code">3.3.1. Viewing help : <code>help</code></a></li>
-<li><a href="#adding-a-command-alias-code-alias-code-since-v1-1">3.3.2. Adding a command alias: <code>alias</code> (since v1.1)</a></li>
-<li><a href="#listing-all-aliases-code-alias-list-code-since-v1-4">3.3.3. Listing all aliases: <code>alias list</code> (since v1.4)</a></li>
-<li><a href="#removing-a-currently-existing-alias-code-unalias-code-since-v1-3">3.3.4. Removing a currently existing alias: <code>unalias</code> (since v1.3)</a></li>
-<li><a href="#listing-entered-commands-code-history-code">3.3.5. Listing entered commands : <code>history</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">3.3.6. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.3.7. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">3.3.8. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#encrypting-data-files-code-encrypt-code-since-v1-2">3.3.9. Encrypting data files : <code>encrypt</code> (since v1.2)</a></li>
-<li><a href="#removal-of-password-code-decrypt-code-since-v1-3">3.3.10. Removal of password: <code>decrypt</code> (since v1.3)</a></li>
-<li><a href="#importing-data-code-import-code-since-v1-1">3.3.11. Importing data : <code>import</code> (since v1.1)</a></li>
-<li><a href="#exporting-data-code-export-code-since-v1-4">3.3.12. Exporting data : <code>export</code> (since v1.4)</a></li>
-<li><a href="#uploading-data-code-upload-code-since-v1-5rc">3.3.13. Uploading data : <code>upload</code> (since v1.5rc)</a></li>
-<li><a href="#exiting-the-program-code-exit-code">3.3.14. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">3.3.15. Saving the data</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#faq">4. FAQ</a></li>
-<li><a href="#command-summary">5. Command Summary</a></li>
-</ul>
+<div class="paragraph">
+<p>The source code is based on the  <a href="https://github.com/se-edu/addressbook-level4">AddressBook-Level4</a> project created by SE-EDU initiative.</p>
 </div>
-</div>
-<div class="sect1">
-<h2 id="introduction"><a class="link" href="#introduction">1. Introduction</a></h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>Stardy Together (ST) is for <strong>NUS Students</strong> who prefer to use a <strong>desktop app</strong> for managing NUS friends' contacts.</p>
-</li>
-<li>
-<p>More importantly, ST is <strong>optimized for those who prefer to work with a Command Line Interface</strong> (CLI) while still having the benefits of a Graphical User Interface (GUI).</p>
-</li>
-<li>
-<p>If you can type fast, ST can get your contact management tasks done faster than traditional GUI apps.</p>
-</li>
-<li>
-<p>This guide provides a list of features that are available on ST and their usage.</p>
-</li>
-<li>
-<p>Interested? Jump to the next section, <a href="#quick-start">Section 2, &#8220;Quick Start&#8221;</a>, to get started. Enjoy!</p>
-</li>
-</ul>
+<div class="paragraph">
+<p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103JAN2018-W11-B4/main/blob/master/collated/functional/AzuraAiR.md">Functional code</a>]
+[<a href="https://github.com/CS2103JAN2018-W11-B4/main/blob/master/collated/test/AzuraAiR.md">Test code</a>]<br></p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="quick-start"><a class="link" href="#quick-start">2. Quick Start</a></h2>
+<h2 id="feature-contributions"><a class="link" href="#feature-contributions">Feature Contributions</a></h2>
 <div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Ensure you have Java version <code>1.8.0_60</code> or later installed in your Computer.</p>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Having any Java 8 version is not enough.<br>
-This app will not work with earlier versions of Java 8.
-</td>
-</tr>
-</table>
-</div>
-</li>
-<li>
-<p>Download the latest <code>StardyTogether.jar</code> <a href="https://github.com/CS2103JAN2018-W11-B4/main/releases">here</a>.</p>
-</li>
-<li>
-<p>Copy the file to the folder you want to use as the home folder for your StardyTogether.</p>
-</li>
-<li>
-<p>Double-click the file to start the app. The GUI should appear in a few seconds.</p>
-<div class="imageblock">
-<div class="content">
-<img src="images/Ui.png" alt="Ui" width="790">
-</div>
-</div>
-</li>
-<li>
-<p>Type the command in the command box and press <kbd>Enter</kbd> to execute it.<br>
-e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> will open the help window.</p>
-</li>
-<li>
-<p>Some example commands you can try:</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong><code>list</code></strong> : lists all contacts</p>
+<p><strong>Major enhancement</strong>: Timetable Attribute and Union Command</p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: Allows students to import their NUSMods timetables into</p>
 </li>
 <li>
-<p><strong><code>add</code></strong><code>add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/01011995 tt/http://modsn.us/oNZLY</code> : adds a contact named <code>John Doe</code> to StardyTogether.</p>
+<p>Justification: This feature makes the adoption and use of StardyTogether much more convenient as students can now remove the hassle of manually entering their timetables and use StardyTogether along with their existing tools.<br>
+The union of the timetable also allows students to easily plan study sessions today during their free breaks.</p>
 </li>
 <li>
-<p><strong><code>delete</code></strong><code>3</code> : deletes the 3rd contact shown in the current list</p>
-</li>
-<li>
-<p><strong><code>exit</code></strong> : exits the app</p>
+<p>Credits: Timetable importing features obtains data from NUSMods API (<a href="http://api.nusmods.com" class="bare">http://api.nusmods.com</a>)</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>Refer to the next section, <a href="#Features">Section 3, &#8220;Features&#8221;</a>, for details of each command, or refer to <a href="#command-summary">Section 5, &#8220;Command Summary&#8221;</a> for the summary of all the commands.</p>
+<p><strong>Minor enhancement</strong>: Birthday Attribute and Command</p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: Shows a list of birthdays and notification of birthdays occurring today</p>
 </li>
-</ol>
+<li>
+<p>Justification: This allows students to fulfill their social obligations with their friends by reminding them of their friends' birthdays at the start of the app.
+Students can also open a list to plan for birthdays ahead of time.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Other contributions</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Managed releases <code>v1.3</code> - <code>v1.5rc</code> (3 releases) on GitHub</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Community:</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>PRs reviewed (with non-trivial review comments): <a href="https://github.com/CS2103JAN2018-W11-B4/main/pull/74">#74</a></p>
+</li>
+<li>
+<p>Reported bugs and suggestions for other teams in the class (examples: <a href="https://github.com/CS2103JAN2018-T16-B1/main/issues/70">1</a>, <a href="https://github.com/CS2103JAN2018-T16-B1/main/issues/76">2</a>, <a href="https://github.com/CS2103JAN2018-T16-B1/main/issues/82">3</a>, <a href="https://github.com/CS2103JAN2018-T16-B1/main/issues/86">4</a>)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Tools:</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Uses a third party library (NUSMods API) for timetable feature (Pull Request <a href="https://github.com/CS2103JAN2018-W11-B4/main/pull/138">#138</a>)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="Features"><a class="link" href="#Features">3. Features</a></h2>
+<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
 <div class="sectionbody">
-<div class="exampleblock">
-<div class="content">
-<div class="paragraph">
-<p><strong>Command Format</strong></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Words in <code>UPPER_CASE</code> are the parameters to be supplied by the user e.g. in <code>add n/NAME</code>, <code>NAME</code> is a parameter which can be used as <code>add n/John Doe</code>.</p>
-</li>
-<li>
-<p>Items in square brackets are optional e.g <code>n/NAME [t/TAG]</code> can be used as <code>n/John Doe t/friend</code> or as <code>n/John Doe</code>.</p>
-</li>
-<li>
-<p>Items with <code>…</code>​ after them can be used multiple times including zero times e.g. <code>[t/TAG]&#8230;&#8203;</code> can be used as <code>&#160;</code> (i.e. 0 times), <code>t/friend</code>, <code>t/friend t/family</code> etc.</p>
-</li>
-<li>
-<p>Parameters can be in any order e.g. if the command specifies <code>n/NAME p/PHONE_NUMBER</code>, <code>p/PHONE_NUMBER n/NAME</code> is also acceptable.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="contact-commands"><a class="link" href="#contact-commands">3.1. Contact Commands</a></h3>
-<div class="sect3">
-<h4 id="adding-a-person-code-add-code"><a class="link" href="#adding-a-person-code-add-code">3.1.1. Adding a person: <code>add</code></a></h4>
-<div class="paragraph">
-<p>Adds a person to StardyTogether.<br>
-Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/BIRTHDAY tt/TIMETABLE [t/TAG]&#8230;&#8203;</code></p>
-</div>
-<div class="admonitionblock tip">
-<table>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
 <tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-A person can have any number of tags (including 0)
-</td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.</em></p></td>
 </tr>
+</tbody>
 </table>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Birthday must be in DDMMYYYY format</p>
-</li>
-<li>
-<p>Timetable must either be a valid NUSMods shortened link or left empty (in which a empty timetable will be created)</p>
-</li>
-<li>
-<p>Timetable from NUSMods should not have clashes</p>
-</li>
-<li>
-<p>If the computer has no internet access, a empty timetable will be created instead</p>
-</li>
-</ul>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>For more information on how to get a valid link, refer to <a href="#faq">Section 4, &#8220;FAQ&#8221;</a>.</p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/01011995 tt/http://modsn.us/oNZLY</code></p>
-</li>
-<li>
-<p><code>add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 b/28021997 tt/http://modsn.us/ojGeu t/criminal</code></p>
-</li>
-</ul>
-</div>
-</div>
 <div class="sect3">
-<h4 id="listing-all-persons-code-list-code"><a class="link" href="#listing-all-persons-code-list-code">3.1.2. Listing all persons : <code>list</code></a></h4>
-<div class="paragraph">
-<p>Shows a list of all persons in StardyTogether.<br>
-Format: <code>list</code></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="editing-a-person-code-edit-code"><a class="link" href="#editing-a-person-code-edit-code">3.1.3. Editing a person : <code>edit</code></a></h4>
-<div class="paragraph">
-<p>Edits an existing person in StardyTogether.<br>
-Format: <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [tt/TIMETABLE] [t/TAG]&#8230;&#8203;</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Edits the person at the specified <code>INDEX</code>. The index refers to the index number shown in the last person listing. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-<li>
-<p>At least one of the optional fields must be provided.</p>
-</li>
-<li>
-<p>Existing values will be updated to the input values.</p>
-</li>
-<li>
-<p>When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.</p>
-</li>
-<li>
-<p>You can remove all the person&#8217;s tags by typing <code>t/</code> without specifying any tags after it.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>edit 1 p/91234567 e/johndoe@example.com</code><br>
-Edits the phone number and email address of the 1st person to be <code>91234567</code> and <code>johndoe@example.com</code> respectively.</p>
-</li>
-<li>
-<p><code>edit 2 n/Betsy Crower t/</code><br>
-Edits the name of the 2nd person to be <code>Betsy Crower</code> and clears all existing tags.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="locating-persons-by-name-code-find-code"><a class="link" href="#locating-persons-by-name-code-find-code">3.1.4. Locating persons by name: <code>find</code></a></h4>
-<div class="paragraph">
-<p>Finds persons whose names contain any of the given keywords.<br>
-Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>The search is case insensitive. e.g <code>hans</code> will match <code>Hans</code></p>
-</li>
-<li>
-<p>The order of the keywords does not matter. e.g. <code>Hans Bo</code> will match <code>Bo Hans</code></p>
-</li>
-<li>
-<p>Only the name is searched.</p>
-</li>
-<li>
-<p>Only full words will be matched e.g. <code>Han</code> will not match <code>Hans</code></p>
-</li>
-<li>
-<p>Persons matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Hans Bo</code> will return <code>Hans Gruber</code>, <code>Bo Yang</code></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>find John</code><br>
-Returns <code>john</code> and <code>John Doe</code></p>
-</li>
-<li>
-<p><code>find Betsy Tim John</code><br>
-Returns any person having names <code>Betsy</code>, <code>Tim</code>, or <code>John</code></p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="deleting-a-person-code-delete-code"><a class="link" href="#deleting-a-person-code-delete-code">3.1.5. Deleting a person : <code>delete</code></a></h4>
-<div class="paragraph">
-<p>Deletes the specified person from StardyTogether.<br>
-Format: <code>delete INDEX</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Deletes the person at the specified <code>INDEX</code>.</p>
-</li>
-<li>
-<p>The index refers to the index number shown in the most recent listing.</p>
-</li>
-<li>
-<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>list</code><br>
-<code>delete 2</code><br>
-Deletes the 2nd person in StardyTogether.</p>
-</li>
-<li>
-<p><code>find Betsy</code><br>
-<code>delete 1</code><br>
-Deletes the 1st person in the results of the <code>find</code> command.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="selecting-a-person-code-select-code"><a class="link" href="#selecting-a-person-code-select-code">3.1.6. Selecting a person : <code>select</code></a></h4>
-<div class="paragraph">
-<p>Selects the person identified by the index number used in the last person listing.<br>
-Format: <code>select INDEX</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Selects the person and opens the detail card of the person at the specified <code>INDEX</code>.</p>
-</li>
-<li>
-<p>The index refers to the index number shown in the most recent listing.</p>
-</li>
-<li>
-<p>The index <strong>must be a positive integer</strong> <code>1, 2, 3, &#8230;&#8203;</code></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>list</code><br>
-<code>select 2</code><br>
-Selects the 2nd person in StardyTogether.</p>
-</li>
-<li>
-<p><code>find Betsy</code><br>
-<code>select 1</code><br>
-Selects the 1st person in the results of the <code>find</code> command.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="viewing-a-collated-birthday-list-code-birthdays-code-since-v1-3"><a class="link" href="#viewing-a-collated-birthday-list-code-birthdays-code-since-v1-3">3.1.7. Viewing a collated birthday list: <code>birthdays</code> (since v1.3)</a></h4>
+<h4 id="viewing-a-collated-birthday-list-code-birthdays-code-since-v1-3"><a class="link" href="#viewing-a-collated-birthday-list-code-birthdays-code-since-v1-3">Viewing a collated birthday list: <code>birthdays</code> (since v1.3)</a></h4>
 <div class="paragraph">
 <p>Displays a list that contains all the birthdays of all contacts ordered by date<br>
 Or display a notification of the birthdays today<br>
@@ -440,7 +130,7 @@ The following parameters can be inputted into the [ADDITIONAL_PARAMETER] field<b
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/birthdaysToday.png" alt="birthdaysToday" width="790">
+<img src="../images/birthdaysToday.png" alt="birthdaysToday" width="790">
 </div>
 </div>
 <div class="sidebarblock">
@@ -470,11 +160,8 @@ Displays a window with the birthdays today</p>
 </ul>
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="nus-commands"><a class="link" href="#nus-commands">3.2. NUS Commands</a></h3>
 <div class="sect3">
-<h4 id="viewing-common-time-slots-in-timetable-code-union-code-coming-in-v2-0"><a class="link" href="#viewing-common-time-slots-in-timetable-code-union-code-coming-in-v2-0">3.2.1. Viewing common time slots in timetable: <code>union</code> (coming in v2.0)</a></h4>
+<h4 id="viewing-common-time-slots-in-timetable-code-union-code-coming-in-v2-0"><a class="link" href="#viewing-common-time-slots-in-timetable-code-union-code-coming-in-v2-0">Viewing common time slots in timetable: <code>union</code> (coming in v2.0)</a></h4>
 <div class="paragraph">
 <p>Displays the common free time of multiple people in StardyTogether.(Minimum: 2)<br>
 Format: <code>union ODD/EVEN INDEX INDEX [INDEX]&#8230;&#8203;</code></p>
@@ -510,14 +197,14 @@ Displays the combined even timetable for persons at Index 1 and 2.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="vacant-study-rooms-finder-code-vacant-code-since-v1-3"><a class="link" href="#vacant-study-rooms-finder-code-vacant-code-since-v1-3">3.2.2. Vacant study rooms finder : <code>vacant</code> (since v1.3)</a></h4>
+<h4 id="vacant-study-rooms-finder-code-vacant-code-since-v1-3"><a class="link" href="#vacant-study-rooms-finder-code-vacant-code-since-v1-3">Vacant study rooms finder : <code>vacant</code> (since v1.3)</a></h4>
 <div class="paragraph">
 <p>Displays a list of rooms in the specified building and whether each room is vacant or not, in blocks of 1 hours.<br>
 Format: <code>vacant BUILDING</code></p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/vacant.png" alt="vacant" width="790">
+<img src="../images/vacant.png" alt="vacant" width="790">
 </div>
 </div>
 <div class="sidebarblock">
@@ -547,14 +234,14 @@ Finds the vacancy status of study rooms in COM1 building.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="google-maps-display-code-map-code-since-v1-4"><a class="link" href="#google-maps-display-code-map-code-since-v1-4">3.2.3. Google maps display : <code>map</code> (since v1.4)</a></h4>
+<h4 id="google-maps-display-code-map-code-since-v1-4"><a class="link" href="#google-maps-display-code-map-code-since-v1-4">Google maps display : <code>map</code> (since v1.4)</a></h4>
 <div class="paragraph">
 <p>Launches Google Maps with the specified location(s).
 Format: <code>map LOCATION</code> or <code>map LOCATION/LOCATION/&#8230;&#8203;</code></p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/map.png" alt="map" width="790">
+<img src="../images/map.png" alt="map" width="790">
 </div>
 </div>
 <div class="sidebarblock">
@@ -600,17 +287,16 @@ Displays the directions from <code>Tampines Mall</code> to <code>COM1</code> to 
 </ul>
 </div>
 </div>
-</div>
 <div class="sect2">
-<h3 id="utility-commands"><a class="link" href="#utility-commands">3.3. Utility Commands</a></h3>
+<h3 id="utility-commands"><a class="link" href="#utility-commands">Utility Commands</a></h3>
 <div class="sect3">
-<h4 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">3.3.1. Viewing help : <code>help</code></a></h4>
+<h4 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">Viewing help : <code>help</code></a></h4>
 <div class="paragraph">
 <p>Format: <code>help</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="adding-a-command-alias-code-alias-code-since-v1-1"><a class="link" href="#adding-a-command-alias-code-alias-code-since-v1-1">3.3.2. Adding a command alias: <code>alias</code> (since v1.1)</a></h4>
+<h4 id="adding-a-command-alias-code-alias-code-since-v1-1"><a class="link" href="#adding-a-command-alias-code-alias-code-since-v1-1">Adding a command alias: <code>alias</code> (since v1.1)</a></h4>
 <div class="paragraph">
 <p>Creates customized aliases for any valid command.<br>
 Format: <code>alias [COMMAND] [ALIAS]</code></p>
@@ -633,14 +319,14 @@ Format: <code>alias [COMMAND] [ALIAS]</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="listing-all-aliases-code-alias-list-code-since-v1-4"><a class="link" href="#listing-all-aliases-code-alias-list-code-since-v1-4">3.3.3. Listing all aliases: <code>alias list</code> (since v1.4)</a></h4>
+<h4 id="listing-all-aliases-code-alias-list-code-since-v1-4"><a class="link" href="#listing-all-aliases-code-alias-list-code-since-v1-4">Listing all aliases: <code>alias list</code> (since v1.4)</a></h4>
 <div class="paragraph">
 <p>Lists all created aliases.<br>
 Format: <code>alias list</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="removing-a-currently-existing-alias-code-unalias-code-since-v1-3"><a class="link" href="#removing-a-currently-existing-alias-code-unalias-code-since-v1-3">3.3.4. Removing a currently existing alias: <code>unalias</code> (since v1.3)</a></h4>
+<h4 id="removing-a-currently-existing-alias-code-unalias-code-since-v1-3"><a class="link" href="#removing-a-currently-existing-alias-code-unalias-code-since-v1-3">Removing a currently existing alias: <code>unalias</code> (since v1.3)</a></h4>
 <div class="paragraph">
 <p>Removes a previously created alias.<br>
 Format: <code>unalias [CURRENT_ALIAS]</code></p>
@@ -657,7 +343,7 @@ Format: <code>unalias [CURRENT_ALIAS]</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.3.5. Listing entered commands : <code>history</code></a></h4>
+<h4 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">Listing entered commands : <code>history</code></a></h4>
 <div class="paragraph">
 <p>Lists all the commands that you have entered in reverse chronological order.<br>
 Format: <code>history</code></p>
@@ -678,7 +364,7 @@ Format: <code>history</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.3.6. Undoing previous command : <code>undo</code></a></h4>
+<h4 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">Undoing previous command : <code>undo</code></a></h4>
 <div class="paragraph">
 <p>Restores the StardyTogether instance to the state before the previous <em>undoable</em> command was executed.<br>
 Format: <code>undo</code></p>
@@ -723,7 +409,7 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </div>
 </div>
 <div class="sect3">
-<h4 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.3.7. Redoing the previously undone command : <code>redo</code></a></h4>
+<h4 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">Redoing the previously undone command : <code>redo</code></a></h4>
 <div class="paragraph">
 <p>Reverses the most recent <code>undo</code> command.<br>
 Format: <code>redo</code></p>
@@ -755,14 +441,14 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect3">
-<h4 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.3.8. Clearing all entries : <code>clear</code></a></h4>
+<h4 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">Clearing all entries : <code>clear</code></a></h4>
 <div class="paragraph">
 <p>Clears all entries from StardyTogether.<br>
 Format: <code>clear</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="encrypting-data-files-code-encrypt-code-since-v1-2"><a class="link" href="#encrypting-data-files-code-encrypt-code-since-v1-2">3.3.9. Encrypting data files : <code>encrypt</code> (since v1.2)</a></h4>
+<h4 id="encrypting-data-files-code-encrypt-code-since-v1-2"><a class="link" href="#encrypting-data-files-code-encrypt-code-since-v1-2">Encrypting data files : <code>encrypt</code> (since v1.2)</a></h4>
 <div class="paragraph">
 <p>Encrypt StardyTogether with the password provided.<br>
 Format: <code>encrypt PASSWORD</code></p>
@@ -797,14 +483,14 @@ Encrypts <code>addressbook.xml</code> with "test" as the password.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="removal-of-password-code-decrypt-code-since-v1-3"><a class="link" href="#removal-of-password-code-decrypt-code-since-v1-3">3.3.10. Removal of password: <code>decrypt</code> (since v1.3)</a></h4>
+<h4 id="removal-of-password-code-decrypt-code-since-v1-3"><a class="link" href="#removal-of-password-code-decrypt-code-since-v1-3">Removal of password: <code>decrypt</code> (since v1.3)</a></h4>
 <div class="paragraph">
 <p>Removes the password of the application and decrypts <code>addressbook.xml</code>.<br>
 Format: <code>decrypt</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="importing-data-code-import-code-since-v1-1"><a class="link" href="#importing-data-code-import-code-since-v1-1">3.3.11. Importing data : <code>import</code> (since v1.1)</a></h4>
+<h4 id="importing-data-code-import-code-since-v1-1"><a class="link" href="#importing-data-code-import-code-since-v1-1">Importing data : <code>import</code> (since v1.1)</a></h4>
 <div class="paragraph">
 <p>Imports an encrypted or unencrypted StardyTogether instance from filepath to the existing StardyTogether application. Persons, Tags, and Aliases that are not in your StardyTogether will be added.<br>
 Format: <code>import FILEPATH PASSWORD</code></p>
@@ -845,7 +531,7 @@ Imports <code>addressBook.xml</code> file at data folder using "testpassword" as
 </div>
 </div>
 <div class="sect3">
-<h4 id="exporting-data-code-export-code-since-v1-4"><a class="link" href="#exporting-data-code-export-code-since-v1-4">3.3.12. Exporting data : <code>export</code> (since v1.4)</a></h4>
+<h4 id="exporting-data-code-export-code-since-v1-4"><a class="link" href="#exporting-data-code-export-code-since-v1-4">Exporting data : <code>export</code> (since v1.4)</a></h4>
 <div class="paragraph">
 <p>Exports the current view of the existing StardyTogether application with or without password encryption to the specified filepath.<br>
 Format: <code>export FILEPATH PASSWORD</code></p>
@@ -883,7 +569,7 @@ Exports the current list of StardyTogether application to the <code>addressBook.
 </div>
 </div>
 <div class="sect3">
-<h4 id="uploading-data-code-upload-code-since-v1-5rc"><a class="link" href="#uploading-data-code-upload-code-since-v1-5rc">3.3.13. Uploading data : <code>upload</code> (since v1.5rc)</a></h4>
+<h4 id="uploading-data-code-upload-code-since-v1-5rc"><a class="link" href="#uploading-data-code-upload-code-since-v1-5rc">Uploading data : <code>upload</code> (since v1.5rc)</a></h4>
 <div class="paragraph">
 <p>Uploads the current view of the existing StardyTogether application with or without password encryption to the specified filename in Google Drive.
 Format: <code>upload FILENAME PASSWORD</code></p>
@@ -924,14 +610,14 @@ Uploads the current list of StardyTogether application to the <code>addressBook.
 </div>
 </div>
 <div class="sect3">
-<h4 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.3.14. Exiting the program : <code>exit</code></a></h4>
+<h4 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">Exiting the program : <code>exit</code></a></h4>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="saving-the-data"><a class="link" href="#saving-the-data">3.3.15. Saving the data</a></h4>
+<h4 id="saving-the-data"><a class="link" href="#saving-the-data">Saving the data</a></h4>
 <div class="paragraph">
 <p>StardyTogether data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
@@ -941,7 +627,7 @@ There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="faq"><a class="link" href="#faq">4. FAQ</a></h2>
+<h2 id="faq"><a class="link" href="#faq">FAQ</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong>Q</strong>: How do I transfer my data to another Computer?<br>
@@ -1015,7 +701,7 @@ There is no need to save manually.</p>
 <p>Click <code>Share/Sync</code> at the bottom right hand corner</p>
 <div class="imageblock">
 <div class="content">
-<img src="images/NUSMods_Screenshot_First.PNG" alt="NUSMods Screenshot First" width="790">
+<img src="../images/NUSMods_Screenshot_First.PNG" alt="NUSMods Screenshot First" width="790">
 </div>
 </div>
 </li>
@@ -1023,7 +709,7 @@ There is no need to save manually.</p>
 <p>Copy the link in the window that appeared</p>
 <div class="imageblock">
 <div class="content">
-<img src="images/NUSMods_Screenshot_Second.PNG" alt="NUSMods Screenshot Second" width="790">
+<img src="../images/NUSMods_Screenshot_Second.PNG" alt="NUSMods Screenshot Second" width="790">
 </div>
 </div>
 </li>
@@ -1037,7 +723,7 @@ There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="command-summary"><a class="link" href="#command-summary">5. Command Summary</a></h2>
+<h2 id="command-summary"><a class="link" href="#command-summary">Command Summary</a></h2>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -1170,6 +856,241 @@ There is no need to save manually.</p>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="faq-2"><a class="link" href="#faq-2">FAQ</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Q</strong>: How do I transfer my data to another Computer?<br>
+<strong>A</strong>:
+<strong>Method 1</strong>: Replaces the other computer&#8217;s data completely</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In the folder that <code>StardyTogether.jar</code> is in, find the <code>data</code> folder</p>
+</li>
+<li>
+<p>Copy the <code>addressbook.xml</code> storage file inside</p>
+</li>
+<li>
+<p>Transfer that file to the other computer</p>
+</li>
+<li>
+<p>Place it in the <code>data</code> folder of <code>StardyTogether.jar</code>, on the other computer</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Method 2</strong>: Merges the contacts of both computers</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In the folder that <code>StardyTogether.jar</code> is in, find the <code>data</code> folder</p>
+</li>
+<li>
+<p>Copy the <code>addressbook.xml</code> storage file inside</p>
+</li>
+<li>
+<p>Transfer that file to the other computer</p>
+</li>
+<li>
+<p>Rename that file to avoid overwriting the existing <code>addressbook.xml</code></p>
+</li>
+<li>
+<p>Place it in the <code>data</code> folder of <code>StardyTogether.jar</code>, on the other computer</p>
+</li>
+<li>
+<p>Type <code>import [fileName]</code> into the command box, where [fileName] is the new name from Step 4</p>
+</li>
+<li>
+<p>Press Enter</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Q</strong>: How do I import my timetable from NUSMods?<br>
+<strong>A</strong>: When adding or editing a person, you can input his/her NUSMods shortened link in the tt/TIMETABLE field</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Go to NUSMods</p>
+</li>
+<li>
+<p>Click <code>Share/Sync</code> at the bottom right hand corner</p>
+<div class="imageblock">
+<div class="content">
+<img src="../images/NUSMods_Screenshot_First.PNG" alt="NUSMods Screenshot First" width="790">
+</div>
+</div>
+</li>
+<li>
+<p>Copy the link in the window that appeared</p>
+<div class="imageblock">
+<div class="content">
+<img src="../images/NUSMods_Screenshot_Second.PNG" alt="NUSMods Screenshot Second" width="790">
+</div>
+</div>
+</li>
+<li>
+<p>Paste it in StardyTogether at the tt/TIMETABLE field</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="birthdays-feature"><a class="link" href="#birthdays-feature">Birthdays feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
+<div class="paragraph">
+<p>Birthdays Command uses the existing Events system and sends an event.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/LogicComponentBirthdaysSequenceDiagram.png" alt="LogicComponentBirthdaysSequenceDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>The UI component will then receive the event and handle the data.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UiComponentBirthdayListSequenceDiagram.png" alt="UiComponentBirthdayListSequenceDiagram" width="800">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-the-birthdaylist-ui-component-obtains-and-parses-its-data"><a class="link" href="#aspect-how-the-birthdaylist-ui-component-obtains-and-parses-its-data">Aspect: How the BirthdayList UI component obtains and parses its data</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1</strong>: Let UI component handle the parsing of UniquePersonList obtained from Event</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Isolated and independent within BirthdayList UI component. Less overhead.</p>
+</li>
+<li>
+<p>Cons: Not intuitive to new developers as parsing of data is not expected in UI.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 (current choice)</strong>: Let Birthdays do the parsing of UniquePersonList obtained from Model</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: More modularity.</p>
+</li>
+<li>
+<p>Cons: Not apparent in usage by User. Functionality remains the same but Birthdays command becomes more cluttered.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-user-can-open-birthday-list"><a class="link" href="#aspect-how-user-can-open-birthday-list">Aspect: How User can open Birthday List</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1</strong>: Manual command "birthdays" or "birthdays today"</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: User can control when to view the birthdays.</p>
+</li>
+<li>
+<p>Cons: Not very user-friendly. Additional parameter cannot be shortened.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong> Alternative 2 (current choice)</strong>: Notification at the start of app if a birthday is occurring today</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: User can be reminded immediately and need not type the command.</p>
+</li>
+<li>
+<p>Cons: Currently, StardyTogether does not have settings to switch on/off the feature. User may find it irritating.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-user-inputs-the-birthday-parameter-in-person-class"><a class="link" href="#aspect-how-user-inputs-the-birthday-parameter-in-person-class">Aspect: How User inputs the Birthday parameter in Person class</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong> Alternative 1 (Current choice)</strong>: Fixed format as DDMMYYYY</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Less room for errors.</p>
+</li>
+<li>
+<p>Cons: User may not like the DDMMYYYY format.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use Natural Language Processing</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Users can enter their birthday in their preferred format.</p>
+</li>
+<li>
+<p>Cons: External API will be used. May introduce unforeseen bugs.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
