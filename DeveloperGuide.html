@@ -1403,6 +1403,32 @@ However, this is still secure as even if a malicious user were to somehow get a 
 </ul>
 </div>
 </li>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Create a Building, Room, Week and Weekday class</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Follows the Single Responsibility Principle where each class should have responsibility over a single part of the functionality provided by the software</p>
+</li>
+<li>
+<p>Cons: More difficult to implement as the design of the flow of work between classes has to be thought out</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Create a static list of rooms in the Building class which has a room schedule for the day</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Code is shorter</p>
+</li>
+<li>
+<p>Cons: The Room and Building class will have schedule-related code which makes the classes messy.</p>
+</li>
+</ul>
+</div>
+</li>
 </ul>
 </div>
 </div>
@@ -2545,7 +2571,7 @@ Expected: Application opens with an address book with dummy data.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-10 10:06:40 UTC
+Last updated 2018-04-10 13:47:23 UTC
 </div>
 </div>
 </body>
