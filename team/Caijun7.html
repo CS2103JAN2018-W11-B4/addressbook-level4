@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.6.1">
+<title>Loh Cai Jun - Project Portfolio</title>
+<link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>Loh Cai Jun - Project Portfolio</h1>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="project-stardytogether"><a class="link" href="#project-stardytogether">PROJECT: StardyTogether</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>StardyTogether is a desktop contacts and venues manager application specially for NUS students to help them find free time and rooms to study together with their friends.</p>
+</div>
+<div class="paragraph">
+<p>Most of the user interactions are via CLI, while there exists a GUI created with JavaFX. It is written in Java and has
+about 10k LoC.</p>
+</div>
+<div class="paragraph">
+<p>The source code is based on the  <a href="https://github.com/se-edu/addressbook-level4">AddressBook-Level4</a> project created by SE-EDU initiative.</p>
+</div>
+<div class="paragraph">
+<p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103JAN2018-W11-B4/main/blob/master/collated/functional/Caijun7.md">Functional code</a>]<br>
+[<a href="https://github.com/CS2103JAN2018-W11-B4/main/blob/master/collated/functional/Caijun7-reused.md">Functional code (reused)</a>]<br>
+[<a href="https://github.com/CS2103JAN2018-W11-B4/main/blob/master/collated/test/Caijun7.md">Test code</a>]<br>
+[<a href="https://github.com/CS2103JAN2018-W11-B4/main/blob/master/collated/test/Caijun7-reused.md">Test code (reused)</a>]<br></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="feature-contributions"><a class="link" href="#feature-contributions">Feature Contributions</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Major enhancement</strong>: Data transferring which includes import, export, and upload feature</p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: Allows students to transfer StardyTogether file easily which includes importing all of the persons, tags, and aliases of StardyTogether file, exporting the selected persons in StardyTogether to a specified filepath, and upload the selected persons in StardyTogether to Google Drive.</p>
+</li>
+<li>
+<p>Justification: Students can transfer data between one another easily. Students can store backup in Google Drive and transfer between computers easily.</p>
+</li>
+<li>
+<p>Credits: Uploading feature uses <a href="https://developers.google.com/drive/">Google Drive API</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Minor enhancement</strong>: Vacant Room Finder model and storage component</p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: Shows the list of all rooms' weekday schedule in the building that the student is searching for the day.</p>
+</li>
+<li>
+<p>Justification: This allows students to easily find empty rooms for them to study in with their friends. This feature displays the schedule of the rooms for the whole day so that students can find the room that is vacant for the longest time.</p>
+</li>
+<li>
+<p>Credits: Venue information from <a href="https://nusmods.com/api/2017-2018/2/venueInformation.json">NUSMods</a> are used</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Other contributions</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Managed releases <code>v1.3</code> - <code>v1.5rc</code> (3 releases) on GitHub</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Community:</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>PRs reviewed (with non-trivial review comments): Pull Requests <a href="https://github.com/CS2103JAN2018-W11-B4/main/pull/74">#74</a>, <a href="https://github.com/CS2103JAN2018-W11-B4/main/pull/138">#138</a></p>
+</li>
+<li>
+<p>Reported bugs and suggestions for other teams in the class (examples:  <a href="https://github.com/CS2103JAN2018-F09-B3/main/issues/177">1</a>, <a href="https://github.com/CS2103JAN2018-F09-B3/main/issues/139">2</a>, <a href="https://github.com/CS2103JAN2018-F09-B3/main/issues/159">3</a>)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Tools:</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Uses a third party library (Google Drive API) for uploading feature (Pull Request <a href="https://github.com/CS2103JAN2018-W11-B4/main/pull/208">#208</a>)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="importing-data-code-import-code-since-v1-1"><a class="link" href="#importing-data-code-import-code-since-v1-1">Importing data : <code>import</code> (since v1.1)</a></h4>
+<div class="paragraph">
+<p>Imports an encrypted or unencrypted StardyTogether instance from filepath to the existing StardyTogether application. Persons, Tags, and Aliases that are not in your StardyTogether will be added.<br>
+Format: <code>import FILEPATH PASSWORD</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Imports an instance of StardyTogether from the specified <code>FILEPATH</code>.</p>
+</li>
+<li>
+<p>Decrypt that instance using the <code>PASSWORD</code> provided.</p>
+</li>
+<li>
+<p>If no <code>PASSWORD</code> is provided, the instance will be read without decryption.</p>
+</li>
+<li>
+<p>The filepath refers to the filepath where the instance file is stored.</p>
+</li>
+<li>
+<p>The instance file <strong>must be in XML file format</strong> after decryption.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>import data/addressBook.xml testpassword</code><br>
+Imports <code>addressBook.xml</code> file at data folder using "testpassword" as the password.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="exporting-data-code-export-code-since-v1-4"><a class="link" href="#exporting-data-code-export-code-since-v1-4">Exporting data : <code>export</code> (since v1.4)</a></h4>
+<div class="paragraph">
+<p>Exports the current view of the existing StardyTogether application with or without password encryption to the specified filepath.<br>
+Format: <code>export FILEPATH PASSWORD</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Exports an instance of StardyTogether to the specified <code>FILEPATH</code>.</p>
+</li>
+<li>
+<p>Encrypt that instance using the <code>PASSWORD</code> provided.</p>
+</li>
+<li>
+<p>If no <code>PASSWORD</code> is provided, the instance will be exported without encryption.</p>
+</li>
+<li>
+<p>The filepath refers to the filepath where the instance file will be stored.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>export data/addressBookBackUp.xml testpassword</code><br>
+Exports the current list of StardyTogether application to the <code>addressBook.xml</code> file at data folder using "testpassword" as the password for encryption.<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="uploading-data-code-upload-code-since-v1-5rc"><a class="link" href="#uploading-data-code-upload-code-since-v1-5rc">Uploading data : <code>upload</code> (since v1.5rc)</a></h4>
+<div class="paragraph">
+<p>Uploads the current view of the existing StardyTogether application with or without password encryption to the specified filename in Google Drive.
+Format: <code>upload FILENAME PASSWORD</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Application will redirect you to a browser url to request for access to Google Drive</p>
+</li>
+<li>
+<p>Uploads an instance of StardyTogether with the specified <code>FILENAME</code>.</p>
+</li>
+<li>
+<p>Encrypt that instance using the <code>PASSWORD</code> provided.</p>
+</li>
+<li>
+<p>If no <code>PASSWORD</code> is provided, the instance will be exported without encryption.</p>
+</li>
+<li>
+<p>The filepath refers to the filepath where the instance file will be stored.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>upload addressBook.xml testpassword</code><br>
+Uploads the current list of StardyTogether application to the <code>addressBook.xml</code> file in Google Drive using "testpassword" as the password for encryption.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="vacant-study-rooms-finder-code-vacant-code-since-v1-3"><a class="link" href="#vacant-study-rooms-finder-code-vacant-code-since-v1-3">Vacant study rooms finder : <code>vacant</code> (since v1.3)</a></h4>
+<div class="paragraph">
+<p>Displays a list of rooms in the specified building and whether each room is vacant or not, in blocks of 1 hours.<br>
+Format: <code>vacant BUILDING</code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/vacant.png" alt="vacant" width="790">
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Finds vacant study rooms in the specified <code>BUILDING</code>.</p>
+</li>
+<li>
+<p>The building must be in NUS venue format, e.g. <code>COM1</code>, <code>S17</code>, <code>E2</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>vacant COM1</code><br>
+Finds the vacancy status of study rooms in COM1 building.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="import-addressbook-feature"><a class="link" href="#import-addressbook-feature">Import AddressBook feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
+<div class="paragraph">
+<p>The import AddressBook mechanism is facilitated by <code>XmlSerializableAddressBook</code>, which resides inside <code>Storage</code>. It allows the imported XML file to be converted into AddressBook format.</p>
+</div>
+<div class="paragraph">
+<p>The imported AddressBook must be a XML file that follows <code>XmlAdaptedPerson</code>, <code>XmlAdaptedTag</code>, and <code>XmlAdaptedAlias</code> format.</p>
+</div>
+<div class="paragraph">
+<p><code>Person</code>,<code>Tag</code>, and <code>Alias</code> from imported AddressBook that are not a duplicate of existing <code>Person</code>, <code>Tag</code>, and <code>Alias</code> in the user&#8217;s AddressBook will be added.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the import operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ImportCommandSequenceDiagram.png" alt="ImportCommandSequenceDiagram" width="800">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-imported-addressbook-file-format"><a class="link" href="#aspect-imported-addressbook-file-format">Aspect: Imported AddressBook file format</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Uses the same XML file format as <code>XmlSerializableAddressBook</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Same file format as saved AddressBook, users can transfer AddressBook easily without the need to indicate file format.</p>
+</li>
+<li>
+<p>Cons: Imported AddressBook must be in XML file format that follows <code>XmlAdaptedPerson</code>, <code>XmlAdaptedTag</code>, and <code>XmlAdaptedAlias</code> format.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Uses CSV file format</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: CSV file format is widely used and is able to transfer between different applications (eg. Microsoft Excel).</p>
+</li>
+<li>
+<p>Cons: Different file format as saved AddressBook, implementation of converting file type from XML to CSV is needed.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-import-command-executes"><a class="link" href="#aspect-how-import-command-executes">Aspect: How import command executes</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Adds all <code>Person</code>,<code>Tag</code>, and <code>Alias</code> from imported AddressBook that are not a duplicate of existing <code>Person</code>, <code>Tag</code>, and <code>Alias</code> to the user&#8217;s AddressBook.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: User does not need to indicate which <code>Person</code>, <code>Tag</code> or <code>Alias</code> to be imported.</p>
+</li>
+<li>
+<p>Cons: User is not able to select which <code>Person</code>, <code>Tag</code> or <code>Alias</code> to be imported.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Adds selected <code>Person</code>,<code>Tag</code>, and <code>Alias</code> from imported AddressBook that are not a duplicate of existing <code>Person</code>, <code>Tag</code>, and <code>Alias</code> to the user&#8217;s AddressBook.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: User is able to select which <code>Person</code>, <code>Tag</code> or <code>Alias</code> to be imported.</p>
+</li>
+<li>
+<p>Cons: User needs to indicate which <code>Person</code>, <code>Tag</code> or <code>Alias</code> to be imported.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="vacant-room-finder-feature"><a class="link" href="#vacant-room-finder-feature">Vacant Room Finder feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">Current Implementation</a></h4>
+<div class="paragraph">
+<p>We are using Venue Information JSON file from <a href="https://nusmods.com/api/2017-2018/2/venueInformation.json">NUSMods</a> to get the weekly timetable of the venues. To increase the performance of getting the timetable of the venue, we decided to download Venue Information JSON file and have an offline copy stored in our StardyTogether application.</p>
+</div>
+<div class="paragraph">
+<p>We have added the list of NUS buildings and the list of rooms in each building into the offline copy.</p>
+</div>
+<div class="paragraph">
+<p>We use <code>ReadOnlyJsonVenueInformation</code>, which resides inside <code>Storage</code> to read and store the room timetable data inside <code>nusVenues</code> in <code>Room</code> class, and also store NUS Buildings and their respective rooms inside <code>nusBuildingsAndRooms</code> in <code>Building</code> class.</p>
+</div>
+<div class="paragraph">
+<p>To avoid reading the data whenever the <code>vacant</code> command is executed, we only read the data once when the <code>MainApp</code> starts.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the vacant command is parsed:</p>
+</div>
+<div class="paragraph">
+<p><code>ModelManager</code> will checks if the building is in the list of NUS Buildings, and will throw <code>BuildingNotFoundException</code> if the building is not in the list of NUS Buildings.</p>
+</div>
+<div class="paragraph">
+<p>We have created <code>Building</code>, <code>Room</code>, <code>Week</code>, and <code>WeekDay</code> in <code>Model</code> to read and store all weekday schedule of all NUS Rooms.</p>
+</div>
+<div class="paragraph">
+<p>The following architecture diagram shows the model and storage component:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ModelClassDiagram.png" alt="ModelClassDiagram" width="800">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/StorageClassDiagram.png" alt="StorageClassDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the logic component of Vacant Room Finder works:</p>
+</div>
+<div class="paragraph">
+<p>As shown in diagram above, all Rooms weekday schedule will be return in an <code>ArrayList&lt;ArrayList&lt;String&gt;&gt;</code> data structure. This result will be shown to the UI on the <code>InfoPanel</code></p>
+</div>
+<div class="sect4">
+<h5 id="aspect-shows-list-of-vacant-rooms"><a class="link" href="#aspect-shows-list-of-vacant-rooms">Aspect: Shows list of vacant rooms</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Displays a list of rooms and the weekday schedule from 0800 to 2100</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: User is able to see which rooms are vacant throughout the day</p>
+</li>
+<li>
+<p>Cons: User has to manually find which rooms are vacant at the current time</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Displays a list of vacant rooms at the current time</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: User is able to see which rooms are vacant at current time immediately</p>
+</li>
+<li>
+<p>Cons: User is not able to see the room schedule for the whole day</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Create a Building, Room, Week and Weekday class</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Follows the Single Responsibility Principle where each class should have responsibility over a single part of the functionality provided by the software</p>
+</li>
+<li>
+<p>Cons: More difficult to implement as the design of the flow of work between classes has to be thought out</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Create a static list of rooms in the Building class which has a room schedule for the day</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Code is shorter</p>
+</li>
+<li>
+<p>Cons: The Room and Building class will have schedule-related code which makes the classes messy.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2018-04-10 19:31:30 UTC
+</div>
+</div>
+</body>
+</html>
