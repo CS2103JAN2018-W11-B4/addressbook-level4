@@ -973,7 +973,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="sect3">
 <h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">4.3.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>We are using <code>java.crypto.cipher</code> and <code>java.security.key</code> package for the encryption of the data. The <code>SecurityUtil</code> class is used to provide the <code>SHA-1</code> hashing and <code>AES</code> encryption/decryption required.</p>
+<p>We are using <code>javax.crypto.cipher</code> and <code>java.security.key</code> package for the encryption of the data. The <code>SecurityUtil</code> class is used to provide the <code>SHA-1</code> hashing and <code>AES</code> encryption/decryption required.</p>
 </div>
 <div class="paragraph">
 <p>Using a given password, it is first hashed using <code>SHA-1</code> to be used as the <code>AES</code> key.
@@ -1096,7 +1096,7 @@ However, this is still secure as even if a malicious user were to somehow get a 
 </div>
 </li>
 <li>
-<p>**Alternative 2: Password not saved</p>
+<p><strong>Alternative 2:</strong> Password not saved</p>
 <div class="ulist">
 <ul>
 <li>
@@ -2571,7 +2571,7 @@ Expected: Application opens with an address book with dummy data.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-10 13:47:23 UTC
+Last updated 2018-04-10 15:42:10 UTC
 </div>
 </div>
 </body>
