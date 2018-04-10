@@ -41,7 +41,7 @@
 </li>
 <li><a href="#nus-commands">3.2. NUS Commands</a>
 <ul class="sectlevel3">
-<li><a href="#viewing-common-time-slots-in-timetable-code-free-code-coming-in-v2-0">3.2.1. Viewing common time slots in timetable: <code>free</code> (coming in v2.0)</a></li>
+<li><a href="#viewing-common-time-slots-in-timetable-code-union-code-coming-in-v2-0">3.2.1. Viewing common time slots in timetable: <code>union</code> (coming in v2.0)</a></li>
 <li><a href="#vacant-study-rooms-finder-code-vacant-code-since-v1-3">3.2.2. Vacant study rooms finder : <code>vacant</code> (since v1.3)</a></li>
 <li><a href="#google-maps-display-code-map-code-since-v1-4">3.2.3. Google maps display : <code>map</code> (since v1.4)</a></li>
 </ul>
@@ -473,20 +473,20 @@ Displays a window with the birthdays today</p>
 <div class="sect2">
 <h3 id="nus-commands"><a class="link" href="#nus-commands">3.2. NUS Commands</a></h3>
 <div class="sect3">
-<h4 id="viewing-common-time-slots-in-timetable-code-free-code-coming-in-v2-0"><a class="link" href="#viewing-common-time-slots-in-timetable-code-free-code-coming-in-v2-0">3.2.1. Viewing common time slots in timetable: <code>free</code> (coming in v2.0)</a></h4>
+<h4 id="viewing-common-time-slots-in-timetable-code-union-code-coming-in-v2-0"><a class="link" href="#viewing-common-time-slots-in-timetable-code-union-code-coming-in-v2-0">3.2.1. Viewing common time slots in timetable: <code>union</code> (coming in v2.0)</a></h4>
 <div class="paragraph">
-<p>Displays the common free time of two people in StardyTogether.<br>
-Format: <code>free p/[PERSON1] p/[PERSON2]</code></p>
+<p>Displays the common free time of multiple people in StardyTogether.(Minimum: 2)<br>
+Format: <code>free ODD/EVEN INDEX INDEX [INDEX]&#8230;&#8203;</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Only full names will be matched e.g. <code>Han</code> will not match <code>Han Tan</code></p>
+<p>Only indexes of the current filtered list are valid</p>
 </li>
 <li>
-<p>Overlap of the two persons' timetables will be displayed.</p>
+<p>Overlap of the persons' timetables will be displayed.</p>
 </li>
 </ul>
 </div>
@@ -498,8 +498,12 @@ Format: <code>free p/[PERSON1] p/[PERSON2]</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>free p/John Doe p/Han Tan</code><br>
-Displays the combined timetable for John Doe and Han Tan.</p>
+<p><code>free Odd 1 2 3</code><br>
+Displays the combined odd timetable for persons at Index 1, 2 and 3.</p>
+</li>
+<li>
+<p><code>free Even 1 2</code><br>
+Displays the combined even timetable for persons at Index 1 and 2.</p>
 </li>
 </ul>
 </div>
@@ -1108,6 +1112,11 @@ There is no need to save manually.</p>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Union</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">union EVEN/ODD INDEX INDEX [INDEX]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">union Odd 1 2 3</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Vacant</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">vacant BUILDING</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">vacant COM1</p></td>
@@ -1119,7 +1128,7 @@ There is no need to save manually.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-10 17:48:14 UTC
+Last updated 2018-04-10 18:11:27 UTC
 </div>
 </div>
 </body>
