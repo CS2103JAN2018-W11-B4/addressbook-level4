@@ -121,6 +121,20 @@ about 6kLoC.</p>
 <p>Creates customized aliases for any valid command.<br>
 Format: <code>alias [COMMAND] [ALIAS]</code></p>
 </div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><code>[ALIAS]</code> should be alpha-numeric and without spaces.</p>
+</li>
+<li>
+<p>The recommended number of characters for <code>[ALIAS]</code> is 6 characters or less.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
 <div class="paragraph">
 <p>Examples:</p>
 </div>
@@ -196,7 +210,7 @@ Finds the vacancy status of study rooms in COM1 building.</p>
 <h4 id="google-maps-display-code-map-code-since-v1-4"><a class="link" href="#google-maps-display-code-map-code-since-v1-4">Google maps display : <code>map</code> (since v1.4)</a></h4>
 <div class="paragraph">
 <p>Launches Google Maps with the specified location(s).
-Format: <code>map LOCATION</code> or <code>map LOCATION/LOCATION/&#8230;&#8203;</code> or <code>map current location</code></p>
+Format: <code>map LOCATION</code> or <code>map LOCATION/LOCATION&#8230;&#8203;</code> or <code>map current location</code></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -208,10 +222,13 @@ Format: <code>map LOCATION</code> or <code>map LOCATION/LOCATION/&#8230;&#8203;<
 <div class="ulist">
 <ul>
 <li>
-<p>All locations specified cannot contains <code>/</code>. e.g. Changi/Airport is not a valid location.</p>
+<p>You are advised to keep the number of consecutive <code>[LOCATION]</code> to 4 locations.</p>
 </li>
 <li>
-<p>NUS building name is case insensitive e.g. <code>COM1</code> or <code>com1</code> gets the same output</p>
+<p>All locations specified should not contain <code>/</code>. e.g. <code>Changi/Airport</code> as a location will not give the same map display as <code>Changi Aiport</code>.</p>
+</li>
+<li>
+<p>NUS building name is case insensitive e.g. <code>COM1</code> or <code>com1</code> gives the same output</p>
 </li>
 <li>
 <p>If only one location is provided, the location will be displayed on the map.</p>
@@ -465,7 +482,7 @@ Displays the directions from <code>Tampines Mall</code> to <code>COM1</code> to 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-14 09:00:37 UTC
+Last updated 2018-04-14 12:16:40 UTC
 </div>
 </div>
 </body>
