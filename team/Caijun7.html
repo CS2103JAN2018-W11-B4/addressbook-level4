@@ -350,25 +350,6 @@ Finds the vacancy status of study rooms in COM1 building.</p>
 <p><code>Person</code>,<code>Tag</code>, and <code>Alias</code> from imported StardyTogether file that are not a duplicate of existing <code>Person</code>, <code>Tag</code>, and <code>Alias</code> in the user&#8217;s StardyTogether will be added.</p>
 </div>
 <div class="paragraph">
-<p>The following code shows how <code>Person</code>,<code>Tag</code>, and <code>Alias</code> are imported into StardyTogether:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>public AddressBook addToAddressBook(AddressBook addressBook) throws IllegalValueException {
-    for (XmlAdaptedTag t : tags) {
-        addressBook.importTag(t.toModelType());
-    }
-    for (XmlAdaptedPerson p : persons) {
-        addressBook.importPerson(p.toModelType());
-    }
-    for (XmlAdaptedAlias a : aliases) {
-        addressBook.importAlias(a.toModelType());
-    }
-    return addressBook;
-}</pre>
-</div>
-</div>
-<div class="paragraph">
 <p>The following sequence diagram shows how the import operation works:</p>
 </div>
 <div class="imageblock">
@@ -631,9 +612,6 @@ Finds the vacancy status of study rooms in COM1 building.</p>
 <p>To avoid reading the data from Venue Information JSON file whenever the <code>vacant</code> command is executed, we only read the data once when the <code>MainApp</code> starts.</p>
 </div>
 <div class="paragraph">
-<p>The following sequence diagram shows how the vacant command is parsed:</p>
-</div>
-<div class="paragraph">
 <p><code>ModelManager</code> will checks if the building is in the list of NUS Buildings, and will throw <code>BuildingNotFoundException</code> if the building is not in the list of NUS Buildings.</p>
 </div>
 <div class="paragraph">
@@ -733,7 +711,7 @@ Finds the vacancy status of study rooms in COM1 building.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 14:45:26 UTC
+Last updated 2018-04-15 15:12:30 UTC
 </div>
 </div>
 </body>
