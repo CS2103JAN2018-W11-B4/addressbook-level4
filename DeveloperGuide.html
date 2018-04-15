@@ -445,7 +445,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <h3 id="Design-Ui"><a class="link" href="#Design-Ui">3.2. UI component</a></h3>
 <div class="imageblock">
 <div class="content">
-<img src="images/UiClassDiagram.png" alt="UiClassDiagram" width="800">
+<img src="images/UiComponentUpdated.png" alt="UiComponentUpdated" width="800">
 </div>
 <div class="title">Figure 5. Structure of the UI Component</div>
 </div>
@@ -905,17 +905,31 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <h3 id="customized-alias-feature"><a class="link" href="#customized-alias-feature">4.2. Customized Alias feature</a></h3>
 <div class="sect3">
 <h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">4.2.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The alias mechanism is maintained in a HashMap which resides in <code>UniqueAliasList</code> in the Model component. It supports the undoable command.
+The alias as specified by the user is used as the key in the HashMap, with its respective command as the value.
+Whenever a user enters a command, the application will be able to check if the command is a previously-set alias efficiently by using the API provided by the <code>UniqueAliasList</code>.
+If the input command word is an existing alias, it will be replaced with its respective command as shown below.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="predefined-type">String</span> getCommandFromAlias(<span class="predefined-type">String</span> aliasKey) {
+    <span class="keyword">if</span> (aliases.contains(aliasKey)) {
+        <span class="keyword">return</span> aliases.getCommandFromAlias(aliasKey);
+    }
+    <span class="keyword">return</span> aliasKey;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When the user creates a new alias for a command, the <code>AliasCommand</code> checks that the command is a valid command, and the alias is not an existing application command word.
+The following sequence diagram shows how the <code>AliasCommand</code> works:</p>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/LogicComponentAliasSequenceDiagram.png" alt="LogicComponentAliasSequenceDiagram" width="800">
 </div>
 <div class="title">Figure 19. Alias Command Sequence Diagram for Logic Component</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/StorageClassDiagram.png" alt="StorageClassDiagram" width="800">
-</div>
-<div class="title">Figure 20. Storage Component</div>
 </div>
 </div>
 <div class="sect3">
@@ -926,7 +940,10 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="content">
 <img src="images/ModelClassDiagram.png" alt="ModelClassDiagram" width="800">
 </div>
-<div class="title">Figure 21. Model Component</div>
+<div class="title">Figure 20. Model Component</div>
+</div>
+<div class="paragraph">
+<p>The alias list is maintained in a UniqueAliasList which is stored in the Model component.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -961,6 +978,15 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 <div class="sect4">
 <h5 id="aspect-how-alias-is-stored"><a class="link" href="#aspect-how-alias-is-stored">Aspect: How alias is stored</a></h5>
+<div class="paragraph">
+<p>The following class diagram shows how the aliases are stored:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/StorageClassDiagram.png" alt="StorageClassDiagram" width="800">
+</div>
+<div class="title">Figure 21. Storage Component</div>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -992,6 +1018,39 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </ul>
 </div>
 </div>
+<div class="sect4">
+<h5 id="aspect-displaying-stored-aliases"><a class="link" href="#aspect-displaying-stored-aliases">Aspect: Displaying stored aliases</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Use the original <code>list</code> command to display aliases</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Utilizes unused <code>infoPanel</code> space in the UI.</p>
+</li>
+<li>
+<p>Cons: Need to integrate with the <code>ListCommand</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Modifying <code>AliasCommand</code> to support <code>alias list</code> command</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to implement as only modification of the command is required.</p>
+</li>
+<li>
+<p>Cons: <code>alias list</code> should not be an undoable command, and conflicts with the <code>AliasCommand</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1008,12 +1067,12 @@ We have implemented two functionalities for the Google Maps: Address locator and
 <p>For one location specified, the "https://www.google.com/maps/search/" URL prefix is used.</p>
 </li>
 <li>
-<p>For more than one locations specified, the "https://www.google.com/maps/dir/" url prefix is used.</p>
+<p>For more than one locations specified, the "https://www.google.com/maps/dir/" URL prefix is used.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>When a location specified by the user is an NUS building e.g. S1, our application compares the input with the list of NUS buildings to check from, and recognizes it as an NUS building.
+<p>When a location specified by the user is an NUS building e.g. <code>S1</code>, our application compares the input with the list of NUS buildings to check from, and recognizes it as an NUS building.
 The location is replaced with its respective postal code and passed to form the Google Maps URL.</p>
 </div>
 </div>
@@ -1028,7 +1087,7 @@ The location is replaced with its respective postal code and passed to form the 
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Requires a re-setup of project to link with the Google API.</p>
+<p>Pros: Does not require a re-setup of project to link with the Google API.</p>
 </li>
 <li>
 <p>Cons: Browser mode (Google Lite Maps) does not support some advanced Google Maps features.
@@ -1809,6 +1868,13 @@ requires computation which may make the application slower than desired.</p>
 </ul>
 </div>
 </li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-design-of-converting-json-to-objects"><a class="link" href="#aspect-design-of-converting-json-to-objects">Aspect: Design of converting JSON to objects</a></h5>
+<div class="ulist">
+<ul>
 <li>
 <p><strong>Alternative 1 (current choice):</strong> Create a Building, Room, Week and Weekday class</p>
 <div class="ulist">
@@ -2898,8 +2964,8 @@ b. Require developers to download those libraries manually (this creates extra w
 <div class="paragraph">
 <p><strong>Extensions</strong></p>
 </div>
-<div class="ulist none">
-<ul class="none">
+<div class="ulist">
+<ul>
 <li>
 <p>3a. Incorrect number of arguments specified.</p>
 <div class="ulist none">
@@ -3154,7 +3220,7 @@ Expected: Application opens with an address book with dummy data.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 14:31:10 UTC
+Last updated 2018-04-15 14:45:26 UTC
 </div>
 </div>
 </body>
