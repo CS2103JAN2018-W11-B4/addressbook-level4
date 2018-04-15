@@ -47,15 +47,16 @@
 <ul class="sectlevel2">
 <li><a href="#undo-redo-feature">4.1. Undo/Redo feature</a></li>
 <li><a href="#customized-alias-feature">4.2. Customized Alias feature</a></li>
-<li><a href="#data-encryption">4.3. Data Encryption</a></li>
-<li><a href="#import-stardytogether-file-feature">4.4. Import StardyTogether file feature</a></li>
-<li><a href="#export-stardytogether-file-feature">4.5. Export StardyTogether file feature</a></li>
-<li><a href="#upload-stardytogether-file-feature">4.6. Upload StardyTogether file feature</a></li>
-<li><a href="#birthdays-feature">4.7. Birthdays feature</a></li>
-<li><a href="#vacant-room-finder-feature">4.8. Vacant Room Finder feature</a></li>
-<li><a href="#timetable-feature">4.9. Timetable feature</a></li>
-<li><a href="#logging">4.10. Logging</a></li>
-<li><a href="#Implementation-Configuration">4.11. Configuration</a></li>
+<li><a href="#google-maps-feature">4.3. Google Maps feature</a></li>
+<li><a href="#data-encryption">4.4. Data Encryption</a></li>
+<li><a href="#import-stardytogether-file-feature">4.5. Import StardyTogether file feature</a></li>
+<li><a href="#export-stardytogether-file-feature">4.6. Export StardyTogether file feature</a></li>
+<li><a href="#upload-stardytogether-file-feature">4.7. Upload StardyTogether file feature</a></li>
+<li><a href="#birthdays-feature">4.8. Birthdays feature</a></li>
+<li><a href="#vacant-room-finder-feature">4.9. Vacant Room Finder feature</a></li>
+<li><a href="#timetable-feature">4.10. Timetable feature</a></li>
+<li><a href="#logging">4.11. Logging</a></li>
+<li><a href="#Implementation-Configuration">4.12. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">5. Documentation</a>
@@ -982,9 +983,103 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect2">
-<h3 id="data-encryption"><a class="link" href="#data-encryption">4.3. Data Encryption</a></h3>
+<h3 id="google-maps-feature"><a class="link" href="#google-maps-feature">4.3. Google Maps feature</a></h3>
 <div class="sect3">
 <h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">4.3.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>We are using the Google Maps Browser and passing the location(s) specified by the user into the URL, and then connecting to the internet to retrieve the Google Maps with the respective location(s).
+We have implemented two functionalities for the Google Maps: Address locator and locations navigator.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>For one location specified, the "https://www.google.com/maps/search/" URL prefix is used.</p>
+</li>
+<li>
+<p>For more than one locations specified, the "https://www.google.com/maps/dir/" url prefix is used.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>When a location specified by the user is an NUS building e.g. S1, our application compares the input with the list of NUS buildings to check from, and recognizes it as an NUS building.
+The location is replaced with its respective postal code and passed to form the Google Maps URL.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.3.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-google-maps-implementation"><a class="link" href="#aspect-google-maps-implementation">Aspect: Google Maps implementation</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Use Google Maps in browser</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Requires a re-setup of project to link with the Google API.</p>
+</li>
+<li>
+<p>Cons: Browser mode (Google Lite Maps) does not support some advanced Google Maps features.
+(But these additional features are not used in this project and thus having the browser implementation fulfils the intended functionality)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use Google Maps API</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Google Maps in the application will have the complete set of features.</p>
+</li>
+<li>
+<p>Cons: May cause a longer loading time for the application and Google Maps browser.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-saving-nus-buildings-addresses"><a class="link" href="#aspect-saving-nus-buildings-addresses">Aspect: Saving NUS buildings' addresses</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Saving the postal codes of NUS buildings in the Building class</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement. Since there is only one set of fixed NUS buildings and postal codes, both can be stored as lists in the same class.</p>
+</li>
+<li>
+<p>Cons: Need to have a method that finds the correct postal code for a building from the lists.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Creating a new class to store postal codes/addresses of NUS buildings</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: The code looks neater. Every building will have an <code>Address</code> class to store their postal codes/addresses.</p>
+</li>
+<li>
+<p>Cons: Need to maintain a <code>Building</code> list, where each <code>Building</code> contains the <code>Address</code> class.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="data-encryption"><a class="link" href="#data-encryption">4.4. Data Encryption</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">4.4.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>We are using <code>javax.crypto.cipher</code> and <code>java.security.key</code> package provided by java for the encryption of the data. The <code>SecurityUtil</code> class is used to provide the <code>SHA-1</code> hashing and <code>AES</code> encryption/decryption required.</p>
 </div>
@@ -1067,7 +1162,7 @@ The application would behave as if it is not encrypted from here on.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.3.2. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.4.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-to-generate-the-aes-key"><a class="link" href="#aspect-how-to-generate-the-aes-key">Aspect: How to generate the AES key</a></h5>
 <div class="ulist">
@@ -1207,9 +1302,9 @@ requires computation which may make the application slower than desired.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="import-stardytogether-file-feature"><a class="link" href="#import-stardytogether-file-feature">4.4. Import StardyTogether file feature</a></h3>
+<h3 id="import-stardytogether-file-feature"><a class="link" href="#import-stardytogether-file-feature">4.5. Import StardyTogether file feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">4.4.1. Current Implementation</a></h4>
+<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">4.5.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The import StardyTogether mechanism is facilitated by <code>XmlSerializableAddressBook</code>, which resides inside <code>Storage</code>. It allows the imported XML file to be converted into StardyTogether format.</p>
 </div>
@@ -1230,7 +1325,7 @@ requires computation which may make the application slower than desired.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.4.2. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.5.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-imported-stardytogether-file-format"><a class="link" href="#aspect-imported-stardytogether-file-format">Aspect: Imported StardyTogether file format</a></h5>
 <div class="ulist">
@@ -1300,9 +1395,9 @@ requires computation which may make the application slower than desired.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="export-stardytogether-file-feature"><a class="link" href="#export-stardytogether-file-feature">4.5. Export StardyTogether file feature</a></h3>
+<h3 id="export-stardytogether-file-feature"><a class="link" href="#export-stardytogether-file-feature">4.6. Export StardyTogether file feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">4.5.1. Current Implementation</a></h4>
+<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">4.6.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The export StardyTogether mechanism is facilitated by <code>XmlFileStorage</code>, which resides inside <code>Storage</code>. It allows the StardyTogether&#8217;s <code>AddressBook</code> to be converted into a XML file format.</p>
 </div>
@@ -1320,7 +1415,7 @@ requires computation which may make the application slower than desired.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.5.2. Design Considerations</a></h4>
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">4.6.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-exported-stardytogether-file-format"><a class="link" href="#aspect-exported-stardytogether-file-format">Aspect: Exported StardyTogether file format</a></h5>
 <div class="ulist">
@@ -1390,9 +1485,9 @@ requires computation which may make the application slower than desired.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="upload-stardytogether-file-feature"><a class="link" href="#upload-stardytogether-file-feature">4.6. Upload StardyTogether file feature</a></h3>
+<h3 id="upload-stardytogether-file-feature"><a class="link" href="#upload-stardytogether-file-feature">4.7. Upload StardyTogether file feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">4.6.1. Current Implementation</a></h4>
+<h4 id="current-implementation-7"><a class="link" href="#current-implementation-7">4.7.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The upload feature involves three steps, requesting for authorization, exporting, and uploading.</p>
 </div>
@@ -1429,7 +1524,7 @@ requires computation which may make the application slower than desired.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">4.6.2. Design Considerations</a></h4>
+<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">4.7.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-uploaded-stardytogether-file-format"><a class="link" href="#aspect-uploaded-stardytogether-file-format">Aspect: Uploaded StardyTogether file format</a></h5>
 <div class="ulist">
@@ -1498,7 +1593,7 @@ requires computation which may make the application slower than desired.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="why-download-stardytogether-file-feature-is-not-implemented"><a class="link" href="#why-download-stardytogether-file-feature-is-not-implemented">4.6.3. Why Download StardyTogether file feature is not implemented?</a></h4>
+<h4 id="why-download-stardytogether-file-feature-is-not-implemented"><a class="link" href="#why-download-stardytogether-file-feature-is-not-implemented">4.7.3. Why Download StardyTogether file feature is not implemented?</a></h4>
 <div class="sect4">
 <h5 id="justification"><a class="link" href="#justification">Justification</a></h5>
 <div class="paragraph">
@@ -1511,9 +1606,9 @@ requires computation which may make the application slower than desired.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="birthdays-feature"><a class="link" href="#birthdays-feature">4.7. Birthdays feature</a></h3>
+<h3 id="birthdays-feature"><a class="link" href="#birthdays-feature">4.8. Birthdays feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-7"><a class="link" href="#current-implementation-7">4.7.1. Current Implementation</a></h4>
+<h4 id="current-implementation-8"><a class="link" href="#current-implementation-8">4.8.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>Birthdays Command uses the existing Events system and sends an event.</p>
 </div>
@@ -1534,7 +1629,7 @@ requires computation which may make the application slower than desired.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">4.7.2. Design Considerations</a></h4>
+<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">4.8.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-the-birthdaylist-ui-component-obtains-and-parses-its-data"><a class="link" href="#aspect-how-the-birthdaylist-ui-component-obtains-and-parses-its-data">Aspect: How the BirthdayList UI component obtains and parses its data</a></h5>
 <div class="ulist">
@@ -1637,9 +1732,9 @@ requires computation which may make the application slower than desired.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="vacant-room-finder-feature"><a class="link" href="#vacant-room-finder-feature">4.8. Vacant Room Finder feature</a></h3>
+<h3 id="vacant-room-finder-feature"><a class="link" href="#vacant-room-finder-feature">4.9. Vacant Room Finder feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-8"><a class="link" href="#current-implementation-8">4.8.1. Current Implementation</a></h4>
+<h4 id="current-implementation-9"><a class="link" href="#current-implementation-9">4.9.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>We are using Venue Information JSON file from <a href="https://nusmods.com/api/2017-2018/2/venueInformation.json">NUSMods</a> to retrieve the weekly timetable of the venues. To increase the performance of retrieving the timetable of the venue, we decided to download Venue Information JSON file and have an offline copy stored in our StardyTogether application.</p>
 </div>
@@ -1744,9 +1839,9 @@ requires computation which may make the application slower than desired.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="timetable-feature"><a class="link" href="#timetable-feature">4.9. Timetable feature</a></h3>
+<h3 id="timetable-feature"><a class="link" href="#timetable-feature">4.10. Timetable feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-9"><a class="link" href="#current-implementation-9">4.9.1. Current Implementation</a></h4>
+<h4 id="current-implementation-10"><a class="link" href="#current-implementation-10">4.10.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>When adding a Person using the Add Command, users can enter their NUSMods shortened link into the "tt/" field.
 The link goes into the TimetableParserUtil class to parse and retrieve the info of the user&#8217;s modules.
@@ -1775,7 +1870,7 @@ The <code>InfoPanel</code> will swap between <code>UserDetailsPanel</code>, <cod
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">4.9.2. Design Considerations</a></h4>
+<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">4.10.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-the-use-of-nusmods-shortened-urls"><a class="link" href="#aspect-the-use-of-nusmods-shortened-urls">Aspect: The use of NUSMods Shortened URLs</a></h5>
 <div class="ulist">
@@ -1992,14 +2087,14 @@ Current implementation is the best in terms of variability and ease of implement
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">4.10. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">4.11. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 4.11, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 4.12, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -2030,7 +2125,7 @@ Current implementation is the best in terms of variability and ease of implement
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">4.11. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">4.12. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2348,8 +2443,8 @@ b. Require developers to download those libraries manually (this creates extra w
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Ong Jing Yin</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Designing UI for finding vacant venues feature. UI will display a table of timings for the requested location, with information about whether the venue is vacant or not</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Customized alias to allow users to set their own short cuts or intuitive naming for existing commands, to cater to their own preference.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Implementing the Logic and UI component of the Vacant Room Finder feature. Users can view the vacancy status of all the rooms in the building they have requested for. Implementing the Google Maps Feature to nagivate locations within and outside of NUS easily.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Creating the Customized Alias Feature which allows users to set their own short cuts or intuitive naming for all existing commands to enhance the personalization and user-friendliness of our application.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Wayne Neo</p></td>
@@ -2444,6 +2539,12 @@ b. Require developers to download those libraries manually (this creates extra w
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">busy student</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be able to view all my customized short forms</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">refer to them should I forget the short forms I had previously set</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">add a new person</p></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -2477,6 +2578,18 @@ b. Require developers to download those libraries manually (this creates extra w
 <td class="tableblock halign-left valign-top"><p class="tableblock">student who studies in school</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">be able to find rooms that I can study in</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">save time finding rooms</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">student who studies in school</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be able to know the locations of NUS buildings</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">save time locating the place</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">student</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be able to nagivate locations within and outside of NUS easily</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">find my way around quickly</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
@@ -2598,13 +2711,13 @@ b. Require developers to download those libraries manually (this creates extra w
 <p>User requests to find an available venue</p>
 </li>
 <li>
-<p>StardyTogether prompts user to input a faculty</p>
+<p>StardyTogether prompts user to input a building</p>
 </li>
 <li>
-<p>User requests venues near this faculty</p>
+<p>User requests building name</p>
 </li>
 <li>
-<p>StardyTogether prints out a list of available venues near the specified faculty</p>
+<p>StardyTogether prints out a list of rooms with their vacancy status</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -2634,7 +2747,7 @@ b. Require developers to download those libraries manually (this creates extra w
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>3a1. StardyTogether shows an error message.</p>
+<p>3a1. StardyTogether displays an error message.</p>
 <div class="paragraph">
 <p>Use case resumes at step 2.</p>
 </div>
@@ -2647,13 +2760,73 @@ b. Require developers to download those libraries manually (this creates extra w
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>4a1. StardyTogether shows an error message</p>
+<p>4a1. StardyTogether displays an error message</p>
 </li>
 <li>
 <p>4a2. StardyTogether attempts to reconnect</p>
 </li>
 <li>
 <p>4a3. If problem persists, StardyTogether directs User to troubleshooting</p>
+<div class="paragraph">
+<p>Use case ends</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-add-alias" class="discrete">Use case: Add alias</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to create an alias for a command</p>
+</li>
+<li>
+<p>StardyTogether prompts user to input a building</p>
+</li>
+<li>
+<p>User requests command and alias</p>
+</li>
+<li>
+<p>StardyTogether adds the command and alias pairing successfully</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a. Incorrect number of arguments specified.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1. StardyTogether displays an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 3.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>4a. Invalid command or alias specified.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>4a1. StardyTogether displays an error message</p>
+</li>
+<li>
+<p>4a2. User re-enters command and alias
+Steps 4a1-4a2 are repeated until the command and alias entered are valid.</p>
 <div class="paragraph">
 <p>Use case ends</p>
 </div>
@@ -2678,6 +2851,9 @@ b. Require developers to download those libraries manually (this creates extra w
 </li>
 <li>
 <p>Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.</p>
+</li>
+<li>
+<p>Should have internet connection.</p>
 </li>
 <li>
 <p>A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.</p>
@@ -2882,7 +3058,7 @@ Expected: Application opens with an address book with dummy data.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 11:00:33 UTC
+Last updated 2018-04-15 12:31:41 UTC
 </div>
 </div>
 </body>
