@@ -213,7 +213,7 @@ Format: <code>decrypt</code></p>
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
 <div class="paragraph">
-<p>We are using <code>javax.crypto.cipher</code> and <code>java.security.key</code> package for the encryption of the data. The <code>SecurityUtil</code> class is used to provide the <code>SHA-1</code> hashing and <code>AES</code> encryption/decryption required.</p>
+<p>We are using <code>javax.crypto.cipher</code> and <code>java.security.key</code> package provided by java for the encryption of the data. The <code>SecurityUtil</code> class is used to provide the <code>SHA-1</code> hashing and <code>AES</code> encryption/decryption required.</p>
 </div>
 <div class="paragraph">
 <p>Using a given password, it is first hashed using <code>SHA-1</code> to be used as the <code>AES</code> key.
@@ -234,9 +234,19 @@ This is required as <code>AES</code> requires its key to be 128 bits long.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>A default password is used if the user do not set a password.
-Users can change their password using the command <code>password</code>.<br>
-The sequence diagram shows how the <code>ModelManager</code> updates the password:</p>
+<p>No encryption is done if the user do not set a password.
+Users can change their password using the command <code>encrypt</code> and decrypt it permanently using the command <code>decrypt</code>.</p>
+</div>
+<div class="paragraph">
+<p>When an 'encrypt' command is issued, the argument is parsed and hashed. Is is then passed to the Model.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/PasswordSdForLogic.png" alt="PasswordSdForLogic" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>ModelManager</code> then updates the password in the <code>AddressBook</code> as shown below:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -244,8 +254,42 @@ The sequence diagram shows how the <code>ModelManager</code> updates the passwor
 </div>
 </div>
 <div class="paragraph">
-<p>The 128 bit password used to encrypt <code>addressbook.xml</code> is saved in the address book to ensure that the password is not lost after every reset of the application.
-This is secure as even if a malicious user were to somehow get a copy of the 128 bit password, they would still need to use a computationally unfeasible pre-image attack.</p>
+<p>The 128 bit password used to encrypt <code>addressbook.xml</code> is saved in the address book as <code>XmlAdaptedPassword</code> to ensure that the password is not lost after every reset of the application.
+This is secure as even if a malicious user were to somehow get a copy of the 128 bit password, they would still need to use a computationally unfeasible second pre-image attack.
+This is because users are unable to input hashed password directly.</p>
+</div>
+<div class="paragraph">
+<p>When the user first starts the application, <code>ModelManager</code> would try to load the data from <code>addressbook.xml</code> without using any password.
+If <code>addressbook.xml</code> is encrypted, this would cause the following code to trigger which would morph the <code>ui</code> to <code>PasswordUiManager</code> instead of <code>UiManager</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">private</span> <span class="type">void</span> checkPasswordChanged() {
+    <span class="keyword">if</span> (passwordChanged) {
+        ui = <span class="keyword">new</span> PasswordUiManager(storage, model, ui);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This change would cause the <code>PasswordWindow</code> to display instead of the <code>MainWindow</code>, requesting for a password input by the user.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/passwordBox.png" alt="passwordBox" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>If the password the user input is unable to decrypt <code>addressbook.xml</code>, a <code>WrongPasswordEvent</code> is raised which will cause the <code>PasswordUiManager</code> to display the following dialog to the user:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/wrongPasswordDialog.png" alt="wrongPasswordDialog" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>If the password the user input successfully decrypts <code>addressbook.xml</code>, a <code>CorrectPasswordEvent</code> is raised. This event is handled by the <code>PasswordUiManager</code> which will start the <code>UiManager</code>.
+The application would behave as if it is not encrypted from here on.</p>
 </div>
 </div>
 <div class="sect3">
@@ -262,7 +306,7 @@ This is secure as even if a malicious user were to somehow get a copy of the 128
 <p>Pros: Users are able to key in their own passwords</p>
 </li>
 <li>
-<p>Cons: Default password needs to be provided which may make it as insecure as before if users do not change it.</p>
+<p>Cons: Users have to input password for their data to be encrypted.</p>
 </li>
 </ul>
 </div>
@@ -330,7 +374,8 @@ This is because keys generated by <code>java.crypto.KeyGenerator</code> have the
 </li>
 <li>
 <p>Cons: Plaintext of <code>addressbook.xml</code> contains the 128 bit <code>AES</code> key used.
-However, this is still secure as even if a malicious user were to somehow get a copy of the 128 bit password, they would still need to use a computationally unfeasible pre-image attack.</p>
+However, this is still secure as even if a malicious user were to somehow get a copy of the 128 bit password,
+they would still need to use a computationally unfeasible second pre-image attack.</p>
 </li>
 </ul>
 </div>
@@ -344,6 +389,40 @@ However, this is still secure as even if a malicious user were to somehow get a 
 </li>
 <li>
 <p>Cons: Password reset after each reload of application.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-default-password"><a class="link" href="#aspect-default-password">Aspect: Default Password</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> <code>addressbook.xml</code> not encrypted by default</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Users are able to choose whether they want their data to be encrypted or not as encryption and decryption
+requires computation which may make the application slower than desired.</p>
+</li>
+<li>
+<p>Cons: Unfamiliar users may not be aware of the option of encrypting their data making it less secure.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Default Password provided to encrypt <code>addressbook.xml</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Data is always encrypted.</p>
+</li>
+<li>
+<p>Cons: A default password is, most of the time, as effective as no password and it also slows down the application more than necessary.</p>
 </li>
 </ul>
 </div>
@@ -605,7 +684,7 @@ Current implementation is the best in terms of variability and ease of implement
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 10:03:01 UTC
+Last updated 2018-04-15 10:40:58 UTC
 </div>
 </div>
 </body>
