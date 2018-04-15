@@ -55,8 +55,9 @@
 <li><a href="#birthdays-feature">4.8. Birthdays feature</a></li>
 <li><a href="#vacant-room-finder-feature">4.9. Vacant Room Finder feature</a></li>
 <li><a href="#timetable-feature">4.10. Timetable feature</a></li>
-<li><a href="#logging">4.11. Logging</a></li>
-<li><a href="#Implementation-Configuration">4.12. Configuration</a></li>
+<li><a href="#auto-complete-or-correct-feature">4.11. Auto Complete or Correct feature</a></li>
+<li><a href="#logging">4.12. Logging</a></li>
+<li><a href="#Implementation-Configuration">4.13. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">5. Documentation</a>
@@ -96,6 +97,8 @@
 <li><a href="#importing-a-file">F.4. Importing a file</a></li>
 <li><a href="#exporting-a-file">F.5. Exporting a file</a></li>
 <li><a href="#uploading-a-file">F.6. Uploading a file</a></li>
+<li><a href="#encrypting-and-decrypting">F.7. Encrypting and Decrypting</a></li>
+<li><a href="#selecting-a-person">F.8. Selecting a person</a></li>
 </ul>
 </li>
 </ul>
@@ -1185,6 +1188,7 @@ Users can change their password using the command <code>encrypt</code> and decry
 <div class="content">
 <img src="images/PasswordSdForLogic.png" alt="PasswordSdForLogic" width="800">
 </div>
+<div class="title">Figure 22. Password Sequence Diagram for Logic Component</div>
 </div>
 <div class="paragraph">
 <p>The <code>ModelManager</code> then updates the password in the <code>AddressBook</code> as shown below:</p>
@@ -1193,7 +1197,7 @@ Users can change their password using the command <code>encrypt</code> and decry
 <div class="content">
 <img src="images/PasswordSdForModel.png" alt="PasswordSdForModel" width="800">
 </div>
-<div class="title">Figure 22. Password Sequence Diagram for Model Component</div>
+<div class="title">Figure 23. Password Sequence Diagram for Model Component</div>
 </div>
 <div class="paragraph">
 <p>The 128 bit password used to encrypt <code>addressbook.xml</code> is saved in the address book as <code>XmlAdaptedPassword</code> to ensure that the password is not lost after every reset of the application.
@@ -1220,16 +1224,16 @@ If <code>addressbook.xml</code> is encrypted, this would cause the following cod
 <div class="content">
 <img src="images/passwordBox.png" alt="passwordBox" width="800">
 </div>
-<div class="title">Figure 23. Passard Box UI</div>
+<div class="title">Figure 24. Password Box UI</div>
 </div>
 <div class="paragraph">
 <p>If the password the user input is unable to decrypt <code>addressbook.xml</code>, a <code>WrongPasswordEvent</code> is raised which will cause the <code>PasswordUiManager</code> to display the following dialog to the user:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/wrongPasswordDialog.png" alt="wrongPasswordDialog" width="800">
+<img src="images/wrongpassworddialog.png" alt="wrongpassworddialog" width="800">
 </div>
-<div class="title">Figure 24. Wrong Password Popup</div>
+<div class="title">Figure 25. Wrong Password Dialog UI</div>
 </div>
 <div class="paragraph">
 <p>If the password the user input successfully decrypts <code>addressbook.xml</code>, a <code>CorrectPasswordEvent</code> is raised. This event is handled by the <code>PasswordUiManager</code> which will start the <code>UiManager</code>.
@@ -1396,7 +1400,7 @@ requires computation which may make the application slower than desired.</p>
 <div class="content">
 <img src="images/ModelStorageComponentImportSequenceDiagram.png" alt="ModelStorageComponentImportSequenceDiagram" width="800">
 </div>
-<div class="title">Figure 25. Import Command Sequence Diagram for Model and Storage Component</div>
+<div class="title">Figure 26. Import Command Sequence Diagram for Model and Storage Component</div>
 </div>
 </div>
 <div class="sect3">
@@ -1486,7 +1490,7 @@ requires computation which may make the application slower than desired.</p>
 <div class="content">
 <img src="images/ModelStorageComponentExportSequenceDiagram.png" alt="ModelStorageComponentExportSequenceDiagram" width="800">
 </div>
-<div class="title">Figure 26. Export Command Sequence Diagram for Model and Storage Component</div>
+<div class="title">Figure 27. Export Command Sequence Diagram for Model and Storage Component</div>
 </div>
 </div>
 <div class="sect3">
@@ -1595,7 +1599,7 @@ requires computation which may make the application slower than desired.</p>
 <div class="content">
 <img src="images/ModelStorageComponentUploadSequenceDiagram.png" alt="ModelStorageComponentUploadSequenceDiagram" width="800">
 </div>
-<div class="title">Figure 27. Upload Command Sequence Diagram for Model and Storage Component</div>
+<div class="title">Figure 28. Upload Command Sequence Diagram for Model and Storage Component</div>
 </div>
 </div>
 <div class="sect3">
@@ -1646,7 +1650,7 @@ requires computation which may make the application slower than desired.</p>
 <div class="content">
 <img src="images/LogicComponentBirthdaysSequenceDiagram.png" alt="LogicComponentBirthdaysSequenceDiagram" width="800">
 </div>
-<div class="title">Figure 28. Birthdays Command Sequence Diagram for Logic Component<br></div>
+<div class="title">Figure 29. Birthdays Command Sequence Diagram for Logic Component<br></div>
 </div>
 <div class="paragraph">
 <p>The <code>BirthdayList</code> UI component will then receive the event and handle the display of the data<br></p>
@@ -1655,7 +1659,7 @@ requires computation which may make the application slower than desired.</p>
 <div class="content">
 <img src="images/UiComponentBirthdayListSequenceDiagram.png" alt="UiComponentBirthdayListSequenceDiagram" width="800">
 </div>
-<div class="title">Figure 29. Birthdays Command Sequence Diagram for UI Component<br></div>
+<div class="title">Figure 30. Birthdays Command Sequence Diagram for UI Component<br></div>
 </div>
 <div class="paragraph">
 <p>For "birthdays today" notification, the app will create an alert dialog instead.</p>
@@ -1806,7 +1810,7 @@ requires computation which may make the application slower than desired.</p>
 <div class="content">
 <img src="images/ModelClassDiagram.png" alt="ModelClassDiagram" width="800">
 </div>
-<div class="title">Figure 30. Model Component</div>
+<div class="title">Figure 31. Model Component</div>
 </div>
 <div class="paragraph">
 <p>The following sequence diagram shows how the logic component of Vacant Room Finder works:</p>
@@ -1815,7 +1819,7 @@ requires computation which may make the application slower than desired.</p>
 <div class="content">
 <img src="images/ModelComponentVacantSequenceDiagram.png" alt="ModelComponentVacantSequenceDiagram" width="800">
 </div>
-<div class="title">Figure 31. Vacant Command Sequence Diagram for Model Component</div>
+<div class="title">Figure 32. Vacant Command Sequence Diagram for Model Component</div>
 </div>
 <div class="paragraph">
 <p>As shown in diagram above, all Rooms weekday schedule will be return in an <code>ArrayList&lt;ArrayList&lt;String&gt;&gt;</code> data structure. This result will be shown to the UI on the <code>InfoPanel</code></p>
@@ -1933,7 +1937,7 @@ The information is then sorted and added as a list of <code>Lesson</code> taken 
 <div class="content">
 <img src="images/TimetableComponentClassDiagram.png" alt="TimetableComponentClassDiagram" width="800">
 </div>
-<div class="title">Figure 32. Timetable Component</div>
+<div class="title">Figure 33. Timetable Component</div>
 </div>
 <div class="paragraph">
 <p>In the event the url provided is invalid or empty, a empty <code>Timetable</code> will be created.
@@ -2225,14 +2229,171 @@ Current implementation is the best in terms of variability and ease of implement
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">4.11. Logging</a></h3>
+<h3 id="auto-complete-or-correct-feature"><a class="link" href="#auto-complete-or-correct-feature">4.11. Auto Complete or Correct feature</a></h3>
+<div class="sect3">
+<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">4.11.1. Proposed Implementation</a></h4>
+<div class="paragraph">
+<p>Currently, some commands such as <code>add</code> and <code>edit</code> requires many different fills to be filled in for it to work.
+This makes it extremely tedious as users have to remember what fills are there to be included.
+Spelling mistakes are also very costly as users would need to retype the command.</p>
+</div>
+<div class="paragraph">
+<p>When the user press the <code>Tab</code> key, commands ,and parameters carets will auto complete or auto correct.
+Pressing <code>Tab</code> again would give the next suggested input.</p>
+</div>
+<div class="paragraph">
+<p>The Auto Correct can be implemented in <code>CommandBox</code> as all user inputs can be easily accessed in it.
+Editing the text already entered can also be done easily in <code>CommandBox</code>.</p>
+</div>
+<div class="paragraph">
+<p>Since all commands are in the form of <code>String</code>, we can use a <code>TreeSet</code> of the current input&#8217;s character to find the closest matching command
+and traverse the <code>TreeSet</code> to get other suggestions.</p>
+</div>
+<div class="paragraph">
+<p>To prevent a situation of the need to differentiate between a auto completion of the next parameter or getting the next suggestion of the current command or parameter,
+next suggestion is always chosen before a space is entered and auto completion only happen for non-empty strings.</p>
+</div>
+<div class="paragraph">
+<p>Suppose that the user wants to type the <code>encrypt</code> command, he can press <code>Tab</code> to auto complete.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/commandautocomplete.png" alt="commandautocomplete" width="800">
+</div>
+<div class="title">Figure 34. Auto Completion of Command</div>
+</div>
+<div class="paragraph">
+<p>If he were to have a spelling error typing <code>encrytp</code> instead, the <code>Tab</code> key would instead correct it to <code>encrypt</code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/commandautocorrect.png" alt="commandautocorrect" width="800">
+</div>
+<div class="title">Figure 35. Auto Correction of Command</div>
+</div>
+<div class="paragraph">
+<p>Now suppose he is trying to add a friend, once he types <code>p/123</code> and press <code>Tab</code> after the space, <code>e/</code> caret will be auto completed for him.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/parameterautocomplete.png" alt="parameterautocomplete" width="800">
+</div>
+<div class="title">Figure 36. Auto Completion of Parameter</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-10"><a class="link" href="#design-considerations-10">4.11.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-what-is-done-after-user-presses-code-tab-code-key"><a class="link" href="#aspect-what-is-done-after-user-presses-code-tab-code-key">Aspect: What is done after user presses <code>Tab</code> key</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (Suggested):</strong> Automatically completes for the user.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy and improves efficiency of typing. Familiar for users who uses CLI frequently.</p>
+</li>
+<li>
+<p>Cons: Can be confusing as can be auto complete or next suggested input.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Suggest to user what is expected</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Does not change the user&#8217;s current input making it less confusing.</p>
+</li>
+<li>
+<p>Cons: Does not really improve the user experience by much.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-where-to-implement-it"><a class="link" href="#aspect-where-to-implement-it">Aspect: Where to implement it</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (Suggested):</strong> In <code>CommandBox</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: <code>CommandBox</code> has access to the text showing what is already keyed in, making it easy to implement there.</p>
+</li>
+<li>
+<p>Cons: <code>CommandBox</code> has to do an extra task of determining suggested commands and input, increasing coupling as it would need access to the parser or list of commands.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> In <code>Parser</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Does not increase the coupling of <code>CommandBox</code>.</p>
+</li>
+<li>
+<p>Cons: Makes changing the current input display a difficult task which may require access to the <code>CommandBox</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-what-to-auto-correct-or-complete"><a class="link" href="#aspect-what-to-auto-correct-or-complete">Aspect: What to auto correct or complete</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (Suggested):</strong> Commands and Parameters.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Makes it easy for users as everything can be auto completed or corrected.</p>
+</li>
+<li>
+<p>Cons: Makes it more confusing as sometimes it completes commands while other times it completes the parameters.
+Also makes the implementation complicated as a clear distinction of Command and Parameters have to be made for completion and correction.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Only Commands or Parameters</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to understand.</p>
+</li>
+<li>
+<p>Cons: Not as efficient for the user.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="logging"><a class="link" href="#logging">4.12. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 4.12, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 4.13, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -2263,7 +2424,7 @@ Current implementation is the best in terms of variability and ease of implement
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">4.12. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">4.13. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2329,7 +2490,7 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <div class="content">
 <img src="images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
 </div>
-<div class="title">Figure 33. Saving documentation as PDF files in Chrome</div>
+<div class="title">Figure 37. Saving documentation as PDF files in Chrome</div>
 </div>
 </div>
 </div>
@@ -3255,12 +3416,78 @@ Expected: Invalid command error message will be shown</p>
 </ol>
 </div>
 </div>
+<div class="sect2">
+<h3 id="encrypting-and-decrypting"><a class="link" href="#encrypting-and-decrypting">F.7. Encrypting and Decrypting</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Encrypting data</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: Set password using <code>encrypt</code> command<br>
+Expected: <code>addressbook.xml</code> is no longer in plaintext.<br></p>
+</li>
+<li>
+<p>Test case: Set password using <code>encrypt</code> command and reopen StardyTogether<br>
+Expected: Application prompt you to input password, opens with correct password keyed in and
+error dialog with incorrect password.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Decrypting data</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: Set password using <code>encrypt</code> command, then decrypt using <code>decrypt</code> command and reopen StardyTogether+
+Expected: Application opens with all data.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="selecting-a-person"><a class="link" href="#selecting-a-person">F.8. Selecting a person</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Selecting person</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Add a new person.</p>
+</li>
+<li>
+<p>Test case: Click on the person<br>
+Expected: Card with Details of the person shows up with his/her even week Timetable</p>
+</li>
+<li>
+<p>Test case: <code>select INDEX even</code> where <code>INDEX</code> is the index of the person in the list+
+Expected: Card with Details of the person shows up with his/her even week Timetable</p>
+</li>
+<li>
+<p>Test case: <code>select INDEX odd</code> where <code>INDEX</code> is the index of the person in the list+
+Expected: Card with Details of the person shows up with his/her odd week Timetable</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><em>{ more test cases &#8230;&#8203; }</em></p>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 15:20:29 UTC
+Last updated 2018-04-15 15:27:10 UTC
 </div>
 </div>
 </body>

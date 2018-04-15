@@ -634,6 +634,7 @@ Users can change their password using the command <code>encrypt</code> and decry
 <div class="content">
 <img src="../images/PasswordSdForLogic.png" alt="PasswordSdForLogic" width="800">
 </div>
+<div class="title">Figure 9. Password Sequence Diagram for Logic Component</div>
 </div>
 <div class="paragraph">
 <p>The <code>ModelManager</code> then updates the password in the <code>AddressBook</code> as shown below:</p>
@@ -642,7 +643,7 @@ Users can change their password using the command <code>encrypt</code> and decry
 <div class="content">
 <img src="../images/PasswordSdForModel.png" alt="PasswordSdForModel" width="800">
 </div>
-<div class="title">Figure 9. Password Sequence Diagram for Model Component</div>
+<div class="title">Figure 10. Password Sequence Diagram for Model Component</div>
 </div>
 <div class="paragraph">
 <p>The 128 bit password used to encrypt <code>addressbook.xml</code> is saved in the address book as <code>XmlAdaptedPassword</code> to ensure that the password is not lost after every reset of the application.
@@ -669,16 +670,16 @@ If <code>addressbook.xml</code> is encrypted, this would cause the following cod
 <div class="content">
 <img src="../images/passwordBox.png" alt="passwordBox" width="800">
 </div>
-<div class="title">Figure 10. Passard Box UI</div>
+<div class="title">Figure 11. Password Box UI</div>
 </div>
 <div class="paragraph">
 <p>If the password the user input is unable to decrypt <code>addressbook.xml</code>, a <code>WrongPasswordEvent</code> is raised which will cause the <code>PasswordUiManager</code> to display the following dialog to the user:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/wrongPasswordDialog.png" alt="wrongPasswordDialog" width="800">
+<img src="../images/wrongpassworddialog.png" alt="wrongpassworddialog" width="800">
 </div>
-<div class="title">Figure 11. Wrong Password Popup</div>
+<div class="title">Figure 12. Wrong Password Dialog UI</div>
 </div>
 <div class="paragraph">
 <p>If the password the user input successfully decrypts <code>addressbook.xml</code>, a <code>CorrectPasswordEvent</code> is raised. This event is handled by the <code>PasswordUiManager</code> which will start the <code>UiManager</code>.
@@ -839,7 +840,7 @@ requires computation which may make the application slower than desired.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 15:20:29 UTC
+Last updated 2018-04-15 15:27:10 UTC
 </div>
 </div>
 </body>

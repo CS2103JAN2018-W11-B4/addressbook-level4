@@ -118,7 +118,7 @@
 <p>PRs reviewed (with non-trivial review comments): <a href="https://github.com/CS2103JAN2018-W11-B4/main/pull/135">#135</a>, <a href="https://github.com/CS2103JAN2018-W11-B4/main/pull/138">#138</a>, <a href="https://github.com/CS2103JAN2018-W11-B4/main/pull/191">#191</a></p>
 </li>
 <li>
-<p>Reported bugs and suggestions for other teams in the class (examples:  <a href="https://github.com/CS2103JAN2018-T09-B2/main/issues/178">1</a>, <a href="https://github.com/CS2103JAN2018-T09-B2/main/issues/191">2</a>, <a href="https://github.com/CS2103JAN2018-T09-B2/main/issues/186">3</a>)</p>
+<p>Reported bugs and suggestions for other teams in the class (examples:  <a href="https://github.com/CS2103JAN2018-T09-B2/main/issues/178">1</a>, <a href="https://github.com/CS2103JAN2018-T09-B2/main/issues/183">2</a>, <a href="https://github.com/CS2103JAN2018-T09-B2/main/issues/186">3</a>)</p>
 </li>
 </ul>
 </div>
@@ -248,6 +248,7 @@ Users can change their password using the command <code>encrypt</code> and decry
 <div class="content">
 <img src="../images/PasswordSdForLogic.png" alt="PasswordSdForLogic" width="800">
 </div>
+<div class="title">Figure 1. Password Sequence Diagram for Logic Component</div>
 </div>
 <div class="paragraph">
 <p>The <code>ModelManager</code> then updates the password in the <code>AddressBook</code> as shown below:</p>
@@ -256,7 +257,7 @@ Users can change their password using the command <code>encrypt</code> and decry
 <div class="content">
 <img src="../images/PasswordSdForModel.png" alt="PasswordSdForModel" width="800">
 </div>
-<div class="title">Figure 1. Password Sequence Diagram for Model Component</div>
+<div class="title">Figure 2. Password Sequence Diagram for Model Component</div>
 </div>
 <div class="paragraph">
 <p>The 128 bit password used to encrypt <code>addressbook.xml</code> is saved in the address book as <code>XmlAdaptedPassword</code> to ensure that the password is not lost after every reset of the application.
@@ -283,16 +284,16 @@ If <code>addressbook.xml</code> is encrypted, this would cause the following cod
 <div class="content">
 <img src="../images/passwordBox.png" alt="passwordBox" width="800">
 </div>
-<div class="title">Figure 2. Passard Box UI</div>
+<div class="title">Figure 3. Password Box UI</div>
 </div>
 <div class="paragraph">
 <p>If the password the user input is unable to decrypt <code>addressbook.xml</code>, a <code>WrongPasswordEvent</code> is raised which will cause the <code>PasswordUiManager</code> to display the following dialog to the user:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/wrongPasswordDialog.png" alt="wrongPasswordDialog" width="800">
+<img src="../images/wrongpassworddialog.png" alt="wrongpassworddialog" width="800">
 </div>
-<div class="title">Figure 3. Wrong Password Popup</div>
+<div class="title">Figure 4. Wrong Password Dialog UI</div>
 </div>
 <div class="paragraph">
 <p>If the password the user input successfully decrypts <code>addressbook.xml</code>, a <code>CorrectPasswordEvent</code> is raised. This event is handled by the <code>PasswordUiManager</code> which will start the <code>UiManager</code>.
@@ -440,152 +441,86 @@ requires computation which may make the application slower than desired.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="timetable-feature"><a class="link" href="#timetable-feature">Timetable feature</a></h3>
+<h3 id="auto-complete-or-correct-feature"><a class="link" href="#auto-complete-or-correct-feature">Auto Complete or Correct feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">Current Implementation</a></h4>
+<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">Proposed Implementation</a></h4>
 <div class="paragraph">
-<p>When adding a <code>Person</code> using the "Add" Command, users can enter their NUSMods shortened link into the "tt/" field.
-NUSMods URLs currently come in the format of <code>&#8230;&#8203;/timetable/SEM_NUM/share?MODULE_CODE=LESSON_CODE</code>
-Using <code>TimetableParserUtil:parseShortUrl</code>, we obtain the full url from the shortened link.
-Then, we parse the information accordingly and obtain lesson data from [<a href="https://api.nusmods.com/">NUSMods API</a>] to represent them in <code>Lesson</code>
-The information is then sorted and added as a list of <code>Lesson</code> taken by the user to the Timetable.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">        <span class="keyword">try</span> {
-            <span class="comment">// Grab lesson info from API and store as a map</span>
-            <span class="predefined-type">URL</span> url = <span class="keyword">new</span> <span class="predefined-type">URL</span>(link);
-            <span class="annotation">@SuppressWarnings</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">unchecked</span><span class="delimiter">&quot;</span></span>)
-            <span class="predefined-type">Map</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">Object</span>&gt; mappedJson = mapper.readValue(url, <span class="predefined-type">HashMap</span>.class);
-            <span class="annotation">@SuppressWarnings</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">unchecked</span><span class="delimiter">&quot;</span></span>)
-            <span class="predefined-type">ArrayList</span>&lt;<span class="predefined-type">HashMap</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt;&gt; lessonInfo = (<span class="predefined-type">ArrayList</span>&lt;<span class="predefined-type">HashMap</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt;&gt;)
-                    mappedJson.get(<span class="string"><span class="delimiter">&quot;</span><span class="content">Timetable</span><span class="delimiter">&quot;</span></span>);
-
-            <span class="comment">// Parse the information from API and creates an Arraylist of all possible lessons</span>
-            <span class="predefined-type">ArrayList</span>&lt;Lesson&gt; lessons = <span class="keyword">new</span> <span class="predefined-type">ArrayList</span>&lt;&gt;();
-            <span class="keyword">for</span> (<span class="predefined-type">HashMap</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt; lesson : lessonInfo) {
-                Lesson lessonToAdd = <span class="keyword">new</span> Lesson(moduleCode, lesson.get(<span class="string"><span class="delimiter">&quot;</span><span class="content">ClassNo</span><span class="delimiter">&quot;</span></span>), lesson.get(<span class="string"><span class="delimiter">&quot;</span><span class="content">LessonType</span><span class="delimiter">&quot;</span></span>),
-                        lesson.get(<span class="string"><span class="delimiter">&quot;</span><span class="content">WeekText</span><span class="delimiter">&quot;</span></span>), lesson.get(<span class="string"><span class="delimiter">&quot;</span><span class="content">DayText</span><span class="delimiter">&quot;</span></span>), lesson.get(<span class="string"><span class="delimiter">&quot;</span><span class="content">StartTime</span><span class="delimiter">&quot;</span></span>), lesson.get(<span class="string"><span class="delimiter">&quot;</span><span class="content">EndTime</span><span class="delimiter">&quot;</span></span>));
-                lessons.add(lessonToAdd);
-            }
-
-            <span class="keyword">return</span> lessons;
-        } <span class="keyword">catch</span> (<span class="exception">IOException</span> exception) {
-            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">Cannot retrieve module information</span><span class="delimiter">&quot;</span></span>);
-        }</code></pre>
-</div>
+<p>Currently, some commands such as <code>add</code> and <code>edit</code> requires many different fills to be filled in for it to work.
+This makes it extremely tedious as users have to remember what fills are there to be included.
+Spelling mistakes are also very costly as users would need to retype the command.</p>
 </div>
 <div class="paragraph">
-<p>The main contents of the timetable is stored as <code>TimetableData</code> and is accessed through <code>Timetable</code>.
-<code>TimetableData</code> consists of 2 <code>TimetableWeek</code>, which each consist of 5 <code>TimetableDay</code>, which each consist of 24
-<code>TimetableSlot</code> (following the 24h clock)</p>
+<p>When the user press the <code>Tab</code> key, commands ,and parameters carets will auto complete or auto correct.
+Pressing <code>Tab</code> again would give the next suggested input.</p>
+</div>
+<div class="paragraph">
+<p>The Auto Correct can be implemented in <code>CommandBox</code> as all user inputs can be easily accessed in it.
+Editing the text already entered can also be done easily in <code>CommandBox</code>.</p>
+</div>
+<div class="paragraph">
+<p>Since all commands are in the form of <code>String</code>, we can use a <code>TreeSet</code> of the current input&#8217;s character to find the closest matching command
+and traverse the <code>TreeSet</code> to get other suggestions.</p>
+</div>
+<div class="paragraph">
+<p>To prevent a situation of the need to differentiate between a auto completion of the next parameter or getting the next suggestion of the current command or parameter,
+next suggestion is always chosen before a space is entered and auto completion only happen for non-empty strings.</p>
+</div>
+<div class="paragraph">
+<p>Suppose that the user wants to type the <code>encrypt</code> command, he can press <code>Tab</code> to auto complete.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/TimetableComponentClassDiagram.png" alt="TimetableComponentClassDiagram" width="800">
+<img src="../images/commandautocomplete.png" alt="commandautocomplete" width="800">
 </div>
-<div class="title">Figure 4. Timetable Component</div>
-</div>
-<div class="paragraph">
-<p>In the event the url provided is invalid or empty, a empty <code>Timetable</code> will be created.
-Do take note that there are dummy urls for the purpose of testing. While normal users should not be able to know of their existence,
-entering a dummy link will result in a preset timetable being built.</p>
+<div class="title">Figure 5. Auto Completion of Command</div>
 </div>
 <div class="paragraph">
-<p>When the user uses the <code>TimetableUnionCommand</code>, the indexes selected will be parsed and a union of the timetables selected will be created.</p>
+<p>If he were to have a spelling error typing <code>encrytp</code> instead, the <code>Tab</code> key would instead correct it to <code>encrypt</code></p>
 </div>
-<div class="listingblock">
+<div class="imageblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">public</span> <span class="directive">static</span> <span class="predefined-type">ArrayList</span>&lt;<span class="predefined-type">String</span>&gt; unionTimetableDay(<span class="predefined-type">ArrayList</span>&lt;TimetableDay&gt; timetables) {
-        <span class="predefined-type">ArrayList</span>&lt;<span class="predefined-type">String</span>&gt; commonTimetable = <span class="keyword">new</span> <span class="predefined-type">ArrayList</span>&lt;&gt;();
-        <span class="type">boolean</span> checker;
-
-        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="integer">8</span>; i &lt; <span class="integer">22</span>; i++) {
-            checker = <span class="predefined-constant">false</span>;
-            <span class="keyword">for</span> (TimetableDay timetable : timetables) {
-                TimetableSlot t = timetable.timetableSlots[i];
-                <span class="keyword">if</span> (!t.toString().equals(EMPTY_SLOT_STRING)) {
-                    checker = <span class="predefined-constant">true</span>;
-                    <span class="keyword">break</span>;
-                }
-            }
-
-            <span class="keyword">if</span> (checker) {
-                commonTimetable.add(TITLE_OCCUPIED);
-            } <span class="keyword">else</span> {
-                commonTimetable.add(EMPTY_SLOT_STRING);
-            }
-        }
-        <span class="keyword">return</span> commonTimetable;
-    }</code></pre>
+<img src="../images/commandautocorrect.png" alt="commandautocorrect" width="800">
 </div>
+<div class="title">Figure 6. Auto Correction of Command</div>
 </div>
 <div class="paragraph">
-<p>Afterwards, it will raise the <code>TimeTableEvent</code> which will be caught and handled by the <code>InfoPanel</code>.
-The <code>InfoPanel</code> will swap between <code>UserDetailsPanel</code>, <code>BirthdayList</code>, <code>VenueTable</code> and <code>TimetableUnionPanel</code> so that the UI would not be too cluttered.</p>
+<p>Now suppose he is trying to add a friend, once he types <code>p/123</code> and press <code>Tab</code> after the space, <code>e/</code> caret will be auto completed for him.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/parameterautocomplete.png" alt="parameterautocomplete" width="800">
+</div>
+<div class="title">Figure 7. Auto Completion of Parameter</div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
 <div class="sect4">
-<h5 id="aspect-the-use-of-nusmods-shortened-urls"><a class="link" href="#aspect-the-use-of-nusmods-shortened-urls">Aspect: The use of NUSMods Shortened URLs</a></h5>
+<h5 id="aspect-what-is-done-after-user-presses-code-tab-code-key"><a class="link" href="#aspect-what-is-done-after-user-presses-code-tab-code-key">Aspect: What is done after user presses <code>Tab</code> key</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1</strong> (current choice): Use NUSMods shortened urls to 'import' the user&#8217;s timetable over to StardyTogether</p>
+<p><strong>Alternative 1 (Suggested):</strong> Automatically completes for the user.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: User-friendly if user already uses NUSMods and knows how to get the shortened link</p>
+<p>Pros: Easy and improves efficiency of typing. Familiar for users who uses CLI frequently.</p>
 </li>
 <li>
-<p>Cons: Not helpful to a user who does not use NUSMods. If NUSMods API changes, StardyTogether needs to be updated</p>
+<p>Cons: Can be confusing as can be auto complete or next suggested input.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2</strong>: Allow the use of more universal formats such as .ics files</p>
+<p><strong>Alternative 2:</strong> Suggest to user what is expected</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: More flexibility for the user</p>
+<p>Pros: Does not change the user&#8217;s current input making it less confusing.</p>
 </li>
 <li>
-<p>Cons: Hard to implement and parse the input</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="aspect-behaviour-of-the-app-when-data-from-api-is-not-retrieved-successfully"><a class="link" href="#aspect-behaviour-of-the-app-when-data-from-api-is-not-retrieved-successfully">Aspect: Behaviour of the app when data from API is not retrieved successfully</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1</strong> (current choice): A empty timetable is created for them.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Prevents unexpected errors</p>
-</li>
-<li>
-<p>Cons: Not very intuitive unless user sees the thrown exception</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong> Alternative 2</strong>: Prevent the adding of a Person without a valid timetable</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Warns the user that the timetable is not inputted properly</p>
-</li>
-<li>
-<p>Cons: Not very user-friendly if user just does not have a valid timetable</p>
+<p>Cons: Does not really improve the user experience by much.</p>
 </li>
 </ul>
 </div>
@@ -594,65 +529,31 @@ The <code>InfoPanel</code> will swap between <code>UserDetailsPanel</code>, <cod
 </div>
 </div>
 <div class="sect4">
-<h5 id="aspect-adding-of-lessons-to-timetable"><a class="link" href="#aspect-adding-of-lessons-to-timetable">Aspect: Adding of lessons to Timetable</a></h5>
+<h5 id="aspect-where-to-implement-it"><a class="link" href="#aspect-where-to-implement-it">Aspect: Where to implement it</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1</strong> (current choice): Users do the adding on NUSMods and re-import the timetable link</p>
+<p><strong>Alternative 1 (Suggested):</strong> In <code>CommandBox</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: No need to implement a separate function to add lessons and a separate <code>Module</code> class</p>
+<p>Pros: <code>CommandBox</code> has access to the text showing what is already keyed in, making it easy to implement there.</p>
 </li>
 <li>
-<p>Cons: May be troublesome for the user</p>
+<p>Cons: <code>CommandBox</code> has to do an extra task of determining suggested commands and input, increasing coupling as it would need access to the parser or list of commands.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2</strong>: Implement a function to add lessons and <code>Module</code> class</p>
+<p><strong>Alternative 2:</strong> In <code>Parser</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: User need not to manually edit the timetable parameter</p>
+<p>Pros: Does not increase the coupling of <code>CommandBox</code>.</p>
 </li>
 <li>
-<p>Cons: Hard to implement. Lessons and modules will not have any usage outside <code>Timetable</code></p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="aspect-testing-of-timetable"><a class="link" href="#aspect-testing-of-timetable">Aspect: Testing of Timetable</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1</strong> (current choice): Dummy links (which will never be generated by NUSMods) are used,
-Timetable will parse those differently</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Allows for easy creation of dummy timetables</p>
-</li>
-<li>
-<p>Cons: Although unlikely, user may be able to enter the dummy link as his own timetable (unintended behaviour)</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong> Alternative 2</strong>: Changing value to be non-final, settable with a method</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easy to implement</p>
-</li>
-<li>
-<p>Cons: Violates coding conventions, allows possible unauthorized access to Timetable</p>
+<p>Cons: Makes changing the current input display a difficult task which may require access to the <code>CommandBox</code>.</p>
 </li>
 </ul>
 </div>
@@ -661,111 +562,32 @@ Timetable will parse those differently</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="aspect-displaying-of-timetable-in-ui"><a class="link" href="#aspect-displaying-of-timetable-in-ui">Aspect: Displaying of Timetable in UI</a></h5>
+<h5 id="aspect-what-to-auto-correct-or-complete"><a class="link" href="#aspect-what-to-auto-correct-or-complete">Aspect: What to auto correct or complete</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (Current choice):</strong> Change between the different panels</p>
+<p><strong>Alternative 1 (Suggested):</strong> Commands and Parameters.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: UI would not be too cluttered.</p>
+<p>Pros: Makes it easy for users as everything can be auto completed or corrected.</p>
 </li>
 <li>
-<p>Cons: User cannot simultaneously use the different panels.</p>
+<p>Cons: Makes it more confusing as sometimes it completes commands while other times it completes the parameters.
+Also makes the implementation complicated as a clear distinction of Command and Parameters have to be made for completion and correction.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Have a dedicated spot in the UI for <code>TimeTablePanel</code></p>
+<p><strong>Alternative 2:</strong> Only Commands or Parameters</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Easy to refer for users.</p>
+<p>Pros: Easier to understand.</p>
 </li>
 <li>
-<p>Cons: UI would be confusing and cluttered.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="aspect-size-of-timetable-size"><a class="link" href="#aspect-size-of-timetable-size">Aspect: Size of Timetable size</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (Current choice):</strong> Automatically resize according to the size of the Application</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Size is adaptable to the size of the Application.</p>
-</li>
-<li>
-<p>Cons: Variable size may make it confusing for users.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Fixed Size</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easy and predictable size and location of timings.</p>
-</li>
-<li>
-<p>Cons: Since display may different from computer to computer, it would be inflexible to use a one size fit all approach.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="aspect-color-of-modules-in-timetable"><a class="link" href="#aspect-color-of-modules-in-timetable">Aspect: Color of Modules in Timetable</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (Current choice):</strong> Automatically randomized based on the <code>hashcode()</code> of the module name</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Colors are fixed and more or less randomized.</p>
-</li>
-<li>
-<p>Cons: Colors may be same for different modules in the same timetable and Colors are not customizable.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Pre-defined colors for the different modules</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: No overlap in color and different color for each module</p>
-</li>
-<li>
-<p>Cons: Since there are many different modules in NUS, it would be very time-consuming and almost impossible to be implemented.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 3:</strong> User customize colors</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Customized Application for users.</p>
-</li>
-<li>
-<p>Cons: Implementation of this system would be complex and time-consuming, it would be implemented in later versions.
-Current implementation is the best in terms of variability and ease of implementation.</p>
+<p>Cons: Not as efficient for the user.</p>
 </li>
 </ul>
 </div>
@@ -780,7 +602,7 @@ Current implementation is the best in terms of variability and ease of implement
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 15:20:29 UTC
+Last updated 2018-04-15 15:27:10 UTC
 </div>
 </div>
 </body>
