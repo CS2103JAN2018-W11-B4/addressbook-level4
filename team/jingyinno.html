@@ -398,22 +398,22 @@ Displays the directions from <code>Tampines Mall</code> to <code>COM1</code> to 
 <p>We have created <code>Building</code>, <code>Room</code>, <code>Week</code>, and <code>WeekDay</code> in <code>Model</code> to read and store all weekday schedule of all NUS Rooms.</p>
 </div>
 <div class="paragraph">
-<p>The following architecture diagram shows the model and storage component:</p>
+<p>The following architecture diagram shows the model component:</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="../images/ModelClassDiagram.png" alt="ModelClassDiagram" width="800">
 </div>
-<div class="title">Figure 4. Model Componenet</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/StorageClassDiagram.png" alt="StorageClassDiagram" width="800">
-</div>
-<div class="title">Figure 5. Storage Component</div>
+<div class="title">Figure 4. Model Component</div>
 </div>
 <div class="paragraph">
 <p>The following sequence diagram shows how the logic component of Vacant Room Finder works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ModelComponentVacantSequenceDiagram.png" alt="ModelComponentVacantSequenceDiagram" width="800">
+</div>
+<div class="title">Figure 5. Vacant Command Sequence Diagram for Model Component</div>
 </div>
 <div class="paragraph">
 <p>As shown in diagram above, all Rooms weekday schedule will be return in an <code>ArrayList&lt;ArrayList&lt;String&gt;&gt;</code> data structure. This result will be shown to the UI on the <code>InfoPanel</code></p>
@@ -484,7 +484,7 @@ Displays the directions from <code>Tampines Mall</code> to <code>COM1</code> to 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 12:31:41 UTC
+Last updated 2018-04-15 13:38:51 UTC
 </div>
 </div>
 </body>

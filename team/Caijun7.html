@@ -29,9 +29,9 @@ about 10k LoC.</p>
 <p>The source code is based on the  <a href="https://github.com/se-edu/addressbook-level4">AddressBook-Level4</a> project created by SE-EDU initiative.</p>
 </div>
 <div class="paragraph">
-<p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103JAN2018-W11-B4/main/blob/master/collated/functional/Caijun7.md">Functional code</a>]<br>
-[<a href="https://github.com/CS2103JAN2018-W11-B4/main/blob/master/collated/functional/Caijun7-reused.md">Functional code (reused)</a>]<br>
-[<a href="https://github.com/CS2103JAN2018-W11-B4/main/blob/master/collated/test/Caijun7.md">Test code</a>]<br>
+<p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103JAN2018-W11-B4/main/blob/master/collated/functional/Caijun7.md">Functional code</a>],
+[<a href="https://github.com/CS2103JAN2018-W11-B4/main/blob/master/collated/functional/Caijun7-reused.md">Functional code (reused)</a>],
+[<a href="https://github.com/CS2103JAN2018-W11-B4/main/blob/master/collated/test/Caijun7.md">Test code</a>],
 [<a href="https://github.com/CS2103JAN2018-W11-B4/main/blob/master/collated/test/Caijun7-reused.md">Test code (reused)</a>]<br></p>
 </div>
 </div>
@@ -309,6 +309,25 @@ Finds the vacancy status of study rooms in COM1 building.</p>
 <p><code>Person</code>,<code>Tag</code>, and <code>Alias</code> from imported StardyTogether file that are not a duplicate of existing <code>Person</code>, <code>Tag</code>, and <code>Alias</code> in the user&#8217;s StardyTogether will be added.</p>
 </div>
 <div class="paragraph">
+<p>The following code shows how <code>Person</code>,<code>Tag</code>, and <code>Alias</code> are imported into StardyTogether:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>public AddressBook addToAddressBook(AddressBook addressBook) throws IllegalValueException {
+    for (XmlAdaptedTag t : tags) {
+        addressBook.importTag(t.toModelType());
+    }
+    for (XmlAdaptedPerson p : persons) {
+        addressBook.importPerson(p.toModelType());
+    }
+    for (XmlAdaptedAlias a : aliases) {
+        addressBook.importAlias(a.toModelType());
+    }
+    return addressBook;
+}</pre>
+</div>
+</div>
+<div class="paragraph">
 <p>The following sequence diagram shows how the import operation works:</p>
 </div>
 <div class="imageblock">
@@ -316,6 +335,12 @@ Finds the vacancy status of study rooms in COM1 building.</p>
 <img src="../images/LogicComponentImportSequenceDiagram.png" alt="LogicComponentImportSequenceDiagram" width="800">
 </div>
 <div class="title">Figure 1. Import Command Sequence Diagram for Logic Component</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ModelStorageComponentImportSequenceDiagram.png" alt="ModelStorageComponentImportSequenceDiagram" width="800">
+</div>
+<div class="title">Figure 2. Import Command Sequence Diagram for Model and Storage Component</div>
 </div>
 </div>
 <div class="sect3">
@@ -403,9 +428,9 @@ Finds the vacancy status of study rooms in COM1 building.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/ExportCommandSequenceDiagram.png" alt="ExportCommandSequenceDiagram" width="800">
+<img src="../images/ModelStorageComponentExportSequenceDiagram.png" alt="ModelStorageComponentExportSequenceDiagram" width="800">
 </div>
-<div class="title">Figure 2. Export Command Sequence Diagram for Logic Component</div>
+<div class="title">Figure 3. Export Command Sequence Diagram for Model and Storage Component</div>
 </div>
 </div>
 <div class="sect3">
@@ -512,9 +537,9 @@ Finds the vacancy status of study rooms in COM1 building.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/UploadCommandSequenceDiagram.png" alt="UploadCommandSequenceDiagram" width="800">
+<img src="../images/ModelStorageComponentUploadSequenceDiagram.png" alt="ModelStorageComponentUploadSequenceDiagram" width="800">
 </div>
-<div class="title">Figure 3. Upload Command Sequence Diagram for Logic Component</div>
+<div class="title">Figure 4. Upload Command Sequence Diagram for Model and Storage Component</div>
 </div>
 </div>
 <div class="sect3">
@@ -552,51 +577,6 @@ Finds the vacancy status of study rooms in COM1 building.</p>
 </ul>
 </div>
 </div>
-<div class="sect4">
-<h5 id="aspect-how-upload-command-executes"><a class="link" href="#aspect-how-upload-command-executes">Aspect: How upload command executes</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Uploads all <code>Person</code> in <code>filteredPersons</code>, <code>Tag</code>, and <code>Alias</code> from StardyTogether.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: User is able to select which <code>Person</code> to be uploaded by using <code>find</code> command, user is not able to indicate which <code>Tag</code> or <code>Alias</code> to be uploaded. User can uploads all <code>Person</code> by using <code>list</code> command too, storing backups in Google Drive easily.</p>
-</li>
-<li>
-<p>Cons: User is not able to select which <code>Tag</code> or <code>Alias</code> to be uploaded.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Uploads all <code>Person</code>,<code>Tag</code>, and <code>Alias</code> from StardyTogether.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: User does not need to indicate which <code>Person</code>, <code>Tag</code> or <code>Alias</code> to be uploaded.</p>
-</li>
-<li>
-<p>Cons: User is not able to select which <code>Person</code>, <code>Tag</code> or <code>Alias</code> to be uploaded.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="why-download-stardytogether-file-feature-is-not-implemented"><a class="link" href="#why-download-stardytogether-file-feature-is-not-implemented">Why Download StardyTogether file feature is not implemented?</a></h4>
-<div class="sect4">
-<h5 id="justification"><a class="link" href="#justification">Justification</a></h5>
-<div class="paragraph">
-<p>Downloading a file from Google Drive requires the File ID, as there can be two or more files with the same filename in the user&#8217;s Google Drive. Hence, the user has to go to his/her Google Drive to get the uploaded StardyTogether File ID.</p>
-</div>
-<div class="paragraph">
-<p>Since the user is already on his/her Google Drive, he/she may download the file onto his/her computer and perform an <code>import</code> function. Steps are not reduced by implementing <code>download</code> feature. Therefore, we decided not to implement <code>download</code> feature.</p>
-</div>
-</div>
 </div>
 </div>
 <div class="sect2">
@@ -625,22 +605,22 @@ Finds the vacancy status of study rooms in COM1 building.</p>
 <p>We have created <code>Building</code>, <code>Room</code>, <code>Week</code>, and <code>WeekDay</code> in <code>Model</code> to read and store all weekday schedule of all NUS Rooms.</p>
 </div>
 <div class="paragraph">
-<p>The following architecture diagram shows the model and storage component:</p>
+<p>The following architecture diagram shows the model component:</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="../images/ModelClassDiagram.png" alt="ModelClassDiagram" width="800">
 </div>
-<div class="title">Figure 4. Model Componenet</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/StorageClassDiagram.png" alt="StorageClassDiagram" width="800">
-</div>
-<div class="title">Figure 5. Storage Component</div>
+<div class="title">Figure 5. Model Component</div>
 </div>
 <div class="paragraph">
 <p>The following sequence diagram shows how the logic component of Vacant Room Finder works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ModelComponentVacantSequenceDiagram.png" alt="ModelComponentVacantSequenceDiagram" width="800">
+</div>
+<div class="title">Figure 6. Vacant Command Sequence Diagram for Model Component</div>
 </div>
 <div class="paragraph">
 <p>As shown in diagram above, all Rooms weekday schedule will be return in an <code>ArrayList&lt;ArrayList&lt;String&gt;&gt;</code> data structure. This result will be shown to the UI on the <code>InfoPanel</code></p>
@@ -711,7 +691,7 @@ Finds the vacancy status of study rooms in COM1 building.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 12:31:41 UTC
+Last updated 2018-04-15 13:38:51 UTC
 </div>
 </div>
 </body>
