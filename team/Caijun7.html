@@ -207,6 +207,18 @@ Format: <code>export FILEPATH PASSWORD</code></p>
 </div>
 </div>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Execute <code>find</code> command before <code>export</code> to select the students' contact details you want to export
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>Example:</p>
 </div>
@@ -248,6 +260,19 @@ Format: <code>upload FILENAME PASSWORD</code></p>
 </ul>
 </div>
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Application will be blocked from executing another command while waiting for authorization response<br>
+Authorization request will timed out after 20 seconds
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Example:</p>
@@ -348,15 +373,9 @@ Finds the vacancy status of study rooms in COM1 building.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/LogicComponentImportSequenceDiagram.png" alt="LogicComponentImportSequenceDiagram" width="800">
-</div>
-<div class="title">Figure 1. Import Command Sequence Diagram for Logic Component</div>
-</div>
-<div class="imageblock">
-<div class="content">
 <img src="../images/ModelStorageComponentImportSequenceDiagram.png" alt="ModelStorageComponentImportSequenceDiagram" width="800">
 </div>
-<div class="title">Figure 2. Import Command Sequence Diagram for Model and Storage Component</div>
+<div class="title">Figure 1. Import Command Sequence Diagram for Model and Storage Component</div>
 </div>
 </div>
 <div class="sect3">
@@ -446,7 +465,7 @@ Finds the vacancy status of study rooms in COM1 building.</p>
 <div class="content">
 <img src="../images/ModelStorageComponentExportSequenceDiagram.png" alt="ModelStorageComponentExportSequenceDiagram" width="800">
 </div>
-<div class="title">Figure 3. Export Command Sequence Diagram for Model and Storage Component</div>
+<div class="title">Figure 2. Export Command Sequence Diagram for Model and Storage Component</div>
 </div>
 </div>
 <div class="sect3">
@@ -555,7 +574,7 @@ Finds the vacancy status of study rooms in COM1 building.</p>
 <div class="content">
 <img src="../images/ModelStorageComponentUploadSequenceDiagram.png" alt="ModelStorageComponentUploadSequenceDiagram" width="800">
 </div>
-<div class="title">Figure 4. Upload Command Sequence Diagram for Model and Storage Component</div>
+<div class="title">Figure 3. Upload Command Sequence Diagram for Model and Storage Component</div>
 </div>
 </div>
 <div class="sect3">
@@ -627,7 +646,7 @@ Finds the vacancy status of study rooms in COM1 building.</p>
 <div class="content">
 <img src="../images/ModelClassDiagram.png" alt="ModelClassDiagram" width="800">
 </div>
-<div class="title">Figure 5. Model Component</div>
+<div class="title">Figure 4. Model Component</div>
 </div>
 <div class="paragraph">
 <p>The following sequence diagram shows how the logic component of Vacant Room Finder works:</p>
@@ -636,7 +655,7 @@ Finds the vacancy status of study rooms in COM1 building.</p>
 <div class="content">
 <img src="../images/ModelComponentVacantSequenceDiagram.png" alt="ModelComponentVacantSequenceDiagram" width="800">
 </div>
-<div class="title">Figure 6. Vacant Command Sequence Diagram for Model Component</div>
+<div class="title">Figure 5. Vacant Command Sequence Diagram for Model Component</div>
 </div>
 <div class="paragraph">
 <p>As shown in diagram above, all Rooms weekday schedule will be return in an <code>ArrayList&lt;ArrayList&lt;String&gt;&gt;</code> data structure. This result will be shown to the UI on the <code>InfoPanel</code></p>
@@ -707,7 +726,7 @@ Finds the vacancy status of study rooms in COM1 building.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 14:18:08 UTC
+Last updated 2018-04-15 14:21:27 UTC
 </div>
 </div>
 </body>
