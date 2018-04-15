@@ -296,31 +296,32 @@ Finds the vacancy status of study rooms in COM1 building.</p>
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="import-addressbook-feature"><a class="link" href="#import-addressbook-feature">Import AddressBook feature</a></h3>
+<h3 id="import-stardytogether-file-feature"><a class="link" href="#import-stardytogether-file-feature">Import StardyTogether file feature</a></h3>
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
 <div class="paragraph">
-<p>The import AddressBook mechanism is facilitated by <code>XmlSerializableAddressBook</code>, which resides inside <code>Storage</code>. It allows the imported XML file to be converted into AddressBook format.</p>
+<p>The import StardyTogether mechanism is facilitated by <code>XmlSerializableAddressBook</code>, which resides inside <code>Storage</code>. It allows the imported XML file to be converted into StardyTogether format.</p>
 </div>
 <div class="paragraph">
-<p>The imported AddressBook must be a XML file that follows <code>XmlAdaptedPerson</code>, <code>XmlAdaptedTag</code>, and <code>XmlAdaptedAlias</code> format.</p>
+<p>The imported StardyTogether must be a XML file that follows <code>XmlAdaptedPerson</code>, <code>XmlAdaptedTag</code>, and <code>XmlAdaptedAlias</code> format.</p>
 </div>
 <div class="paragraph">
-<p><code>Person</code>,<code>Tag</code>, and <code>Alias</code> from imported AddressBook that are not a duplicate of existing <code>Person</code>, <code>Tag</code>, and <code>Alias</code> in the user&#8217;s AddressBook will be added.</p>
+<p><code>Person</code>,<code>Tag</code>, and <code>Alias</code> from imported StardyTogether file that are not a duplicate of existing <code>Person</code>, <code>Tag</code>, and <code>Alias</code> in the user&#8217;s StardyTogether will be added.</p>
 </div>
 <div class="paragraph">
 <p>The following sequence diagram shows how the import operation works:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/ImportCommandSequenceDiagram.png" alt="ImportCommandSequenceDiagram" width="800">
+<img src="../images/LogicComponentImportSequenceDiagram.png" alt="LogicComponentImportSequenceDiagram" width="800">
 </div>
+<div class="title">Figure 1. Import Command Sequence Diagram for Logic Component</div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
 <div class="sect4">
-<h5 id="aspect-imported-addressbook-file-format"><a class="link" href="#aspect-imported-addressbook-file-format">Aspect: Imported AddressBook file format</a></h5>
+<h5 id="aspect-imported-stardytogether-file-format"><a class="link" href="#aspect-imported-stardytogether-file-format">Aspect: Imported StardyTogether file format</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -328,10 +329,10 @@ Finds the vacancy status of study rooms in COM1 building.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Same file format as saved AddressBook, users can transfer AddressBook easily without the need to indicate file format.</p>
+<p>Pros: Same file format as saved StardyTogether, users can transfer StardyTogether easily without the need to indicate file format.</p>
 </li>
 <li>
-<p>Cons: Imported AddressBook must be in XML file format that follows <code>XmlAdaptedPerson</code>, <code>XmlAdaptedTag</code>, and <code>XmlAdaptedAlias</code> format.</p>
+<p>Cons: Imported StardyTogether must be in XML file format that follows <code>XmlAdaptedPerson</code>, <code>XmlAdaptedTag</code>, and <code>XmlAdaptedAlias</code> format.</p>
 </li>
 </ul>
 </div>
@@ -344,7 +345,7 @@ Finds the vacancy status of study rooms in COM1 building.</p>
 <p>Pros: CSV file format is widely used and is able to transfer between different applications (eg. Microsoft Excel).</p>
 </li>
 <li>
-<p>Cons: Different file format as saved AddressBook, implementation of converting file type from XML to CSV is needed.</p>
+<p>Cons: Different file format as saved StardyTogether, implementation of converting file type from XML to CSV is needed.</p>
 </li>
 </ul>
 </div>
@@ -357,11 +358,11 @@ Finds the vacancy status of study rooms in COM1 building.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Adds all <code>Person</code>,<code>Tag</code>, and <code>Alias</code> from imported AddressBook that are not a duplicate of existing <code>Person</code>, <code>Tag</code>, and <code>Alias</code> to the user&#8217;s AddressBook.</p>
+<p><strong>Alternative 1 (current choice):</strong> Adds all <code>Person</code>,<code>Tag</code>, and <code>Alias</code> from imported StardyTogether that are not a duplicate of existing <code>Person</code>, <code>Tag</code>, and <code>Alias</code> to the user&#8217;s StardyTogether.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: User does not need to indicate which <code>Person</code>, <code>Tag</code> or <code>Alias</code> to be imported.</p>
+<p>Pros: User does not need to indicate which <code>Person</code>, <code>Tag</code> or <code>Alias</code> to be imported. Since user can select which <code>Person</code> to be exported using <code>export</code> command, we assume user has already made his selection.</p>
 </li>
 <li>
 <p>Cons: User is not able to select which <code>Person</code>, <code>Tag</code> or <code>Alias</code> to be imported.</p>
@@ -370,14 +371,14 @@ Finds the vacancy status of study rooms in COM1 building.</p>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Adds selected <code>Person</code>,<code>Tag</code>, and <code>Alias</code> from imported AddressBook that are not a duplicate of existing <code>Person</code>, <code>Tag</code>, and <code>Alias</code> to the user&#8217;s AddressBook.</p>
+<p><strong>Alternative 2:</strong> Adds selected <code>Person</code>,<code>Tag</code>, and <code>Alias</code> from imported StardyTogether that are not a duplicate of existing <code>Person</code>, <code>Tag</code>, and <code>Alias</code> to the user&#8217;s StardyTogether.</p>
 <div class="ulist">
 <ul>
 <li>
 <p>Pros: User is able to select which <code>Person</code>, <code>Tag</code> or <code>Alias</code> to be imported.</p>
 </li>
 <li>
-<p>Cons: User needs to indicate which <code>Person</code>, <code>Tag</code> or <code>Alias</code> to be imported.</p>
+<p>Cons: User needs to indicate which <code>Person</code>, <code>Tag</code> or <code>Alias</code> to be imported, which may lead to human errors.</p>
 </li>
 </ul>
 </div>
@@ -388,11 +389,222 @@ Finds the vacancy status of study rooms in COM1 building.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="vacant-room-finder-feature"><a class="link" href="#vacant-room-finder-feature">Vacant Room Finder feature</a></h3>
+<h3 id="export-stardytogether-file-feature"><a class="link" href="#export-stardytogether-file-feature">Export StardyTogether file feature</a></h3>
 <div class="sect3">
 <h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">Current Implementation</a></h4>
 <div class="paragraph">
-<p>We are using Venue Information JSON file from <a href="https://nusmods.com/api/2017-2018/2/venueInformation.json">NUSMods</a> to get the weekly timetable of the venues. To increase the performance of getting the timetable of the venue, we decided to download Venue Information JSON file and have an offline copy stored in our StardyTogether application.</p>
+<p>The export StardyTogether mechanism is facilitated by <code>XmlFileStorage</code>, which resides inside <code>Storage</code>. It allows the StardyTogether&#8217;s <code>AddressBook</code> to be converted into a XML file format.</p>
+</div>
+<div class="paragraph">
+<p>The exported StardyTogether file contains all <code>Person</code> in <code>filteredPersons</code>, which resides inside <code>ModelManager</code>, all <code>Tag</code>, and all <code>Alias</code> in StardyTogether.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the export operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ExportCommandSequenceDiagram.png" alt="ExportCommandSequenceDiagram" width="800">
+</div>
+<div class="title">Figure 2. Export Command Sequence Diagram for Logic Component</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-exported-stardytogether-file-format"><a class="link" href="#aspect-exported-stardytogether-file-format">Aspect: Exported StardyTogether file format</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Uses the same XML file format as <code>XmlFileStorage</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Same file format as saved StardyTogether, users can transfer StardyTogether easily without the need to indicate file format.</p>
+</li>
+<li>
+<p>Cons: Can only be transferred and used by StardyTogether application.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Uses CSV file format</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: CSV file format is widely used and is able to transfer between different applications (eg. Microsoft Excel).</p>
+</li>
+<li>
+<p>Cons: Different file format as saved StardyTogether, implementation of converting file type from XML to CSV is needed.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-export-command-executes"><a class="link" href="#aspect-how-export-command-executes">Aspect: How export command executes</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Exports all <code>Person</code> in <code>filteredPersons</code>, <code>Tag</code>, and <code>Alias</code> from StardyTogether.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: User is able to select which <code>Person</code> to be exported by using <code>find</code> command, user is not able to indicate which <code>Tag</code> or <code>Alias</code> to be exported. User can exports all <code>Person</code> by using <code>list</code> command too.</p>
+</li>
+<li>
+<p>Cons: User is not able to select which <code>Tag</code> or <code>Alias</code> to be exported.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Exports all <code>Person</code>,<code>Tag</code>, and <code>Alias</code> from StardyTogether.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: User does not need to indicate which <code>Person</code>, <code>Tag</code> or <code>Alias</code> to be exported.</p>
+</li>
+<li>
+<p>Cons: User is not able to select which <code>Person</code>, <code>Tag</code> or <code>Alias</code> to be exported. This is similar to copying and pasting the saved StardyTogether file using file explorer.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="upload-stardytogether-file-feature"><a class="link" href="#upload-stardytogether-file-feature">Upload StardyTogether file feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">Current Implementation</a></h4>
+<div class="paragraph">
+<p>The upload feature involves three steps, requesting for authorization, exporting, and uploading.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Redirecting user to a Google URL to request for authorization to his/her Google Drive. User must grant StardyTogether access to his/her Google Drive to continue. If user already granted access, this step will be skipped.</p>
+</li>
+<li>
+<p>Exporting all <code>Person</code> in <code>filteredPersons</code>, which resides inside <code>ModelManager</code>, all <code>Tag</code>, and all <code>Alias</code> of the StardyTogether to <code>googledrive</code> folder in user&#8217;s computer.</p>
+</li>
+<li>
+<p>Uploading the exported StardyTogether file to user&#8217;s Google Drive.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Please refer to <a href="#export-stardytogether-file-feature">Export StardyTogether file feature</a> for implementation on export mechanism.</p>
+</div>
+<div class="paragraph">
+<p>The upload StardyTogether mechanism is facilitated by using <a href="https://developers.google.com/drive/">Google Drive API</a> in <code>GoogleDriveStorage</code>, which resides inside <code>Storage</code>. It allows the stored StardyTogether file in user&#8217;s computer to be uploaded into user&#8217;s Google Drive.</p>
+</div>
+<div class="paragraph">
+<p>The uploaded StardyTogether file is the same as exported StardyTogether file stored.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the upload operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UploadCommandSequenceDiagram.png" alt="UploadCommandSequenceDiagram" width="800">
+</div>
+<div class="title">Figure 3. Upload Command Sequence Diagram for Logic Component</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-uploaded-stardytogether-file-format"><a class="link" href="#aspect-uploaded-stardytogether-file-format">Aspect: Uploaded StardyTogether file format</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Uses the same XML file format as <code>XmlFileStorage</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Same file format as saved StardyTogether, users can transfer StardyTogether easily without the need to indicate file format.</p>
+</li>
+<li>
+<p>Cons: Can only be transferred and used by StardyTogether application.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Uses CSV file format</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: CSV file format is widely used and is able to transfer between different applications (eg. Microsoft Excel).</p>
+</li>
+<li>
+<p>Cons: Different file format as saved StardyTogether, implementation of converting file type from XML to CSV is needed.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-upload-command-executes"><a class="link" href="#aspect-how-upload-command-executes">Aspect: How upload command executes</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Uploads all <code>Person</code> in <code>filteredPersons</code>, <code>Tag</code>, and <code>Alias</code> from StardyTogether.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: User is able to select which <code>Person</code> to be uploaded by using <code>find</code> command, user is not able to indicate which <code>Tag</code> or <code>Alias</code> to be uploaded. User can uploads all <code>Person</code> by using <code>list</code> command too, storing backups in Google Drive easily.</p>
+</li>
+<li>
+<p>Cons: User is not able to select which <code>Tag</code> or <code>Alias</code> to be uploaded.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Uploads all <code>Person</code>,<code>Tag</code>, and <code>Alias</code> from StardyTogether.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: User does not need to indicate which <code>Person</code>, <code>Tag</code> or <code>Alias</code> to be uploaded.</p>
+</li>
+<li>
+<p>Cons: User is not able to select which <code>Person</code>, <code>Tag</code> or <code>Alias</code> to be uploaded.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="why-download-stardytogether-file-feature-is-not-implemented"><a class="link" href="#why-download-stardytogether-file-feature-is-not-implemented">Why Download StardyTogether file feature is not implemented?</a></h4>
+<div class="sect4">
+<h5 id="justification"><a class="link" href="#justification">Justification</a></h5>
+<div class="paragraph">
+<p>Downloading a file from Google Drive requires the File ID, as there can be two or more files with the same filename in the user&#8217;s Google Drive. Hence, the user has to go to his/her Google Drive to get the uploaded StardyTogether File ID.</p>
+</div>
+<div class="paragraph">
+<p>Since the user is already on his/her Google Drive, he/she may download the file onto his/her computer and perform an <code>import</code> function. Steps are not reduced by implementing <code>download</code> feature. Therefore, we decided not to implement <code>download</code> feature.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="vacant-room-finder-feature"><a class="link" href="#vacant-room-finder-feature">Vacant Room Finder feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">Current Implementation</a></h4>
+<div class="paragraph">
+<p>We are using Venue Information JSON file from <a href="https://nusmods.com/api/2017-2018/2/venueInformation.json">NUSMods</a> to retrieve the weekly timetable of the venues. To increase the performance of retrieving the timetable of the venue, we decided to download Venue Information JSON file and have an offline copy stored in our StardyTogether application.</p>
 </div>
 <div class="paragraph">
 <p>We have added the list of NUS buildings and the list of rooms in each building into the offline copy.</p>
@@ -401,7 +613,7 @@ Finds the vacancy status of study rooms in COM1 building.</p>
 <p>We use <code>ReadOnlyJsonVenueInformation</code>, which resides inside <code>Storage</code> to read and store the room timetable data inside <code>nusVenues</code> in <code>Room</code> class, and also store NUS Buildings and their respective rooms inside <code>nusBuildingsAndRooms</code> in <code>Building</code> class.</p>
 </div>
 <div class="paragraph">
-<p>To avoid reading the data whenever the <code>vacant</code> command is executed, we only read the data once when the <code>MainApp</code> starts.</p>
+<p>To avoid reading the data from Venue Information JSON file whenever the <code>vacant</code> command is executed, we only read the data once when the <code>MainApp</code> starts.</p>
 </div>
 <div class="paragraph">
 <p>The following sequence diagram shows how the vacant command is parsed:</p>
@@ -419,11 +631,13 @@ Finds the vacancy status of study rooms in COM1 building.</p>
 <div class="content">
 <img src="../images/ModelClassDiagram.png" alt="ModelClassDiagram" width="800">
 </div>
+<div class="title">Figure 4. Model Componenet</div>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="../images/StorageClassDiagram.png" alt="StorageClassDiagram" width="800">
 </div>
+<div class="title">Figure 5. Storage Component</div>
 </div>
 <div class="paragraph">
 <p>The following sequence diagram shows how the logic component of Vacant Room Finder works:</p>
@@ -497,7 +711,7 @@ Finds the vacancy status of study rooms in COM1 building.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 10:56:09 UTC
+Last updated 2018-04-15 11:00:33 UTC
 </div>
 </div>
 </body>

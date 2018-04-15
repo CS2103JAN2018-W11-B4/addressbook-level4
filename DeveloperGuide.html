@@ -48,12 +48,14 @@
 <li><a href="#undo-redo-feature">4.1. Undo/Redo feature</a></li>
 <li><a href="#customized-alias-feature">4.2. Customized Alias feature</a></li>
 <li><a href="#data-encryption">4.3. Data Encryption</a></li>
-<li><a href="#import-addressbook-feature">4.4. Import AddressBook feature</a></li>
-<li><a href="#birthdays-feature">4.5. Birthdays feature</a></li>
-<li><a href="#vacant-room-finder-feature">4.6. Vacant Room Finder feature</a></li>
-<li><a href="#timetable-feature">4.7. Timetable feature</a></li>
-<li><a href="#logging">4.8. Logging</a></li>
-<li><a href="#Implementation-Configuration">4.9. Configuration</a></li>
+<li><a href="#import-stardytogether-file-feature">4.4. Import StardyTogether file feature</a></li>
+<li><a href="#export-stardytogether-file-feature">4.5. Export StardyTogether file feature</a></li>
+<li><a href="#upload-stardytogether-file-feature">4.6. Upload StardyTogether file feature</a></li>
+<li><a href="#birthdays-feature">4.7. Birthdays feature</a></li>
+<li><a href="#vacant-room-finder-feature">4.8. Vacant Room Finder feature</a></li>
+<li><a href="#timetable-feature">4.9. Timetable feature</a></li>
+<li><a href="#logging">4.10. Logging</a></li>
+<li><a href="#Implementation-Configuration">4.11. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">5. Documentation</a>
@@ -600,6 +602,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <div class="content">
 <img src="images/LogicCommandClassDiagram.png" alt="LogicCommandClassDiagram" width="800">
 </div>
+<div class="title">Figure 11. Logic Command Class Diagram</div>
 </div>
 <div class="paragraph">
 <p>As you can see from the diagram, <code>UndoableCommand</code> adds an extra layer between the abstract <code>Command</code> class and concrete commands that can be undone, such as the <code>DeleteCommand</code>. Note that extra tasks need to be done when executing a command in an <em>undoable</em> way, such as saving the state of the address book before execution. <code>UndoableCommand</code> contains the high-level algorithm for those extra tasks while the child classes implements the details of how to execute the specific command. Note that this technique of putting the high-level algorithm in the parent class and lower-level steps of the algorithm in child classes is also known as the <a href="https://www.tutorialspoint.com/design_pattern/template_pattern.htm">template pattern</a>.</p>
@@ -649,6 +652,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <div class="content">
 <img src="images/UndoRedoStartingStackDiagram.png" alt="UndoRedoStartingStackDiagram" width="800">
 </div>
+<div class="title">Figure 12. Undo and Redo Starting Stack</div>
 </div>
 <div class="paragraph">
 <p>As the user continues to use the program, more commands are added into the <code>undoStack</code>. For example, the user may execute <code>add n/David &#8230;&#8203;</code> to add a new person.</p>
@@ -657,6 +661,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <div class="content">
 <img src="images/UndoRedoNewCommand1StackDiagram.png" alt="UndoRedoNewCommand1StackDiagram" width="800">
 </div>
+<div class="title">Figure 13. Undo and Redo Stack after executing one Command</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -680,6 +685,7 @@ If a command fails its execution, it will not be pushed to the <code>UndoRedoSta
 <div class="content">
 <img src="images/UndoRedoExecuteUndoStackDiagram.png" alt="UndoRedoExecuteUndoStackDiagram" width="800">
 </div>
+<div class="title">Figure 14. Undo and Redo stack before and after Undo command execution</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -700,6 +706,7 @@ If the <code>undoStack</code> is empty, then there are no other commands left to
 <div class="content">
 <img src="images/UndoRedoSequenceDiagram.png" alt="UndoRedoSequenceDiagram" width="800">
 </div>
+<div class="title">Figure 15. Undo Sequence Diagram</div>
 </div>
 <div class="paragraph">
 <p>The redo does the exact opposite (pops from <code>redoStack</code>, push to <code>undoStack</code>, and restores the address book to the state after the command is executed).</p>
@@ -723,6 +730,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="content">
 <img src="images/UndoRedoNewCommand2StackDiagram.png" alt="UndoRedoNewCommand2StackDiagram" width="800">
 </div>
+<div class="title">Figure 16. Undo and Redo stack before and after Clear command execution</div>
 </div>
 <div class="paragraph">
 <p>Commands that are not undoable are not added into the <code>undoStack</code>. For example, <code>list</code>, which inherits from <code>Command</code> rather than <code>UndoableCommand</code>, will not be added after execution:</p>
@@ -731,6 +739,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="content">
 <img src="images/UndoRedoNewCommand3StackDiagram.png" alt="UndoRedoNewCommand3StackDiagram" width="800">
 </div>
+<div class="title">Figure 17. Undo and Redo stack before and after List command execution</div>
 </div>
 <div class="paragraph">
 <p>The following activity diagram summarize what happens inside the <code>UndoRedoStack</code> when a user executes a new command:</p>
@@ -739,6 +748,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="content">
 <img src="images/UndoRedoActivityDiagram.png" alt="UndoRedoActivityDiagram" width="650">
 </div>
+<div class="title">Figure 18. Undo and Redo Activity Diagram</div>
 </div>
 </div>
 <div class="sect3">
@@ -886,11 +896,13 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="content">
 <img src="images/LogicComponentAliasSequenceDiagram.png" alt="LogicComponentAliasSequenceDiagram" width="800">
 </div>
+<div class="title">Figure 19. Alias Command Sequence Diagram for Logic Component</div>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/StorageClassDiagram.png" alt="StorageClassDiagram" width="800">
 </div>
+<div class="title">Figure 20. Storage Component</div>
 </div>
 </div>
 <div class="sect3">
@@ -901,6 +913,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="content">
 <img src="images/ModelClassDiagram.png" alt="ModelClassDiagram" width="800">
 </div>
+<div class="title">Figure 21. Model Component</div>
 </div>
 <div class="ulist">
 <ul>
@@ -1012,6 +1025,7 @@ Users can change their password using the command <code>encrypt</code> and decry
 <div class="content">
 <img src="images/PasswordSdForModel.png" alt="PasswordSdForModel" width="800">
 </div>
+<div class="title">Figure 22. Password Sequence Diagram for Model Component</div>
 </div>
 <div class="paragraph">
 <p>The 128 bit password used to encrypt <code>addressbook.xml</code> is saved in the address book as <code>XmlAdaptedPassword</code> to ensure that the password is not lost after every reset of the application.
@@ -1193,31 +1207,32 @@ requires computation which may make the application slower than desired.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="import-addressbook-feature"><a class="link" href="#import-addressbook-feature">4.4. Import AddressBook feature</a></h3>
+<h3 id="import-stardytogether-file-feature"><a class="link" href="#import-stardytogether-file-feature">4.4. Import StardyTogether file feature</a></h3>
 <div class="sect3">
 <h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">4.4.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>The import AddressBook mechanism is facilitated by <code>XmlSerializableAddressBook</code>, which resides inside <code>Storage</code>. It allows the imported XML file to be converted into AddressBook format.</p>
+<p>The import StardyTogether mechanism is facilitated by <code>XmlSerializableAddressBook</code>, which resides inside <code>Storage</code>. It allows the imported XML file to be converted into StardyTogether format.</p>
 </div>
 <div class="paragraph">
-<p>The imported AddressBook must be a XML file that follows <code>XmlAdaptedPerson</code>, <code>XmlAdaptedTag</code>, and <code>XmlAdaptedAlias</code> format.</p>
+<p>The imported StardyTogether must be a XML file that follows <code>XmlAdaptedPerson</code>, <code>XmlAdaptedTag</code>, and <code>XmlAdaptedAlias</code> format.</p>
 </div>
 <div class="paragraph">
-<p><code>Person</code>,<code>Tag</code>, and <code>Alias</code> from imported AddressBook that are not a duplicate of existing <code>Person</code>, <code>Tag</code>, and <code>Alias</code> in the user&#8217;s AddressBook will be added.</p>
+<p><code>Person</code>,<code>Tag</code>, and <code>Alias</code> from imported StardyTogether file that are not a duplicate of existing <code>Person</code>, <code>Tag</code>, and <code>Alias</code> in the user&#8217;s StardyTogether will be added.</p>
 </div>
 <div class="paragraph">
 <p>The following sequence diagram shows how the import operation works:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/ImportCommandSequenceDiagram.png" alt="ImportCommandSequenceDiagram" width="800">
+<img src="images/LogicComponentImportSequenceDiagram.png" alt="LogicComponentImportSequenceDiagram" width="800">
 </div>
+<div class="title">Figure 23. Import Command Sequence Diagram for Logic Component</div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.4.2. Design Considerations</a></h4>
 <div class="sect4">
-<h5 id="aspect-imported-addressbook-file-format"><a class="link" href="#aspect-imported-addressbook-file-format">Aspect: Imported AddressBook file format</a></h5>
+<h5 id="aspect-imported-stardytogether-file-format"><a class="link" href="#aspect-imported-stardytogether-file-format">Aspect: Imported StardyTogether file format</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -1225,10 +1240,10 @@ requires computation which may make the application slower than desired.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Same file format as saved AddressBook, users can transfer AddressBook easily without the need to indicate file format.</p>
+<p>Pros: Same file format as saved StardyTogether, users can transfer StardyTogether easily without the need to indicate file format.</p>
 </li>
 <li>
-<p>Cons: Imported AddressBook must be in XML file format that follows <code>XmlAdaptedPerson</code>, <code>XmlAdaptedTag</code>, and <code>XmlAdaptedAlias</code> format.</p>
+<p>Cons: Imported StardyTogether must be in XML file format that follows <code>XmlAdaptedPerson</code>, <code>XmlAdaptedTag</code>, and <code>XmlAdaptedAlias</code> format.</p>
 </li>
 </ul>
 </div>
@@ -1241,7 +1256,7 @@ requires computation which may make the application slower than desired.</p>
 <p>Pros: CSV file format is widely used and is able to transfer between different applications (eg. Microsoft Excel).</p>
 </li>
 <li>
-<p>Cons: Different file format as saved AddressBook, implementation of converting file type from XML to CSV is needed.</p>
+<p>Cons: Different file format as saved StardyTogether, implementation of converting file type from XML to CSV is needed.</p>
 </li>
 </ul>
 </div>
@@ -1254,11 +1269,11 @@ requires computation which may make the application slower than desired.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Adds all <code>Person</code>,<code>Tag</code>, and <code>Alias</code> from imported AddressBook that are not a duplicate of existing <code>Person</code>, <code>Tag</code>, and <code>Alias</code> to the user&#8217;s AddressBook.</p>
+<p><strong>Alternative 1 (current choice):</strong> Adds all <code>Person</code>,<code>Tag</code>, and <code>Alias</code> from imported StardyTogether that are not a duplicate of existing <code>Person</code>, <code>Tag</code>, and <code>Alias</code> to the user&#8217;s StardyTogether.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: User does not need to indicate which <code>Person</code>, <code>Tag</code> or <code>Alias</code> to be imported.</p>
+<p>Pros: User does not need to indicate which <code>Person</code>, <code>Tag</code> or <code>Alias</code> to be imported. Since user can select which <code>Person</code> to be exported using <code>export</code> command, we assume user has already made his selection.</p>
 </li>
 <li>
 <p>Cons: User is not able to select which <code>Person</code>, <code>Tag</code> or <code>Alias</code> to be imported.</p>
@@ -1267,14 +1282,14 @@ requires computation which may make the application slower than desired.</p>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Adds selected <code>Person</code>,<code>Tag</code>, and <code>Alias</code> from imported AddressBook that are not a duplicate of existing <code>Person</code>, <code>Tag</code>, and <code>Alias</code> to the user&#8217;s AddressBook.</p>
+<p><strong>Alternative 2:</strong> Adds selected <code>Person</code>,<code>Tag</code>, and <code>Alias</code> from imported StardyTogether that are not a duplicate of existing <code>Person</code>, <code>Tag</code>, and <code>Alias</code> to the user&#8217;s StardyTogether.</p>
 <div class="ulist">
 <ul>
 <li>
 <p>Pros: User is able to select which <code>Person</code>, <code>Tag</code> or <code>Alias</code> to be imported.</p>
 </li>
 <li>
-<p>Cons: User needs to indicate which <code>Person</code>, <code>Tag</code> or <code>Alias</code> to be imported.</p>
+<p>Cons: User needs to indicate which <code>Person</code>, <code>Tag</code> or <code>Alias</code> to be imported, which may lead to human errors.</p>
 </li>
 </ul>
 </div>
@@ -1285,9 +1300,220 @@ requires computation which may make the application slower than desired.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="birthdays-feature"><a class="link" href="#birthdays-feature">4.5. Birthdays feature</a></h3>
+<h3 id="export-stardytogether-file-feature"><a class="link" href="#export-stardytogether-file-feature">4.5. Export StardyTogether file feature</a></h3>
 <div class="sect3">
 <h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">4.5.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The export StardyTogether mechanism is facilitated by <code>XmlFileStorage</code>, which resides inside <code>Storage</code>. It allows the StardyTogether&#8217;s <code>AddressBook</code> to be converted into a XML file format.</p>
+</div>
+<div class="paragraph">
+<p>The exported StardyTogether file contains all <code>Person</code> in <code>filteredPersons</code>, which resides inside <code>ModelManager</code>, all <code>Tag</code>, and all <code>Alias</code> in StardyTogether.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the export operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ExportCommandSequenceDiagram.png" alt="ExportCommandSequenceDiagram" width="800">
+</div>
+<div class="title">Figure 24. Export Command Sequence Diagram for Logic Component</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.5.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-exported-stardytogether-file-format"><a class="link" href="#aspect-exported-stardytogether-file-format">Aspect: Exported StardyTogether file format</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Uses the same XML file format as <code>XmlFileStorage</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Same file format as saved StardyTogether, users can transfer StardyTogether easily without the need to indicate file format.</p>
+</li>
+<li>
+<p>Cons: Can only be transferred and used by StardyTogether application.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Uses CSV file format</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: CSV file format is widely used and is able to transfer between different applications (eg. Microsoft Excel).</p>
+</li>
+<li>
+<p>Cons: Different file format as saved StardyTogether, implementation of converting file type from XML to CSV is needed.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-export-command-executes"><a class="link" href="#aspect-how-export-command-executes">Aspect: How export command executes</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Exports all <code>Person</code> in <code>filteredPersons</code>, <code>Tag</code>, and <code>Alias</code> from StardyTogether.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: User is able to select which <code>Person</code> to be exported by using <code>find</code> command, user is not able to indicate which <code>Tag</code> or <code>Alias</code> to be exported. User can exports all <code>Person</code> by using <code>list</code> command too.</p>
+</li>
+<li>
+<p>Cons: User is not able to select which <code>Tag</code> or <code>Alias</code> to be exported.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Exports all <code>Person</code>,<code>Tag</code>, and <code>Alias</code> from StardyTogether.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: User does not need to indicate which <code>Person</code>, <code>Tag</code> or <code>Alias</code> to be exported.</p>
+</li>
+<li>
+<p>Cons: User is not able to select which <code>Person</code>, <code>Tag</code> or <code>Alias</code> to be exported. This is similar to copying and pasting the saved StardyTogether file using file explorer.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="upload-stardytogether-file-feature"><a class="link" href="#upload-stardytogether-file-feature">4.6. Upload StardyTogether file feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">4.6.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The upload feature involves three steps, requesting for authorization, exporting, and uploading.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Redirecting user to a Google URL to request for authorization to his/her Google Drive. User must grant StardyTogether access to his/her Google Drive to continue. If user already granted access, this step will be skipped.</p>
+</li>
+<li>
+<p>Exporting all <code>Person</code> in <code>filteredPersons</code>, which resides inside <code>ModelManager</code>, all <code>Tag</code>, and all <code>Alias</code> of the StardyTogether to <code>googledrive</code> folder in user&#8217;s computer.</p>
+</li>
+<li>
+<p>Uploading the exported StardyTogether file to user&#8217;s Google Drive.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Please refer to <a href="#export-stardytogether-file-feature">Export StardyTogether file feature</a> for implementation on export mechanism.</p>
+</div>
+<div class="paragraph">
+<p>The upload StardyTogether mechanism is facilitated by using <a href="https://developers.google.com/drive/">Google Drive API</a> in <code>GoogleDriveStorage</code>, which resides inside <code>Storage</code>. It allows the stored StardyTogether file in user&#8217;s computer to be uploaded into user&#8217;s Google Drive.</p>
+</div>
+<div class="paragraph">
+<p>The uploaded StardyTogether file is the same as exported StardyTogether file stored.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the upload operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UploadCommandSequenceDiagram.png" alt="UploadCommandSequenceDiagram" width="800">
+</div>
+<div class="title">Figure 25. Upload Command Sequence Diagram for Logic Component</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">4.6.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-uploaded-stardytogether-file-format"><a class="link" href="#aspect-uploaded-stardytogether-file-format">Aspect: Uploaded StardyTogether file format</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Uses the same XML file format as <code>XmlFileStorage</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Same file format as saved StardyTogether, users can transfer StardyTogether easily without the need to indicate file format.</p>
+</li>
+<li>
+<p>Cons: Can only be transferred and used by StardyTogether application.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Uses CSV file format</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: CSV file format is widely used and is able to transfer between different applications (eg. Microsoft Excel).</p>
+</li>
+<li>
+<p>Cons: Different file format as saved StardyTogether, implementation of converting file type from XML to CSV is needed.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-upload-command-executes"><a class="link" href="#aspect-how-upload-command-executes">Aspect: How upload command executes</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Uploads all <code>Person</code> in <code>filteredPersons</code>, <code>Tag</code>, and <code>Alias</code> from StardyTogether.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: User is able to select which <code>Person</code> to be uploaded by using <code>find</code> command, user is not able to indicate which <code>Tag</code> or <code>Alias</code> to be uploaded. User can uploads all <code>Person</code> by using <code>list</code> command too, storing backups in Google Drive easily.</p>
+</li>
+<li>
+<p>Cons: User is not able to select which <code>Tag</code> or <code>Alias</code> to be uploaded.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Uploads all <code>Person</code>,<code>Tag</code>, and <code>Alias</code> from StardyTogether.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: User does not need to indicate which <code>Person</code>, <code>Tag</code> or <code>Alias</code> to be uploaded.</p>
+</li>
+<li>
+<p>Cons: User is not able to select which <code>Person</code>, <code>Tag</code> or <code>Alias</code> to be uploaded.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="why-download-stardytogether-file-feature-is-not-implemented"><a class="link" href="#why-download-stardytogether-file-feature-is-not-implemented">4.6.3. Why Download StardyTogether file feature is not implemented?</a></h4>
+<div class="sect4">
+<h5 id="justification"><a class="link" href="#justification">Justification</a></h5>
+<div class="paragraph">
+<p>Downloading a file from Google Drive requires the File ID, as there can be two or more files with the same filename in the user&#8217;s Google Drive. Hence, the user has to go to his/her Google Drive to get the uploaded StardyTogether File ID.</p>
+</div>
+<div class="paragraph">
+<p>Since the user is already on his/her Google Drive, he/she may download the file onto his/her computer and perform an <code>import</code> function. Steps are not reduced by implementing <code>download</code> feature. Therefore, we decided not to implement <code>download</code> feature.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="birthdays-feature"><a class="link" href="#birthdays-feature">4.7. Birthdays feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-7"><a class="link" href="#current-implementation-7">4.7.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>Birthdays Command uses the existing Events system and sends an event.</p>
 </div>
@@ -1295,6 +1521,7 @@ requires computation which may make the application slower than desired.</p>
 <div class="content">
 <img src="images/LogicComponentBirthdaysSequenceDiagram.png" alt="LogicComponentBirthdaysSequenceDiagram" width="800">
 </div>
+<div class="title">Figure 26. Birthdays Command Sequence Diagram for Logic Component</div>
 </div>
 <div class="paragraph">
 <p>The UI component will then receive the event and handle the data.</p>
@@ -1303,10 +1530,11 @@ requires computation which may make the application slower than desired.</p>
 <div class="content">
 <img src="images/UiComponentBirthdayListSequenceDiagram.png" alt="UiComponentBirthdayListSequenceDiagram" width="800">
 </div>
+<div class="title">Figure 27. Birthdays Command Sequence Diagram for UI Component</div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.5.2. Design Considerations</a></h4>
+<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">4.7.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-the-birthdaylist-ui-component-obtains-and-parses-its-data"><a class="link" href="#aspect-how-the-birthdaylist-ui-component-obtains-and-parses-its-data">Aspect: How the BirthdayList UI component obtains and parses its data</a></h5>
 <div class="ulist">
@@ -1409,11 +1637,11 @@ requires computation which may make the application slower than desired.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="vacant-room-finder-feature"><a class="link" href="#vacant-room-finder-feature">4.6. Vacant Room Finder feature</a></h3>
+<h3 id="vacant-room-finder-feature"><a class="link" href="#vacant-room-finder-feature">4.8. Vacant Room Finder feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">4.6.1. Current Implementation</a></h4>
+<h4 id="current-implementation-8"><a class="link" href="#current-implementation-8">4.8.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>We are using Venue Information JSON file from <a href="https://nusmods.com/api/2017-2018/2/venueInformation.json">NUSMods</a> to get the weekly timetable of the venues. To increase the performance of getting the timetable of the venue, we decided to download Venue Information JSON file and have an offline copy stored in our StardyTogether application.</p>
+<p>We are using Venue Information JSON file from <a href="https://nusmods.com/api/2017-2018/2/venueInformation.json">NUSMods</a> to retrieve the weekly timetable of the venues. To increase the performance of retrieving the timetable of the venue, we decided to download Venue Information JSON file and have an offline copy stored in our StardyTogether application.</p>
 </div>
 <div class="paragraph">
 <p>We have added the list of NUS buildings and the list of rooms in each building into the offline copy.</p>
@@ -1422,7 +1650,7 @@ requires computation which may make the application slower than desired.</p>
 <p>We use <code>ReadOnlyJsonVenueInformation</code>, which resides inside <code>Storage</code> to read and store the room timetable data inside <code>nusVenues</code> in <code>Room</code> class, and also store NUS Buildings and their respective rooms inside <code>nusBuildingsAndRooms</code> in <code>Building</code> class.</p>
 </div>
 <div class="paragraph">
-<p>To avoid reading the data whenever the <code>vacant</code> command is executed, we only read the data once when the <code>MainApp</code> starts.</p>
+<p>To avoid reading the data from Venue Information JSON file whenever the <code>vacant</code> command is executed, we only read the data once when the <code>MainApp</code> starts.</p>
 </div>
 <div class="paragraph">
 <p>The following sequence diagram shows how the vacant command is parsed:</p>
@@ -1440,11 +1668,13 @@ requires computation which may make the application slower than desired.</p>
 <div class="content">
 <img src="images/ModelClassDiagram.png" alt="ModelClassDiagram" width="800">
 </div>
+<div class="title">Figure 28. Model Componenet</div>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/StorageClassDiagram.png" alt="StorageClassDiagram" width="800">
 </div>
+<div class="title">Figure 29. Storage Component</div>
 </div>
 <div class="paragraph">
 <p>The following sequence diagram shows how the logic component of Vacant Room Finder works:</p>
@@ -1514,9 +1744,9 @@ requires computation which may make the application slower than desired.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="timetable-feature"><a class="link" href="#timetable-feature">4.7. Timetable feature</a></h3>
+<h3 id="timetable-feature"><a class="link" href="#timetable-feature">4.9. Timetable feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-7"><a class="link" href="#current-implementation-7">4.7.1. Current Implementation</a></h4>
+<h4 id="current-implementation-9"><a class="link" href="#current-implementation-9">4.9.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>When adding a Person using the Add Command, users can enter their NUSMods shortened link into the "tt/" field.
 The link goes into the TimetableParserUtil class to parse and retrieve the info of the user&#8217;s modules.
@@ -1531,6 +1761,7 @@ TimetableSlot (following the 24h clock)</p>
 <div class="content">
 <img src="images/TimetableComponentClassDiagram.png" alt="TimetableComponentClassDiagram" width="800">
 </div>
+<div class="title">Figure 30. Timetable Component</div>
 </div>
 <div class="paragraph">
 <p>In the event the url provided is invalid or empty, a empty Timetable will be created.
@@ -1544,7 +1775,7 @@ The <code>InfoPanel</code> will swap between <code>UserDetailsPanel</code>, <cod
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">4.7.2. Design Considerations</a></h4>
+<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">4.9.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-the-use-of-nusmods-shortened-urls"><a class="link" href="#aspect-the-use-of-nusmods-shortened-urls">Aspect: The use of NUSMods Shortened URLs</a></h5>
 <div class="ulist">
@@ -1761,14 +1992,14 @@ Current implementation is the best in terms of variability and ease of implement
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">4.8. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">4.10. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 4.9, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 4.11, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -1799,7 +2030,7 @@ Current implementation is the best in terms of variability and ease of implement
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">4.9. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">4.11. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -1865,7 +2096,7 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <div class="content">
 <img src="images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
 </div>
-<div class="title">Figure 11. Saving documentation as PDF files in Chrome</div>
+<div class="title">Figure 31. Saving documentation as PDF files in Chrome</div>
 </div>
 </div>
 </div>
@@ -2113,7 +2344,7 @@ b. Require developers to download those libraries manually (this creates extra w
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Loh Cai Jun</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Implementing Model and Storage component of Vacant study rooms finder feature to help user to find vacant study rooms nearby.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Importing and exporting AddressBook feature to allow user to transfer selected data to other users, transfer to different computers, store and restore backup of AddressBook easily.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Importing, exporting, and uploading StardyTogether file feature to allow user to transfer selected data to other users, transfer to different computers, store and restore backup of StardyTogether easily.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Ong Jing Yin</p></td>
@@ -2306,7 +2537,7 @@ b. Require developers to download those libraries manually (this creates extra w
 <h2 id="use-cases"><a class="link" href="#use-cases">Appendix C: Use Cases</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>(For all use cases below, the <strong>System</strong> is the <code>AddressBook</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
+<p>(For all use cases below, the <strong>System</strong> is the <code>StardyTogether</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
 </div>
 <h3 id="use-case-delete-person" class="discrete">Use case: Delete person</h3>
 <div class="paragraph">
@@ -2318,13 +2549,13 @@ b. Require developers to download those libraries manually (this creates extra w
 <p>User requests to list persons</p>
 </li>
 <li>
-<p>AddressBook shows a list of persons</p>
+<p>StardyTogether shows a list of persons</p>
 </li>
 <li>
 <p>User requests to delete a specific person in the list</p>
 </li>
 <li>
-<p>AddressBook deletes the person</p>
+<p>StardyTogether deletes the person</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -2347,7 +2578,7 @@ b. Require developers to download those libraries manually (this creates extra w
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>3a1. AddressBook shows an error message.</p>
+<p>3a1. StardyTogether shows an error message.</p>
 <div class="paragraph">
 <p>Use case resumes at step 2.</p>
 </div>
@@ -2367,13 +2598,13 @@ b. Require developers to download those libraries manually (this creates extra w
 <p>User requests to find an available venue</p>
 </li>
 <li>
-<p>AddressBook prompts user to input a faculty</p>
+<p>StardyTogether prompts user to input a faculty</p>
 </li>
 <li>
 <p>User requests venues near this faculty</p>
 </li>
 <li>
-<p>AddressBook prints out a list of available venues near the specified faculty</p>
+<p>StardyTogether prints out a list of available venues near the specified faculty</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -2390,7 +2621,7 @@ b. Require developers to download those libraries manually (this creates extra w
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>2a1. AddressBook displays the empty result</p>
+<p>2a1. StardyTogether displays the empty result</p>
 <div class="paragraph">
 <p>Use case resumes at step 2</p>
 </div>
@@ -2403,7 +2634,7 @@ b. Require developers to download those libraries manually (this creates extra w
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>3a1. AddressBook shows an error message.</p>
+<p>3a1. StardyTogether shows an error message.</p>
 <div class="paragraph">
 <p>Use case resumes at step 2.</p>
 </div>
@@ -2412,17 +2643,17 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 </li>
 <li>
-<p>4a. AddressBook cannot retrieve the information online</p>
+<p>4a. StardyTogether cannot retrieve the information online</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>4a1. AddressBook shows an error message</p>
+<p>4a1. StardyTogether shows an error message</p>
 </li>
 <li>
-<p>4a2. AddressBook attempts to reconnect</p>
+<p>4a2. StardyTogether attempts to reconnect</p>
 </li>
 <li>
-<p>4a3. If problem persists, AddressBook directs User to troubleshooting</p>
+<p>4a3. If problem persists, StardyTogether directs User to troubleshooting</p>
 <div class="paragraph">
 <p>Use case ends</p>
 </div>
@@ -2651,7 +2882,7 @@ Expected: Application opens with an address book with dummy data.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 10:56:09 UTC
+Last updated 2018-04-15 11:00:33 UTC
 </div>
 </div>
 </body>

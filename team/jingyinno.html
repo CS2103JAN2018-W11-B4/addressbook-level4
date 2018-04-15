@@ -290,11 +290,13 @@ Displays the directions from <code>Tampines Mall</code> to <code>COM1</code> to 
 <div class="content">
 <img src="../images/LogicComponentAliasSequenceDiagram.png" alt="LogicComponentAliasSequenceDiagram" width="800">
 </div>
+<div class="title">Figure 1. Alias Command Sequence Diagram for Logic Component</div>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="../images/StorageClassDiagram.png" alt="StorageClassDiagram" width="800">
 </div>
+<div class="title">Figure 2. Storage Component</div>
 </div>
 </div>
 <div class="sect3">
@@ -305,6 +307,7 @@ Displays the directions from <code>Tampines Mall</code> to <code>COM1</code> to 
 <div class="content">
 <img src="../images/ModelClassDiagram.png" alt="ModelClassDiagram" width="800">
 </div>
+<div class="title">Figure 3. Model Component</div>
 </div>
 <div class="ulist">
 <ul>
@@ -377,7 +380,7 @@ Displays the directions from <code>Tampines Mall</code> to <code>COM1</code> to 
 <div class="sect3">
 <h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">Current Implementation</a></h4>
 <div class="paragraph">
-<p>We are using Venue Information JSON file from <a href="https://nusmods.com/api/2017-2018/2/venueInformation.json">NUSMods</a> to get the weekly timetable of the venues. To increase the performance of getting the timetable of the venue, we decided to download Venue Information JSON file and have an offline copy stored in our StardyTogether application.</p>
+<p>We are using Venue Information JSON file from <a href="https://nusmods.com/api/2017-2018/2/venueInformation.json">NUSMods</a> to retrieve the weekly timetable of the venues. To increase the performance of retrieving the timetable of the venue, we decided to download Venue Information JSON file and have an offline copy stored in our StardyTogether application.</p>
 </div>
 <div class="paragraph">
 <p>We have added the list of NUS buildings and the list of rooms in each building into the offline copy.</p>
@@ -386,7 +389,7 @@ Displays the directions from <code>Tampines Mall</code> to <code>COM1</code> to 
 <p>We use <code>ReadOnlyJsonVenueInformation</code>, which resides inside <code>Storage</code> to read and store the room timetable data inside <code>nusVenues</code> in <code>Room</code> class, and also store NUS Buildings and their respective rooms inside <code>nusBuildingsAndRooms</code> in <code>Building</code> class.</p>
 </div>
 <div class="paragraph">
-<p>To avoid reading the data whenever the <code>vacant</code> command is executed, we only read the data once when the <code>MainApp</code> starts.</p>
+<p>To avoid reading the data from Venue Information JSON file whenever the <code>vacant</code> command is executed, we only read the data once when the <code>MainApp</code> starts.</p>
 </div>
 <div class="paragraph">
 <p>The following sequence diagram shows how the vacant command is parsed:</p>
@@ -404,11 +407,13 @@ Displays the directions from <code>Tampines Mall</code> to <code>COM1</code> to 
 <div class="content">
 <img src="../images/ModelClassDiagram.png" alt="ModelClassDiagram" width="800">
 </div>
+<div class="title">Figure 4. Model Componenet</div>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="../images/StorageClassDiagram.png" alt="StorageClassDiagram" width="800">
 </div>
+<div class="title">Figure 5. Storage Component</div>
 </div>
 <div class="paragraph">
 <p>The following sequence diagram shows how the logic component of Vacant Room Finder works:</p>
@@ -482,7 +487,7 @@ Displays the directions from <code>Tampines Mall</code> to <code>COM1</code> to 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 10:56:09 UTC
+Last updated 2018-04-15 11:00:33 UTC
 </div>
 </div>
 </body>
