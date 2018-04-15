@@ -97,8 +97,12 @@
 <li><a href="#importing-a-file">F.4. Importing a file</a></li>
 <li><a href="#exporting-a-file">F.5. Exporting a file</a></li>
 <li><a href="#uploading-a-file">F.6. Uploading a file</a></li>
-<li><a href="#encrypting-and-decrypting">F.7. Encrypting and Decrypting</a></li>
-<li><a href="#selecting-a-person">F.8. Selecting a person</a></li>
+<li><a href="#finding-vacant-rooms">F.7. Finding vacant rooms</a></li>
+<li><a href="#encrypting-and-decrypting">F.8. Encrypting and Decrypting</a></li>
+<li><a href="#selecting-a-person">F.9. Selecting a person</a></li>
+<li><a href="#adding-an-alias">F.10. Adding an alias</a></li>
+<li><a href="#removing-an-alias">F.11. Removing an alias</a></li>
+<li><a href="#locating-places-on-google-maps">F.12. Locating places on Google Maps</a></li>
 </ul>
 </li>
 </ul>
@@ -3319,6 +3323,10 @@ Expected: Application opens with an address book with empty data.</p>
 Expected: All students, tags, and aliases from the imported file are added to StardyTogether.</p>
 </li>
 <li>
+<p>Test case: <code>undo</code><br>
+Expected: undo the changes.</p>
+</li>
+<li>
 <p>Test case: <code>import INVALID_FILE_PATH</code><br>
 Expected: Invalid filepath error message will be shown</p>
 </li>
@@ -3417,7 +3425,33 @@ Expected: Invalid command error message will be shown</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="encrypting-and-decrypting"><a class="link" href="#encrypting-and-decrypting">F.7. Encrypting and Decrypting</a></h3>
+<h3 id="finding-vacant-rooms"><a class="link" href="#finding-vacant-rooms">F.7. Finding vacant rooms</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Finding vacant rooms</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>vacant COM1</code><br>
+Expected: All rooms schedule of COM1 are displayed on UI.</p>
+</li>
+<li>
+<p>Test case: <code>vacant nonExistentBuilding</code><br>
+Expected: Building not found, list of buildings are displayed on UI.</p>
+</li>
+<li>
+<p>Other incorrect vacant commands to try: <code>vacant</code>, <code>vacant COM1 COM2</code><br>
+Expected: Invalid command error message will be shown</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="encrypting-and-decrypting"><a class="link" href="#encrypting-and-decrypting">F.8. Encrypting and Decrypting</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3451,7 +3485,7 @@ Expected: Application opens with all data.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="selecting-a-person"><a class="link" href="#selecting-a-person">F.8. Selecting a person</a></h3>
+<h3 id="selecting-a-person"><a class="link" href="#selecting-a-person">F.9. Selecting a person</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3478,8 +3512,82 @@ Expected: Card with Details of the person shows up with his/her odd week Timetab
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
+</div>
+<div class="sect2">
+<h3 id="adding-an-alias"><a class="link" href="#adding-an-alias">F.10. Adding an alias</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Adding an alias to valid command</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>alias add a</code><br>
+Expected: Entering <code>list</code> would display <code>a</code> under <code>add</code> column.</p>
+</li>
+<li>
+<p>Test case: <code>undo</code><br>
+Expected: Entering <code>list</code> would display <code>a</code> removed from <code>add</code> column.</p>
+</li>
+<li>
+<p>Other incorrect alias commands to try: <code>alias</code>, <code>alias *</code>, <code>alias abc</code>, <code>alias add! abc</code>, <code>alias wrong w</code><br>
+Expected: Displays error messages</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="removing-an-alias"><a class="link" href="#removing-an-alias">F.11. Removing an alias</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Removing an existing alias</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Add an alias with alias name a, <code>alias add a</code>.</p>
+</li>
+<li>
+<p>Test case: <code>unalias a</code><br>
+Expected: Entering <code>list</code> would display <code>a</code> removed from <code>add</code> column.</p>
+</li>
+<li>
+<p>Other incorrect unalias commands to try: <code>unalias</code>, <code>unalias *</code>, <code>unalias abc</code>, <code>unalias abc abc</code><br>
+Expected: Displays error messages</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="locating-places-on-google-maps"><a class="link" href="#locating-places-on-google-maps">F.12. Locating places on Google Maps</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Locating a place or finding directions from one place to another</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>map COM1</code><br>
+Expected: Displays the location of NUS COM1 on Google Maps.</p>
+</li>
+<li>
+<p>Test case: <code>map Tampines Mall/COM2</code><br>
+Expected: Shows the directions from Tampines Mall to COM2 on Google Maps.</p>
+</li>
+<li>
+<p>Other incorrect map commands to try: <code>map</code><br>
+Expected: Displays error messages</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
 </div>
 </div>
 </div>
@@ -3487,7 +3595,7 @@ Expected: Card with Details of the person shows up with his/her odd week Timetab
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 15:27:10 UTC
+Last updated 2018-04-15 15:36:56 UTC
 </div>
 </div>
 </body>
