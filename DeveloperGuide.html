@@ -92,17 +92,14 @@
 <li><a href="#instructions-for-manual-testing">Appendix F: Instructions for Manual Testing</a>
 <ul class="sectlevel2">
 <li><a href="#launch-and-shutdown">F.1. Launch and Shutdown</a></li>
-<li><a href="#deleting-a-person">F.2. Deleting a person</a></li>
-<li><a href="#saving-data">F.3. Saving data</a></li>
-<li><a href="#importing-a-file">F.4. Importing a file</a></li>
-<li><a href="#exporting-a-file">F.5. Exporting a file</a></li>
-<li><a href="#uploading-a-file">F.6. Uploading a file</a></li>
-<li><a href="#finding-vacant-rooms">F.7. Finding vacant rooms</a></li>
-<li><a href="#encrypting-and-decrypting">F.8. Encrypting and Decrypting</a></li>
-<li><a href="#selecting-a-person">F.9. Selecting a person</a></li>
-<li><a href="#adding-an-alias">F.10. Adding an alias</a></li>
-<li><a href="#removing-an-alias">F.11. Removing an alias</a></li>
-<li><a href="#locating-places-on-google-maps">F.12. Locating places on Google Maps</a></li>
+<li><a href="#adding-a-person">F.2. Adding a person</a></li>
+<li><a href="#deleting-a-person">F.3. Deleting a person</a></li>
+<li><a href="#saving-data">F.4. Saving data</a></li>
+<li><a href="#birthdays-function">F.5. Birthdays function</a></li>
+<li><a href="#timetableunion-function">F.6. TimetableUnion function</a></li>
+<li><a href="#importing-a-file">F.7. Importing a file</a></li>
+<li><a href="#exporting-a-file">F.8. Exporting a file</a></li>
+<li><a href="#uploading-a-file">F.9. Uploading a file</a></li>
 </ul>
 </li>
 </ul>
@@ -3257,7 +3254,48 @@ Expected: The most recent window size and location is retained.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-person"><a class="link" href="#deleting-a-person">F.2. Deleting a person</a></h3>
+<h3 id="adding-a-person"><a class="link" href="#adding-a-person">F.2. Adding a person</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Adding a person with the new parameters Birthday and Timetable</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Valid NUSMods link</p>
+</li>
+<li>
+<p>Test case: <code>add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/01011995 tt/http://modsn.us/oNZLY</code><br></p>
+</li>
+<li>
+<p>Expected: Successfully added</p>
+</li>
+<li>
+<p>Test case: <code>add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/01011995 tt/http://modsn.us/ojGeu</code><br></p>
+</li>
+<li>
+<p>Expected: Not added. As timetable is not considered unique</p>
+</li>
+<li>
+<p>Test case: <code>add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/01011995 tt/</code></p>
+</li>
+<li>
+<p>Expected: Successfully added with a empty timetable</p>
+</li>
+<li>
+<p>Test case: <code>add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/32011995 tt/</code></p>
+</li>
+<li>
+<p>Expected: Not added. Invalid birthday day.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-person"><a class="link" href="#deleting-a-person">F.3. Deleting a person</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3286,7 +3324,7 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">F.3. Saving data</a></h3>
+<h3 id="saving-data"><a class="link" href="#saving-data">F.4. Saving data</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3308,7 +3346,107 @@ Expected: Application opens with an address book with empty data.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="importing-a-file"><a class="link" href="#importing-a-file">F.4. Importing a file</a></h3>
+<h3 id="birthdays-function"><a class="link" href="#birthdays-function">F.5. Birthdays function</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Using the <code>birthdays</code> and <code>birthdays today</code> function</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Multiple persons in ST</p>
+</li>
+<li>
+<p>Test case: <code>birthdays</code><br></p>
+</li>
+<li>
+<p>Expected: Birthday list appears at the main window, containing the birthdays of your persons ordered by day and month</p>
+</li>
+<li>
+<p>Prerequisites: Sufficiently large amount of persons in ST to exceed the window size of ST</p>
+</li>
+<li>
+<p>Test case: <code>birthdays</code><br></p>
+</li>
+<li>
+<p>Expected: Birthday list is scrollable, showing the full birthday list</p>
+</li>
+<li>
+<p>Prerequisites: Empty ST</p>
+</li>
+<li>
+<p>Test case: <code>birthdays</code><br></p>
+</li>
+<li>
+<p>Expected: Empty white list</p>
+</li>
+<li>
+<p>Prerequisites: One person with a birthday today</p>
+</li>
+<li>
+<p>Test case: <code>birthdays today</code><br></p>
+</li>
+<li>
+<p>Expected: Only that person appears in the notification window</p>
+</li>
+<li>
+<p>Prerequisites: Zero persons with birthdays today</p>
+</li>
+<li>
+<p>Test case: <code>birthdays today</code><br></p>
+</li>
+<li>
+<p>Expected: The notification window shows "No one is celebrating their birthdays today"</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="timetableunion-function"><a class="link" href="#timetableunion-function">F.6. TimetableUnion function</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Using the <code>timetableUnion</code> function when all persons are listed.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: List all persons using the <code>list</code> command. Multiple persons in the list. Indexes are valid</p>
+</li>
+<li>
+<p>Test case: <code>union Odd 1 2</code><br></p>
+</li>
+<li>
+<p>Expected: The union of the odd timetables of Person at Index 1 and 2 appears at the main window</p>
+</li>
+<li>
+<p>Test case: <code>union Odd 1 2 4</code><br></p>
+</li>
+<li>
+<p>Expected: The union of the odd timetables of Person at Index 1, 2 and 4 appears at the main window</p>
+</li>
+<li>
+<p>Test case: <code>union Odd 0 2 4</code><br></p>
+</li>
+<li>
+<p>Expected: Invalid index. Error details will be shown in the result display</p>
+</li>
+<li>
+<p>Test case: <code>union Odd 1 2     4</code><br></p>
+</li>
+<li>
+<p>Expected: Too many whitespaces between indexes. Error details will be shown in the result display</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="importing-a-file"><a class="link" href="#importing-a-file">F.7. Importing a file</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3341,7 +3479,7 @@ Expected: Invalid command error message will be shown</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exporting-a-file"><a class="link" href="#exporting-a-file">F.5. Exporting a file</a></h3>
+<h3 id="exporting-a-file"><a class="link" href="#exporting-a-file">F.8. Exporting a file</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3378,7 +3516,7 @@ Expected: Invalid command error message will be shown</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="uploading-a-file"><a class="link" href="#uploading-a-file">F.6. Uploading a file</a></h3>
+<h3 id="uploading-a-file"><a class="link" href="#uploading-a-file">F.9. Uploading a file</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3423,9 +3561,11 @@ Expected: Invalid command error message will be shown</p>
 </li>
 </ol>
 </div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>=== Finding vacant rooms</p>
 </div>
-<div class="sect2">
-<h3 id="finding-vacant-rooms"><a class="link" href="#finding-vacant-rooms">F.7. Finding vacant rooms</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3449,9 +3589,9 @@ Expected: Invalid command error message will be shown</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p>=== Encrypting and Decrypting</p>
 </div>
-<div class="sect2">
-<h3 id="encrypting-and-decrypting"><a class="link" href="#encrypting-and-decrypting">F.8. Encrypting and Decrypting</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3483,9 +3623,9 @@ Expected: Application opens with all data.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p>=== Selecting a person</p>
 </div>
-<div class="sect2">
-<h3 id="selecting-a-person"><a class="link" href="#selecting-a-person">F.9. Selecting a person</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3512,9 +3652,9 @@ Expected: Card with Details of the person shows up with his/her odd week Timetab
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p>=== Adding an alias</p>
 </div>
-<div class="sect2">
-<h3 id="adding-an-alias"><a class="link" href="#adding-an-alias">F.10. Adding an alias</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3538,9 +3678,9 @@ Expected: Displays error messages</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p>=== Removing an alias</p>
 </div>
-<div class="sect2">
-<h3 id="removing-an-alias"><a class="link" href="#removing-an-alias">F.11. Removing an alias</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3563,9 +3703,9 @@ Expected: Displays error messages</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p>=== Locating places on Google Maps</p>
 </div>
-<div class="sect2">
-<h3 id="locating-places-on-google-maps"><a class="link" href="#locating-places-on-google-maps">F.12. Locating places on Google Maps</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3593,9 +3733,11 @@ Expected: Displays error messages</p>
 </div>
 </div>
 </div>
+</div>
+</div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 15:52:59 UTC
+Last updated 2018-04-15 16:02:28 UTC
 </div>
 </div>
 </body>
