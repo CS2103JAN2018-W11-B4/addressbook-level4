@@ -549,6 +549,18 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </li>
 </ul>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Note that although it is stated that contacts are friends in the User Guide (for better presentation), they are actually represented as <code>Person</code> class in code.
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="Design-Storage"><a class="link" href="#Design-Storage">3.5. Storage component</a></h3>
@@ -1590,28 +1602,44 @@ requires computation which may make the application slower than desired.</p>
 <div class="sect3">
 <h4 id="current-implementation-8"><a class="link" href="#current-implementation-8">4.8.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>Birthdays Command uses the existing Events system and sends an event.</p>
+<p><code>Birthdays</code> Command uses the existing <code>Events</code> system and sends an event according to the parameters provided.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/LogicComponentBirthdaysSequenceDiagram.png" alt="LogicComponentBirthdaysSequenceDiagram" width="800">
 </div>
-<div class="title">Figure 27. Birthdays Command Sequence Diagram for Logic Component</div>
+<div class="title">Figure 27. Birthdays Command Sequence Diagram for Logic Component<br></div>
 </div>
 <div class="paragraph">
-<p>The UI component will then receive the event and handle the data.</p>
+<p>The <code>BirthdayList</code> UI component will then receive the event and handle the display of the data<br></p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/UiComponentBirthdayListSequenceDiagram.png" alt="UiComponentBirthdayListSequenceDiagram" width="800">
 </div>
-<div class="title">Figure 28. Birthdays Command Sequence Diagram for UI Component</div>
+<div class="title">Figure 28. Birthdays Command Sequence Diagram for UI Component<br></div>
+</div>
+<div class="paragraph">
+<p>For "birthdays today" notification, the app will create an alert dialog instead.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="annotation">@Subscribe</span>
+    <span class="directive">private</span> <span class="type">void</span> handleBirthdayNotificationEvent(BirthdayNotificationEvent event) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(<span class="string"><span class="delimiter">&quot;</span><span class="content">dd/MM/yyyy</span><span class="delimiter">&quot;</span></span>);
+
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        Alert alert = <span class="keyword">new</span> Alert(Alert.AlertType.INFORMATION);
+        <span class="comment">// ... setting up of Alert ...</span>
+        alert.showAndWait();
+    }</code></pre>
+</div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">4.8.2. Design Considerations</a></h4>
 <div class="sect4">
-<h5 id="aspect-how-the-birthdaylist-ui-component-obtains-and-parses-its-data"><a class="link" href="#aspect-how-the-birthdaylist-ui-component-obtains-and-parses-its-data">Aspect: How the BirthdayList UI component obtains and parses its data</a></h5>
+<h5 id="aspect-how-the-code-birthdaylist-code-ui-component-obtains-and-parses-its-data"><a class="link" href="#aspect-how-the-code-birthdaylist-code-ui-component-obtains-and-parses-its-data">Aspect: How the <code>BirthdayList</code> UI component obtains and parses its data</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -1619,7 +1647,7 @@ requires computation which may make the application slower than desired.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Isolated and independent within BirthdayList UI component. Less overhead.</p>
+<p>Pros: Isolated and independent within <code>BirthdayList</code> UI component. Less overhead.</p>
 </li>
 <li>
 <p>Cons: Not intuitive to new developers as parsing of data is not expected in UI.</p>
@@ -1628,7 +1656,7 @@ requires computation which may make the application slower than desired.</p>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2 (current choice)</strong>: Let Birthdays do the parsing of UniquePersonList obtained from Model</p>
+<p><strong>Alternative 2 (current choice)</strong>: Let <code>Birthdays</code> do the parsing of UniquePersonList obtained from Model</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1677,7 +1705,7 @@ requires computation which may make the application slower than desired.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="aspect-how-user-inputs-the-birthday-parameter-in-person-class"><a class="link" href="#aspect-how-user-inputs-the-birthday-parameter-in-person-class">Aspect: How User inputs the Birthday parameter in Person class</a></h5>
+<h5 id="aspect-how-user-inputs-the-birthday-parameter-in-code-person-code-class"><a class="link" href="#aspect-how-user-inputs-the-birthday-parameter-in-code-person-code-class">Aspect: How User inputs the Birthday parameter in <code>Person</code> class</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -1823,14 +1851,41 @@ requires computation which may make the application slower than desired.</p>
 <div class="sect3">
 <h4 id="current-implementation-10"><a class="link" href="#current-implementation-10">4.10.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>When adding a Person using the Add Command, users can enter their NUSMods shortened link into the "tt/" field.
-The link goes into the TimetableParserUtil class to parse and retrieve the info of the user&#8217;s modules.
-The information is then sorted and added as a list of lessons taken by the user to the Timetable</p>
+<p>When adding a <code>Person</code> using the "Add" Command, users can enter their NUSMods shortened link into the "tt/" field.
+NUSMods URLs currently come in the format of <code>&#8230;&#8203;/timetable/SEM_NUM/share?MODULE_CODE=LESSON_CODE</code>
+Using <code>TimetableParserUtil:parseShortUrl</code>, we obtain the full url from the shortened link.
+Then, we parse the information accordingly and obtain lesson data from [<a href="https://api.nusmods.com/">NUSMods API</a>] to represent them in <code>Lesson</code>
+The information is then sorted and added as a list of <code>Lesson</code> taken by the user to the Timetable.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">        <span class="keyword">try</span> {
+            <span class="comment">// Grab lesson info from API and store as a map</span>
+            <span class="predefined-type">URL</span> url = <span class="keyword">new</span> <span class="predefined-type">URL</span>(link);
+            <span class="annotation">@SuppressWarnings</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">unchecked</span><span class="delimiter">&quot;</span></span>)
+            <span class="predefined-type">Map</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">Object</span>&gt; mappedJson = mapper.readValue(url, <span class="predefined-type">HashMap</span>.class);
+            <span class="annotation">@SuppressWarnings</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">unchecked</span><span class="delimiter">&quot;</span></span>)
+            <span class="predefined-type">ArrayList</span>&lt;<span class="predefined-type">HashMap</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt;&gt; lessonInfo = (<span class="predefined-type">ArrayList</span>&lt;<span class="predefined-type">HashMap</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt;&gt;)
+                    mappedJson.get(<span class="string"><span class="delimiter">&quot;</span><span class="content">Timetable</span><span class="delimiter">&quot;</span></span>);
+
+            <span class="comment">// Parse the information from API and creates an Arraylist of all possible lessons</span>
+            <span class="predefined-type">ArrayList</span>&lt;Lesson&gt; lessons = <span class="keyword">new</span> <span class="predefined-type">ArrayList</span>&lt;&gt;();
+            <span class="keyword">for</span> (<span class="predefined-type">HashMap</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt; lesson : lessonInfo) {
+                Lesson lessonToAdd = <span class="keyword">new</span> Lesson(moduleCode, lesson.get(<span class="string"><span class="delimiter">&quot;</span><span class="content">ClassNo</span><span class="delimiter">&quot;</span></span>), lesson.get(<span class="string"><span class="delimiter">&quot;</span><span class="content">LessonType</span><span class="delimiter">&quot;</span></span>),
+                        lesson.get(<span class="string"><span class="delimiter">&quot;</span><span class="content">WeekText</span><span class="delimiter">&quot;</span></span>), lesson.get(<span class="string"><span class="delimiter">&quot;</span><span class="content">DayText</span><span class="delimiter">&quot;</span></span>), lesson.get(<span class="string"><span class="delimiter">&quot;</span><span class="content">StartTime</span><span class="delimiter">&quot;</span></span>), lesson.get(<span class="string"><span class="delimiter">&quot;</span><span class="content">EndTime</span><span class="delimiter">&quot;</span></span>));
+                lessons.add(lessonToAdd);
+            }
+
+            <span class="keyword">return</span> lessons;
+        } <span class="keyword">catch</span> (<span class="exception">IOException</span> exception) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">Cannot retrieve module information</span><span class="delimiter">&quot;</span></span>);
+        }</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>The main contents of the timetable is stored as TimetableData and is accessed through Timetable.
-TimetableData consists of 2 TimetableWeek, which each consist of 5 TimetableDay, which each consist of 24
-TimetableSlot (following the 24h clock)</p>
+<p>The main contents of the timetable is stored as <code>TimetableData</code> and is accessed through <code>Timetable</code>.
+<code>TimetableData</code> consists of 2 <code>TimetableWeek</code>, which each consist of 5 <code>TimetableDay</code>, which each consist of 24
+<code>TimetableSlot</code> (following the 24h clock)</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1839,13 +1894,41 @@ TimetableSlot (following the 24h clock)</p>
 <div class="title">Figure 31. Timetable Component</div>
 </div>
 <div class="paragraph">
-<p>In the event the url provided is invalid or empty, a empty Timetable will be created.
+<p>In the event the url provided is invalid or empty, a empty <code>Timetable</code> will be created.
 Do take note that there are dummy urls for the purpose of testing. While normal users should not be able to know of their existence,
 entering a dummy link will result in a preset timetable being built.</p>
 </div>
 <div class="paragraph">
-<p>When the user uses the <code>TimetableUnionCommand</code>, the indexes selected will be parsed and a union of the timetables selected will be created.
-Afterwards, it will raise the <code>TimeTableEvent</code> which will be caught and handled by the <code>InfoPanel</code>.
+<p>When the user uses the <code>TimetableUnionCommand</code>, the indexes selected will be parsed and a union of the timetables selected will be created.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">public</span> <span class="directive">static</span> <span class="predefined-type">ArrayList</span>&lt;<span class="predefined-type">String</span>&gt; unionTimetableDay(<span class="predefined-type">ArrayList</span>&lt;TimetableDay&gt; timetables) {
+        <span class="predefined-type">ArrayList</span>&lt;<span class="predefined-type">String</span>&gt; commonTimetable = <span class="keyword">new</span> <span class="predefined-type">ArrayList</span>&lt;&gt;();
+        <span class="type">boolean</span> checker;
+
+        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="integer">8</span>; i &lt; <span class="integer">22</span>; i++) {
+            checker = <span class="predefined-constant">false</span>;
+            <span class="keyword">for</span> (TimetableDay timetable : timetables) {
+                TimetableSlot t = timetable.timetableSlots[i];
+                <span class="keyword">if</span> (!t.toString().equals(EMPTY_SLOT_STRING)) {
+                    checker = <span class="predefined-constant">true</span>;
+                    <span class="keyword">break</span>;
+                }
+            }
+
+            <span class="keyword">if</span> (checker) {
+                commonTimetable.add(TITLE_OCCUPIED);
+            } <span class="keyword">else</span> {
+                commonTimetable.add(EMPTY_SLOT_STRING);
+            }
+        }
+        <span class="keyword">return</span> commonTimetable;
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Afterwards, it will raise the <code>TimeTableEvent</code> which will be caught and handled by the <code>InfoPanel</code>.
 The <code>InfoPanel</code> will swap between <code>UserDetailsPanel</code>, <code>BirthdayList</code>, <code>VenueTable</code> and <code>TimetableUnionPanel</code> so that the UI would not be too cluttered.</p>
 </div>
 </div>
@@ -1910,6 +1993,39 @@ The <code>InfoPanel</code> will swap between <code>UserDetailsPanel</code>, <cod
 </li>
 <li>
 <p>Cons: Not very user-friendly if user just does not have a valid timetable</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-adding-of-lessons-to-timetable"><a class="link" href="#aspect-adding-of-lessons-to-timetable">Aspect: Adding of lessons to Timetable</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1</strong> (current choice): Users do the adding on NUSMods and re-import the timetable link</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: No need to implement a separate function to add lessons and a separate <code>Module</code> class</p>
+</li>
+<li>
+<p>Cons: May be troublesome for the user</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2</strong>: Implement a function to add lessons and <code>Module</code> class</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: User need not to manually edit the timetable parameter</p>
+</li>
+<li>
+<p>Cons: Hard to implement. Lessons and modules will not have any usage outside <code>Timetable</code></p>
 </li>
 </ul>
 </div>
@@ -3038,7 +3154,7 @@ Expected: Application opens with an address book with dummy data.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 13:38:51 UTC
+Last updated 2018-04-15 14:18:08 UTC
 </div>
 </div>
 </body>
